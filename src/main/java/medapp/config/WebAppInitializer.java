@@ -22,7 +22,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new Class[] {WebAppInitializer.class};
     }
 
-
     @Override
     protected String[] getServletMappings()
     {

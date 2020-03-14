@@ -44,7 +44,7 @@ public class HelloController {
         return modelAndView;
     }
 
-    @GetMapping("/customers")
+    @GetMapping("/patients")
     public List<Patient> getCustomers() {
         return patientService.getPatients();
     }
