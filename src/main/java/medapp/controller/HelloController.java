@@ -2,6 +2,7 @@ package medapp.controller;
 
 import medapp.model.Assignment;
 import medapp.model.Patient;
+import medapp.service.AssignmentService;
 import medapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,10 +16,16 @@ import java.util.List;
 public class HelloController {
 
     private PatientService patientService;
+    private AssignmentService assignmentService;
 
     @Autowired(required=true)
     public void setPatientService(PatientService patientService) {
         this.patientService = patientService;
+    }
+
+    @Autowired(required=true)
+    public void setAssignmentService(AssignmentService assignmentService) {
+        this.assignmentService = assignmentService;
     }
 
     @GetMapping("/p")
@@ -40,7 +47,6 @@ public class HelloController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addPatient");
         modelAndView.addObject("patient", new Patient());
-        modelAndView.addObject("assignment", new Assignment());
         return modelAndView;
     }
 
@@ -49,6 +55,22 @@ public class HelloController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
         patientService.addPatient(patient);
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/addAssignment")
+    public ModelAndView addAssignment() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addAssignment");
+        modelAndView.addObject("assignment", new Assignment());
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/addAssignment")
+    public ModelAndView assignment(@ModelAttribute("assignment") Assignment assignment) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/");
+        assignmentService.addAssignment(assignment);
         return modelAndView;
     }
 

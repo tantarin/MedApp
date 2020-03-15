@@ -1,7 +1,6 @@
 package medapp.dao;
 
 import medapp.model.Patient;
-
 import java.util.List;
 
 

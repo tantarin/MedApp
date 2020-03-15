@@ -8,5 +8,7 @@
 <h2>Add</h2>
 <c:url value="/addPatient" var="add"/>
 <a href="${add}">Add new patient</a>
+<c:url value="/addAssignment" var="addA"/>
+<a href="${addA}">Add assignment</a>
 </body>
 </html>
