@@ -1,8 +1,10 @@
 package medapp.controller;
 
+import medapp.model.Assignment;
 import medapp.model.Patient;
 import medapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
@@ -19,6 +21,11 @@ public class HelloController {
         this.patientService = patientService;
     }
 
+    @GetMapping("/p")
+    public String userForm(Model model) {
+        return "input";
+    }
+
     @GetMapping(value = "/")
     public ModelAndView hello()
     {
@@ -33,6 +40,7 @@ public class HelloController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addPatient");
         modelAndView.addObject("patient", new Patient());
+        modelAndView.addObject("assignment", new Assignment());
         return modelAndView;
     }
 

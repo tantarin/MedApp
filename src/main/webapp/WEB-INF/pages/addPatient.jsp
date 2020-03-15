@@ -24,11 +24,30 @@
             </td>
             <td><form:input path="lastName" /></td>
         </tr>
+    </table>
+</form:form>
+<br>
+<h2>Assignment</h2>
+<form:form action="${add}" method="post" modelAttribute="patient">
+    <table border="0" cellpadding="5">
+        <tr>
+            <td>
+                Тип:
+            </td>
+            <td>
+                <form:input path="type" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Название:
+            </td>
+            <td><form:input path="name" /></td>
+        </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Save"></td>
         </tr>
     </table>
 </form:form>
-<br>
 </body>
 </html>
