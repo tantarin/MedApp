@@ -1,17 +1,18 @@
 package medapp.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "assignments")
+@Data
 public class Assignment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @Getter
     private int id;
 
     @Column(name = "type")
@@ -24,10 +25,9 @@ public class Assignment {
     @Setter
     String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "patient_id")
-    @Getter
-    @Setter
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id",referencedColumnName = "id")
     private Patient patient;
 
     public Assignment(){}

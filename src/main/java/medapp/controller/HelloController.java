@@ -66,13 +66,14 @@ public class HelloController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/addAssignment")
-    public ModelAndView assignment(@ModelAttribute("assignment") Assignment assignment) {
+        @PostMapping(value = "/addAssignment")
+        public ModelAndView assignment (@ModelAttribute("assignment") Assignment assignment){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
         assignmentService.addAssignment(assignment);
         return modelAndView;
     }
+
 
     @GetMapping("/patients")
     public List<Patient> getCustomers() {

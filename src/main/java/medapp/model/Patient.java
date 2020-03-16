@@ -1,25 +1,23 @@
 package medapp.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "patients")
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @Getter
     private int id;
 
-    @OneToMany(mappedBy = "patient",cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,
-    CascadeType.REFRESH})
-    @Getter
-    @Setter
-    private List<Assignment> assignments;
+    @OneToOne(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Assignment assignment;
 
     @Column(name = "first_name")
     @Getter
