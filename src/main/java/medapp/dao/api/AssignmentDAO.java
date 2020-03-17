@@ -9,4 +9,5 @@ public interface AssignmentDAO {
 
     void addAssignment(Assignment assignment);
     List<Assignment> getAll(int id);
+    Assignment getAssignment(int id);
 }

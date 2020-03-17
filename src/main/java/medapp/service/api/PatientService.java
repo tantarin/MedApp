@@ -15,6 +15,4 @@ public interface PatientService {
     public PatientDto getPatient(int theId);
 
     public void deletePatient(int theId);
-
-    Assignment getAssignment(int id);
 }

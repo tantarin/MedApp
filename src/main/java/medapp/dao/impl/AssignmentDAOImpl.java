@@ -38,4 +38,11 @@ public class AssignmentDAOImpl implements AssignmentDAO {
         Patient patient = (Patient) query.getResultList();
         return new ArrayList<Assignment>(patient.getAssignments());
     }
+
+    @Override
+    public Assignment getAssignment(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Assignment ass = (Assignment) session.get(Assignment.class,id);
+        return ass;
+    }
 }

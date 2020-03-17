@@ -60,8 +60,4 @@ public class PatientServiceImpl implements PatientService {
 
     }
 
-    @Override
-    public Assignment getAssignment(int id) {
-        return patientDAO.getAssignment(id);
-    }
 }

@@ -1,6 +1,8 @@
 package medapp.service.impl;
 
 import medapp.dao.api.AssignmentDAO;
+import medapp.dto.AssignmentDto;
+import medapp.dto.PatientDto;
 import medapp.model.Assignment;
 import medapp.service.api.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +32,18 @@ public class AssignmentServiceImpl implements AssignmentService {
     public List<Assignment> getAll(Integer id) {
         return assignmentDAO.getAll(id);
     }
+
+    @Override
+    @Transactional
+    public AssignmentDto getAssignment(int id) {
+        AssignmentDto ad = new AssignmentDto();
+        Assignment a = assignmentDAO.getAssignment(id);
+        ad.setId(a.getId());
+        ad.setName(a.getName());
+        ad.setType(a.getType());
+        ad.setPatientId(a.getPatient().getId());
+        return ad;
+    }
+
+
 }
