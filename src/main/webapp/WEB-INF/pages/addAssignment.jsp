@@ -23,7 +23,7 @@
                 Тип:
             </td>
             <td>
-                <form:input path="" />
+                <form:input path="type" />
             </td>
         </tr>
         <tr>
@@ -37,7 +37,7 @@
             <td>
                 Id пациента:
             </td>
-            <td><form:input path="patient" /></td>
+            <td><form:input path="id" /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Save"></td>
