@@ -25,8 +25,7 @@ public class Assignment {
     @Setter
     String name;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id",referencedColumnName = "id")
     private Patient patient;
 

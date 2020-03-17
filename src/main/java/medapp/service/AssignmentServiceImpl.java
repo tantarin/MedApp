@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
 
@@ -21,5 +23,11 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Transactional
     public void addAssignment(Assignment assignment) {
         assignmentDAO.addAssignment(assignment);
+    }
+
+    @Override
+    @Transactional
+    public List<Assignment> getAll(int id) {
+        assignmentDAO.getAll(id);
     }
 }

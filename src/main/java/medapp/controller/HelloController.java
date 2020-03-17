@@ -1,5 +1,6 @@
 package medapp.controller;
 
+import medapp.dto.PatientDto;
 import medapp.model.Assignment;
 import medapp.model.Patient;
 import medapp.service.AssignmentService;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -78,5 +81,26 @@ public class HelloController {
     @GetMapping("/patients")
     public List<Patient> getCustomers() {
         return patientService.getPatients();
+
     }
-}
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+        public String getRecords(Model model) {
+
+        List<Patient> patients = patientService.getPatients();
+
+        List<PatientDto> patientsDTO = new ArrayList<>();
+
+        for (Patient patient: patients) {
+            PatientDto dto = new PatientDto();
+            dto.setFirst_name(patient.getFirstName());
+            dto.setLast_name(patient.getLastName());
+            dto.setAssignments(assignmentService.getAll(patient.getId()));
+            patientsDTO.add(dto);
+            }
+
+            model.addAttribute("patients", patientsDTO);
+            return "records";
+        }
+    }
+
