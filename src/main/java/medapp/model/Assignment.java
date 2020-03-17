@@ -6,27 +6,22 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "assignments")
+@Table
 @Data
 public class Assignment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private int id;
 
     @Column(name = "type")
-    @Getter
-    @Setter
     String type;
 
     @Column(name = "name")
-    @Getter
-    @Setter
     String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id",referencedColumnName = "id")
+    @ManyToOne
     private Patient patient;
 
     public Assignment(){}

@@ -8,25 +8,21 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "patients")
+@Table
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private int id;
 
-    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany
     private List<Assignment> assignments;
 
-    @Column(name = "first_name")
-    @Getter
-    @Setter
+    @Column
     private String firstName ;
 
-    @Column(name = "last_name")
-    @Getter
-    @Setter
+    @Column
     private String lastName;
 
     public Patient() {

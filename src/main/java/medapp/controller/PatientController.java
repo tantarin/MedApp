@@ -62,41 +62,25 @@ public class PatientController {
     }
 
     @GetMapping(value = "/addAssignment")
-    public ModelAndView addAssignment() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addAssignment");
-        modelAndView.addObject("assignment", new Assignment());
-        return modelAndView;
-    }
-
-//        @PostMapping(value = "/addAssignment")
-//        public ModelAndView assignment (@ModelAttribute("assignment") Assignment assignment){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("redirect:/");
-//        assignmentService.addAssignment(assignment);
-//        return modelAndView;
-//    }
-
-
-    @GetMapping("/patients")
-    public List<Patient> getCustomers() {
-        return patientService.getPatients();
-
+    public ModelAndView addAssignment(@RequestParam("id") int id) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("addAssignment");
+        PatientDto p = patientService.getPatient(id);
+        model.addObject("assignment", p.getAssignments());
+        return model;
     }
 
     @RequestMapping(value = "/addAssignment", method = RequestMethod.POST)
-        public String getRecords(Model model) {
-        List<Patient> patients = patientService.getPatients();
-        List<PatientDto> patientsDTO = new ArrayList<>();
-        for (Patient patient: patients) {
-            PatientDto dto = new PatientDto();
-            dto.setFirst_name(patient.getFirstName());
-            dto.setLast_name(patient.getLastName());
-            dto.setAssignments(assignmentService.getAll(patient.getId()));
-            patientsDTO.add(dto);
-            }
-            model.addAttribute("patients", patientsDTO);
-            return "assignment";
-        }
+        public ModelAndView getRecords(@ModelAttribute("assignment") Assignment assignment) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/");
+        assignmentService.addAssignment(assignment);
+        return modelAndView;
+    }
+
+    @GetMapping("/patients")
+    public List<PatientDto> getCustomers() {
+        return patientService.getPatients();
+    }
     }
 
