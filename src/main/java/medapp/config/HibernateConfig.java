@@ -23,6 +23,11 @@ import java.util.Properties;
 @ComponentScan("medapp")
 public class HibernateConfig {
 
+    private static final String HIBERNATE_DIALECT = "hibernate.dialect";
+    private static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+    private static final String HIBERNATE_FORMAT = "hibernate.format_sql";
+    private static final String HIBERNATE_HBM2DDL = "hibernate.hbm2ddl.auto";
+
     @Autowired
     private Environment environment;
 
@@ -55,10 +60,10 @@ public class HibernateConfig {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        properties.put(HIBERNATE_DIALECT, environment.getRequiredProperty("hibernate.dialect"));
+        properties.put(HIBERNATE_SHOW_SQL, environment.getRequiredProperty("hibernate.show_sql"));
+        properties.put(HIBERNATE_FORMAT, environment.getRequiredProperty("hibernate.format_sql"));
+        properties.put(HIBERNATE_HBM2DDL, environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
 }

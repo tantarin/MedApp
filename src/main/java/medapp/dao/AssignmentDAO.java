@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface AssignmentDAO {
 
-    public void addAssignment(Assignment assignment);
-
+    void addAssignment(Assignment assignment);
     List<Assignment> getAll(int id);
 }
