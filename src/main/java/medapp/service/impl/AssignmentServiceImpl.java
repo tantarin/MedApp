@@ -1,9 +1,11 @@
 package medapp.service.impl;
 
 import medapp.dao.api.AssignmentDAO;
+import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
 import medapp.dto.PatientDto;
 import medapp.model.Assignment;
+import medapp.model.Patient;
 import medapp.service.api.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +23,23 @@ public class AssignmentServiceImpl implements AssignmentService {
         this.assignmentDAO = assignmentDAO;
     }
 
+    private PatientDAO patientDAO;
+
+    @Autowired
+    public void setPatientDAO(PatientDAO patientDAO) {
+        this.patientDAO = patientDAO;
+    }
+
     @Override
     @Transactional
-    public void addAssignment(Assignment assignment) {
-        assignmentDAO.addAssignment(assignment);
+    public void addAssignment(AssignmentDto assignmentDto) {
+        Patient p = patientDAO.getPatient(assignmentDto.getPatientId());
+        Assignment a = new Assignment();
+        a.setPatient(p);
+        a.setId(assignmentDto.getId());
+        a.setName(assignmentDto.getName());
+        a.setType(assignmentDto.getType());
+        assignmentDAO.addAssignment(a);
     }
 
     @Override
@@ -37,11 +52,6 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Transactional
     public AssignmentDto getAssignment(int id) {
         AssignmentDto ad = new AssignmentDto();
-        Assignment a = assignmentDAO.getAssignment(id);
-        ad.setId(a.getId());
-        ad.setName(a.getName());
-        ad.setType(a.getType());
-        ad.setPatientId(a.getPatient().getId());
         return ad;
     }
 

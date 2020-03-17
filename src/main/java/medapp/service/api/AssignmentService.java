@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface AssignmentService {
 
-    void addAssignment(Assignment assignment);
-
     List<Assignment> getAll(Integer id);
 
     AssignmentDto getAssignment(int id);
+
+    public void addAssignment(AssignmentDto assignmentDto);
 }

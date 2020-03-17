@@ -37,7 +37,7 @@
             <td>
                 Id пациента:
             </td>
-            <td><form:input path="id" /></td>
+            <td><form:input path="patientId" /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Save"></td>

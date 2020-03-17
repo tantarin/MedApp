@@ -63,19 +63,18 @@ public class PatientController {
     }
 
     @GetMapping(value = "/addAssignment")
-    public ModelAndView addAssignment(@RequestParam("id") int id) {
+    public ModelAndView addAssignment() {
         ModelAndView model = new ModelAndView();
         model.setViewName("addAssignment");
-        AssignmentDto a = assignmentService.getAssignment(id);
-        model.addObject("assignment",a);
+        model.addObject("assignment",new AssignmentDto());
         return model;
     }
 
     @RequestMapping(value = "/addAssignment", method = RequestMethod.POST)
-        public ModelAndView getRecords(@ModelAttribute("assignment") Assignment assignment) {
+        public ModelAndView getRecords(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
-        assignmentService.addAssignment(assignment);
+        assignmentService.addAssignment(assignmentDto);
         return modelAndView;
     }
 
