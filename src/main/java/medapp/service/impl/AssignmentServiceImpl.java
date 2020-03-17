@@ -17,13 +17,12 @@ import java.util.List;
 public class AssignmentServiceImpl implements AssignmentService {
 
     private AssignmentDAO assignmentDAO;
+    private PatientDAO patientDAO;
 
     @Autowired
     public void setAssignmentDAO(AssignmentDAO assignmentDAO) {
         this.assignmentDAO = assignmentDAO;
     }
-
-    private PatientDAO patientDAO;
 
     @Autowired
     public void setPatientDAO(PatientDAO patientDAO) {
@@ -32,14 +31,14 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
-    public void addAssignment(AssignmentDto assignmentDto) {
-        Patient p = patientDAO.getPatient(assignmentDto.getPatientId());
+    public void add(AssignmentDto assignmentDto) {
+        Patient p = patientDAO.getById(assignmentDto.getPatientId());
         Assignment a = new Assignment();
         a.setPatient(p);
         a.setId(assignmentDto.getId());
         a.setName(assignmentDto.getName());
         a.setType(assignmentDto.getType());
-        assignmentDAO.addAssignment(a);
+        assignmentDAO.add(a);
     }
 
     @Override
@@ -50,7 +49,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
-    public AssignmentDto getAssignment(int id) {
+    public AssignmentDto getById(int id) {
         AssignmentDto ad = new AssignmentDto();
         return ad;
     }

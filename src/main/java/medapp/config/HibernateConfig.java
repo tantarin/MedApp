@@ -15,18 +15,15 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
+import static Utils.ApplicationConstant.*;
+
 
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@PropertySource("classpath:db.properties")
+@PropertySource(PROPERTY_SOURCE)
 @ComponentScan("medapp")
 public class HibernateConfig {
-
-    private static final String HIBERNATE_DIALECT = "hibernate.dialect";
-    private static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-    private static final String HIBERNATE_FORMAT = "hibernate.format_sql";
-    private static final String HIBERNATE_HBM2DDL = "hibernate.hbm2ddl.auto";
 
     @Autowired
     private Environment environment;

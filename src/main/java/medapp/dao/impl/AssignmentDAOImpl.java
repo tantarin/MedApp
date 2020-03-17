@@ -24,7 +24,7 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
 
     @Override
-    public void addAssignment(Assignment assignment) {
+    public void add(Assignment assignment) {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.save(assignment);
         System.out.println("hello");
@@ -40,7 +40,7 @@ public class AssignmentDAOImpl implements AssignmentDAO {
     }
 
     @Override
-    public Assignment getAssignment(int id) {
+    public Assignment getById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Assignment ass = (Assignment) session.get(Assignment.class,id);
         return ass;

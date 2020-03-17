@@ -6,9 +6,9 @@
 </head>
 <body>
 <h2>Add</h2>
-<c:url value="/addPatient" var="add"/>
+<c:url value="/patients/add" var="add"/>
 <a href="${add}">Add new patient</a>
-<c:url value="/addAssignment" var="addA"/>
+<c:url value="/assignments/add" var="addA"/>
 <a href="${addA}">Add assignment</a>
 </body>
 </html>

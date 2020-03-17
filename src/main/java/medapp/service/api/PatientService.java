@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface PatientService {
 
-    void addPatient(Patient patient);
+    void add(Patient patient);
 
-    public List<PatientDto> getPatients();
+    List<PatientDto> getAll();
 
-    public PatientDto getPatient(int theId);
+    PatientDto getById(int theId);
 
-    public void deletePatient(int theId);
+    void delete(int theId);
 }

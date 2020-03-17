@@ -1,7 +1,6 @@
 package medapp.dao.impl;
 
 import medapp.dao.api.PatientDAO;
-import medapp.model.Assignment;
 import medapp.model.Patient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,20 +34,13 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public void removePatient(Integer id) {
+    public void delete(Integer id) {
     }
 
     @Override
-    public Patient getPatient(Integer id) {
+    public Patient getById(Integer id) {
         Session session = this.sessionFactory.getCurrentSession();
         Patient patient = (Patient) session.get(Patient.class,id);
         return patient;
-    }
-
-    @Override
-    public Assignment getAssignment(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Assignment ass = (Assignment) session.get(Assignment.class,id);
-        return ass;
     }
 }

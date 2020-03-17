@@ -9,7 +9,7 @@ public interface AssignmentService {
 
     List<Assignment> getAll(Integer id);
 
-    AssignmentDto getAssignment(int id);
+    AssignmentDto getById(int id);
 
-    public void addAssignment(AssignmentDto assignmentDto);
+    void add(AssignmentDto assignmentDto);
 }
