@@ -8,5 +8,5 @@ public interface AssignmentService {
 
     void addAssignment(Assignment assignment);
 
-    List<Assignment> getAll(int id);
+    List<Assignment> getAll(Integer id);
 }

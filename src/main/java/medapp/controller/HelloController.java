@@ -69,13 +69,13 @@ public class HelloController {
         return modelAndView;
     }
 
-        @PostMapping(value = "/addAssignment")
-        public ModelAndView assignment (@ModelAttribute("assignment") Assignment assignment){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
-        assignmentService.addAssignment(assignment);
-        return modelAndView;
-    }
+//        @PostMapping(value = "/addAssignment")
+//        public ModelAndView assignment (@ModelAttribute("assignment") Assignment assignment){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("redirect:/");
+//        assignmentService.addAssignment(assignment);
+//        return modelAndView;
+//    }
 
 
     @GetMapping("/patients")
@@ -84,13 +84,10 @@ public class HelloController {
 
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/addAssignment", method = RequestMethod.POST)
         public String getRecords(Model model) {
-
         List<Patient> patients = patientService.getPatients();
-
         List<PatientDto> patientsDTO = new ArrayList<>();
-
         for (Patient patient: patients) {
             PatientDto dto = new PatientDto();
             dto.setFirst_name(patient.getFirstName());
@@ -98,9 +95,8 @@ public class HelloController {
             dto.setAssignments(assignmentService.getAll(patient.getId()));
             patientsDTO.add(dto);
             }
-
             model.addAttribute("patients", patientsDTO);
-            return "records";
+            return "assignment";
         }
     }
 

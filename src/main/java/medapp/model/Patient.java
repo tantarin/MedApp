@@ -16,8 +16,8 @@ public class Patient {
     @Column(name = "id")
     private int id;
 
-    @OneToOne(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Assignment assignment;
+    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Assignment> assignments;
 
     @Column(name = "first_name")
     @Getter

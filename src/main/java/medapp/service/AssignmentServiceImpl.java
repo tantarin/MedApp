@@ -27,7 +27,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
-    public List<Assignment> getAll(int id) {
-        assignmentDAO.getAll(id);
+    public List<Assignment> getAll(Integer id) {
+        return assignmentDAO.getAll(id);
     }
 }
