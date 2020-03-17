@@ -1,5 +1,6 @@
 package medapp.controller;
 
+import medapp.dto.AssignmentDto;
 import medapp.dto.PatientDto;
 import medapp.model.Assignment;
 import medapp.model.Patient;
@@ -65,7 +66,7 @@ public class PatientController {
     public ModelAndView addAssignment(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         model.setViewName("addAssignment");
-        Assignment a = patientService.getAssignment(id);
+        AssignmentDto a = assignmentService.getAssignment(id);
         model.addObject("assignment",a);
         return model;
     }
