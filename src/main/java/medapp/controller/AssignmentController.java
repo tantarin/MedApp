@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 @RequestMapping("/assignments")
 public class AssignmentController {
 
@@ -28,8 +28,8 @@ public class AssignmentController {
     @PostMapping(value = "/addAssignment")
     public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/patients");
-        assignmentService.addAssignment(assignmentDto);
+        modelAndView.setViewName("redirect:/");
+        assignmentService.add(assignmentDto);
         return modelAndView;
     }
 }

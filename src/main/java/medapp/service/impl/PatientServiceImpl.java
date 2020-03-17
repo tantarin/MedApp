@@ -2,7 +2,6 @@ package medapp.service.impl;
 
 import medapp.dao.api.PatientDAO;
 import medapp.dto.PatientDto;
-import medapp.model.Assignment;
 import medapp.model.Patient;
 import medapp.service.api.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public void addPatient(Patient patient) {
+    public void add(Patient patient) {
         patientDAO.addPatient(patient);
     }
 
     @Override
     @Transactional
-    public List<PatientDto> getPatients() {
+    public List<PatientDto> getAll() {
         List<PatientDto> list = new ArrayList<>();
         for(Patient p: patientDAO.listPatients()){
             PatientDto patient = new PatientDto();
@@ -44,9 +43,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public PatientDto getPatient(int theId) {
+    public PatientDto getById(int theId) {
         PatientDto patientDto = new PatientDto();
-        Patient p = patientDAO.getPatient(theId);
+        Patient p = patientDAO.getById(theId);
         patientDto.setId(p.getId());
         patientDto.setFirst_name(p.getFirstName());
         patientDto.setLast_name(p.getLastName());
@@ -56,7 +55,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public void deletePatient(int theId) {
+    public void delete(int theId) {
 
     }
 

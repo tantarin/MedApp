@@ -21,12 +21,6 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping
-    public ModelAndView hello()
-    {
-         return new ModelAndView("index");
-    }
-
     @GetMapping(value = "/add")
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("addPatient");
@@ -37,14 +31,14 @@ public class PatientController {
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("patient") Patient patient) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/patients");
-        patientService.addPatient(patient);
+        modelAndView.setViewName("redirect:/");
+        patientService.add(patient);
         return modelAndView;
     }
 
     @GetMapping("/getAll")
     public List<PatientDto> getAll() {
-        return patientService.getPatients();
+        return patientService.getAll();
     }
     }
 
