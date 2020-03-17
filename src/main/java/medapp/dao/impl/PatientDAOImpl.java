@@ -1,5 +1,6 @@
-package medapp.dao;
+package medapp.dao.impl;
 
+import medapp.dao.api.PatientDAO;
 import medapp.model.Patient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PatientDAOImpl implements PatientDAO{
+public class PatientDAOImpl implements PatientDAO {
 
     private SessionFactory sessionFactory;
 

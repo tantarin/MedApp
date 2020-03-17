@@ -1,5 +1,6 @@
-package medapp.dao;
+package medapp.dao.impl;
 
+import medapp.dao.api.AssignmentDAO;
 import medapp.model.Assignment;
 import medapp.model.Patient;
 import org.hibernate.Session;

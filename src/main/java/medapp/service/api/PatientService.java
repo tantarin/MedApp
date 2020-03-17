@@ -1,4 +1,4 @@
-package medapp.service;
+package medapp.service.api;
 
 import medapp.model.Patient;
 

@@ -3,8 +3,8 @@ package medapp.controller;
 import medapp.dto.PatientDto;
 import medapp.model.Assignment;
 import medapp.model.Patient;
-import medapp.service.AssignmentService;
-import medapp.service.PatientService;
+import medapp.service.api.AssignmentService;
+import medapp.service.api.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-public class HelloController {
+public class PatientController {
 
     private PatientService patientService;
     private AssignmentService assignmentService;

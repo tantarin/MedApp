@@ -1,8 +1,8 @@
-package medapp.service;
+package medapp.service.impl;
 
-import medapp.dao.AssignmentDAO;
-import medapp.dao.PatientDAO;
+import medapp.dao.api.AssignmentDAO;
 import medapp.model.Assignment;
+import medapp.service.api.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

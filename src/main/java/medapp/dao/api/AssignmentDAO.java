@@ -1,4 +1,4 @@
-package medapp.dao;
+package medapp.dao.api;
 
 import medapp.model.Assignment;
 
