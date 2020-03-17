@@ -3,7 +3,6 @@ package medapp.service.impl;
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
-import medapp.dto.PatientDto;
 import medapp.model.Assignment;
 import medapp.model.Patient;
 import medapp.service.api.AssignmentService;

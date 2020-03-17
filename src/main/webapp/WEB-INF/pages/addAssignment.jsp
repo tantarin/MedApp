@@ -7,15 +7,7 @@
 </head>
 <body>
 <h2>Assignment</h2>
-<c:forEach items = "${patients}" var="patient">
-    <td><c:out value="patient.id"/> </td>
-    <c:forEach items="${patient.assignments}" var="ass">
-        <tr>
-            <c:out value="${ass.name}"/>
-        </tr>
-    </c:forEach>
-</c:forEach>
-<c:url value="/addAssignment" var="add"/>
+<c:url value="/assignments/addAssignment" var="add"/>
 <form:form action="${add}" method="post" modelAttribute="assignment">
     <table border="0" cellpadding="5">
         <tr>

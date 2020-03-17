@@ -7,12 +7,12 @@
         <title>Add Patient</title>
 </head>
 <body>
-<c:url value="/addPatient" var="add"/>
+<c:url value="/patients/add" var="add"/>
 <form:form action="${add}" method="post" modelAttribute="patient">
     <table border="0" cellpadding="5">
         <tr>
             <td>
-                Имя
+                Name:
             </td>
             <td>
                 <form:input path="firstName" />
@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td>
-                Фамилия
+                Last name:
             </td>
             <td><form:input path="lastName" /></td>
         </tr>
