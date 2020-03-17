@@ -17,4 +17,6 @@ public class PatientDto {
     private String last_name;
 
     private List<Assignment> assignments;
+
+    private Integer assignmentId;
 }

@@ -65,8 +65,8 @@ public class PatientController {
     public ModelAndView addAssignment(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         model.setViewName("addAssignment");
-        PatientDto p = patientService.getPatient(id);
-        model.addObject("assignment",new Assignment());
+        Assignment a = patientService.getAssignment(id);
+        model.addObject("assignment",a);
         return model;
     }
 

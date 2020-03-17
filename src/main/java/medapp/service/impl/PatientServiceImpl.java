@@ -2,6 +2,7 @@ package medapp.service.impl;
 
 import medapp.dao.api.PatientDAO;
 import medapp.dto.PatientDto;
+import medapp.model.Assignment;
 import medapp.model.Patient;
 import medapp.service.api.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,10 @@ public class PatientServiceImpl implements PatientService {
     @Transactional
     public void deletePatient(int theId) {
 
+    }
+
+    @Override
+    public Assignment getAssignment(int id) {
+        return patientDAO.getAssignment(id);
     }
 }
