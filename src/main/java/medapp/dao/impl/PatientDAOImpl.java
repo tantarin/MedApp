@@ -21,13 +21,14 @@ public class PatientDAOImpl implements PatientDAO {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Patient> listPatients() {
+    public List<Patient> getAll() {
         List<Patient> patientList = entityManager.createQuery("from Patient").getResultList();
         return patientList;
     }
 
     @Override
     public void delete(Integer id) {
+        entityManager.remove(getById(id));
     }
 
     @Override

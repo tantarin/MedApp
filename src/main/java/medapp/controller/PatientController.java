@@ -23,7 +23,7 @@ public class PatientController {
 
     @GetMapping(value = "/add")
     public ModelAndView add() {
-        ModelAndView modelAndView = new ModelAndView("addPatient");
+        ModelAndView modelAndView = new ModelAndView("patient");
         modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }
@@ -40,5 +40,18 @@ public class PatientController {
     public List<PatientDto> getAll() {
         return patientService.getAll();
     }
+
+    @GetMapping(value = "/delete")
+    public ModelAndView delete() {
+        ModelAndView modelAndView = new ModelAndView("delete");
+        modelAndView.addObject("id", 2);
+        return modelAndView;
     }
+
+    @RequestMapping("/delete")
+    public String deleteCustomerForm(@RequestParam int id) {
+        patientService.delete(id);
+        return "redirect:/";
+    }
+}
 

@@ -10,5 +10,7 @@
 <a href="${add}">Add new patient</a>
 <c:url value="/assignments/add" var="addA"/>
 <a href="${addA}">Add assignment</a>
+<c:url value="/patients/delete" var="del"/>
+<a href="${del}">Delete patient</a>
 </body>
 </html>

@@ -31,7 +31,7 @@ public class PatientServiceImpl implements PatientService {
     @Transactional
     public List<PatientDto> getAll() {
         List<PatientDto> list = new ArrayList<>();
-        for(Patient p: patientDAO.listPatients()){
+        for(Patient p: patientDAO.getAll()){
             PatientDto patient = new PatientDto();
             patient.setId(p.getId());
             patient.setFirst_name(p.getFirstName());
@@ -56,7 +56,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public void delete(int theId) {
-
+        patientDAO.delete(theId);
     }
 
 }
