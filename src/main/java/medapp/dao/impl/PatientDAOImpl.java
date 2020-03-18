@@ -2,34 +2,27 @@ package medapp.dao.impl;
 
 import medapp.dao.api.PatientDAO;
 import medapp.model.Patient;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
+import org.springframework.stereotype.Component;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import java.util.List;
 
-@Repository
+@Component
 public class PatientDAOImpl implements PatientDAO {
 
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    private EntityManager entityManager;
 
     @Override
     public void addPatient(Patient patient) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(patient);
+        entityManager.persist(patient);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<Patient> listPatients() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Patient> patientList = session.createQuery("from Patient").list();
+        List<Patient> patientList = entityManager.createQuery("from Patient").getResultList();
         return patientList;
     }
 
@@ -39,8 +32,7 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Patient getById(Integer id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Patient patient = (Patient) session.get(Patient.class,id);
+        Patient patient = (Patient) entityManager.find(Patient.class,id);
         return patient;
     }
 }

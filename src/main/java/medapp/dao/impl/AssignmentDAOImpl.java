@@ -6,34 +6,34 @@ import medapp.model.Patient;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Component
 public class AssignmentDAOImpl implements AssignmentDAO {
 
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    private EntityManager entityManager;
 
 
     @Override
+    @Transactional
     public void add(Assignment assignment) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(assignment);
+        entityManager.persist(assignment);
         System.out.println("hello");
     }
 
     @Override
     public List<Assignment> getAll(int id) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Query query = currentSession.createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
+        Query query = entityManager.createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
                 "p.id="+id);
         Patient patient = (Patient) query.getResultList();
         return new ArrayList<Assignment>(patient.getAssignments());
@@ -41,8 +41,7 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public Assignment getById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Assignment ass = (Assignment) session.get(Assignment.class,id);
+        Assignment ass = (Assignment) entityManager.find(Assignment.class,id);
         return ass;
     }
 }
