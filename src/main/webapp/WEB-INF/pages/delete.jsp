@@ -14,7 +14,7 @@
 
 <body>
 <c:url value="/patients/delete" var="del"/>
-<form:form action="${del}" method="delete">
+<form:form action="${del}" method="post" modelAttribute="patient">
     <table border="0" cellpadding="5">
         <tr>
             <td>
@@ -25,7 +25,7 @@
             </td>
         </tr>
         <tr>
-            <a href="/patients/delete?id=${id}">Delete</a>
+            <td colspan="2"><input type="submit" value="Save"></td>
         </tr>
     </table>
 </form:form>

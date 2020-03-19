@@ -1,8 +1,6 @@
 package medapp.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class Patient {
     @Column
     private int id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Assignment> assignments;
 
     @Column

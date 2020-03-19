@@ -44,14 +44,15 @@ public class PatientController {
     @GetMapping(value = "/delete")
     public ModelAndView delete() {
         ModelAndView modelAndView = new ModelAndView("delete");
-        modelAndView.addObject("id", 2);
+        modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }
 
-    @RequestMapping("/delete")
-    public String deleteCustomerForm(@RequestParam int id) {
-        patientService.delete(id);
-        return "redirect:/";
+    @PostMapping("/delete")
+    public ModelAndView delete(@ModelAttribute("patient") Patient patient) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        patientService.delete(patient.getId());
+        return modelAndView;
     }
 }
 
