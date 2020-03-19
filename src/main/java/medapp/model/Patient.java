@@ -12,7 +12,7 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Assignment> assignments;

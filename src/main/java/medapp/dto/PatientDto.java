@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class PatientDto {
 
-    private int id;
+    private Long id;
 
     private String first_name;
 

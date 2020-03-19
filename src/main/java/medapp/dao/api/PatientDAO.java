@@ -8,7 +8,7 @@ import java.util.List;
 public interface PatientDAO {
     void addPatient(Patient patient);
     List<Patient> getAll();
-    void delete(Integer id);
-    Patient getById(Integer id);
+    void delete(Long id);
+    Patient getById(Long id);
     void update(Patient patient);
 }

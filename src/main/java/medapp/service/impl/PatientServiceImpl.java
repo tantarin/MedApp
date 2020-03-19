@@ -43,7 +43,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public PatientDto getById(int theId) {
+    public PatientDto getById(Long theId) {
         PatientDto patientDto = new PatientDto();
         Patient p = patientDAO.getById(theId);
         patientDto.setId(p.getId());
@@ -55,7 +55,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public void delete(int theId) {
+    public void delete(Long theId) {
         patientDAO.delete(theId);
     }
 

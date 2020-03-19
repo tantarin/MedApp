@@ -12,9 +12,9 @@ public interface PatientService {
 
     List<PatientDto> getAll();
 
-    PatientDto getById(int theId);
+    PatientDto getById(Long theId);
 
-    void delete(int theId);
+    void delete(Long theId);
 
     void update(Patient patient);
 }

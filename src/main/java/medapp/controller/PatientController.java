@@ -21,6 +21,10 @@ public class PatientController {
         this.patientService = patientService;
     }
 
+    /**
+     * 
+     * @return
+     */
     @GetMapping(value = "/add")
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("patient");
@@ -40,6 +44,15 @@ public class PatientController {
     public List<PatientDto> getAll() {
         return patientService.getAll();
     }
+
+
+//    @RequestMapping("/delete")
+//    public String deleteStationForm(@RequestParam Long id) {
+//        PatientDto patient = patientService.getById(id);
+//        patientService.delete(patient.getId());
+//        return "redirect:/";
+//
+//    }
 
     @GetMapping(value = "/delete")
     public ModelAndView delete() {
