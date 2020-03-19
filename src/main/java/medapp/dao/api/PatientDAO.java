@@ -10,4 +10,5 @@ public interface PatientDAO {
     List<Patient> getAll();
     void delete(Integer id);
     Patient getById(Integer id);
+    void update(Patient patient);
 }

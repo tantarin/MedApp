@@ -15,4 +15,6 @@ public interface PatientService {
     PatientDto getById(int theId);
 
     void delete(int theId);
+
+    void update(Patient patient);
 }

@@ -54,5 +54,19 @@ public class PatientController {
         patientService.delete(patient.getId());
         return modelAndView;
     }
+
+    @GetMapping(value = "/update")
+    public ModelAndView update() {
+        ModelAndView modelAndView = new ModelAndView("patient");
+        modelAndView.addObject("patient", new Patient());
+        return modelAndView;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView update(@ModelAttribute("patient") Patient patient) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        patientService.update(patient);
+        return modelAndView;
+    }
 }
 

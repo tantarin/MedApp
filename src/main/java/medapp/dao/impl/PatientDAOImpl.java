@@ -36,4 +36,9 @@ public class PatientDAOImpl implements PatientDAO {
         Patient patient = (Patient) entityManager.find(Patient.class,id);
         return patient;
     }
+
+    @Override
+    public void update(Patient patient) {
+        entityManager.persist(patient);
+    }
 }

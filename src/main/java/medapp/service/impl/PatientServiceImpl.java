@@ -59,4 +59,16 @@ public class PatientServiceImpl implements PatientService {
         patientDAO.delete(theId);
     }
 
+    @Override
+    @Transactional
+    public void update(Patient patient) {
+        PatientDto patientDto = new PatientDto();
+        Patient p = patientDAO.getById(patient.getId());
+        patientDto.setId(p.getId());
+        patientDto.setFirst_name(p.getFirstName());
+        patientDto.setLast_name(p.getLastName());
+        patientDto.setAssignments(p.getAssignments());
+        patientDAO.update(patient);
+    }
+
 }
