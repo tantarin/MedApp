@@ -9,6 +9,6 @@ public class AssignmentDto {
     private int id;
     private String type;
     private String name;
-    private int patientId;
+    private Long patientId;
 
 }

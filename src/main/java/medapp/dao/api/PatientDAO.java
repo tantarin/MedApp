@@ -1,6 +1,6 @@
 package medapp.dao.api;
 
-import medapp.model.Assignment;
+
 import medapp.model.Patient;
 import java.util.List;
 

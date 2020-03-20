@@ -1,6 +1,8 @@
 package medapp.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,7 +16,9 @@ public class Patient {
     @Column
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    @JoinColumn(name = "patient_id")
     private List<Assignment> assignments;
 
     @Column

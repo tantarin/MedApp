@@ -27,12 +27,12 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         entityManager.remove(getById(id));
     }
 
     @Override
-    public Patient getById(Integer id) {
+    public Patient getById(Long id) {
         Patient patient = (Patient) entityManager.find(Patient.class,id);
         return patient;
     }

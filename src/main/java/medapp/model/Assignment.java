@@ -20,6 +20,7 @@ public class Assignment {
     String name;
 
     @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Assignment(){}
