@@ -27,7 +27,7 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         entityManager.remove(getById(id));
     }
 

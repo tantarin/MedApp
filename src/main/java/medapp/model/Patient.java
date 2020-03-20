@@ -16,9 +16,7 @@ public class Patient {
     @Column
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @JoinColumn(name = "patient_id")
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Assignment> assignments;
 
     @Column
