@@ -27,50 +27,21 @@ public class PatientController {
      */
     @GetMapping(value = "/add")
     public ModelAndView add() {
-        ModelAndView modelAndView = new ModelAndView("patient");
+        ModelAndView modelAndView = new ModelAndView("addPatient");
         modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }
 
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("patient") Patient patient) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
-        patientService.add(patient);
-        return modelAndView;
-    }
-
-    @GetMapping("/getAll")
-    public List<PatientDto> getAll() {
-        return patientService.getAll();
-    }
-
-
-//    @RequestMapping("/delete")
-//    public String deleteStationForm(@RequestParam Long id) {
-//        PatientDto patient = patientService.getById(id);
-//        patientService.delete(patient.getId());
-//        return "redirect:/";
-//
-//    }
-
-    @GetMapping(value = "/delete")
-    public ModelAndView delete() {
-        ModelAndView modelAndView = new ModelAndView("delete");
-        modelAndView.addObject("patient", new PatientDto());
-        return modelAndView;
-    }
-
-    @PostMapping("/delete")
-    public ModelAndView delete(@ModelAttribute("patient") PatientDto patientDto) {
         ModelAndView modelAndView = new ModelAndView("redirect:/");
-        patientService.delete(patientDto.getId());
+        patientService.add(patient);
         return modelAndView;
     }
 
     @GetMapping(value = "/update")
     public ModelAndView update() {
-        ModelAndView modelAndView = new ModelAndView("delete");
+        ModelAndView modelAndView = new ModelAndView("editPatient");
         modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }
@@ -79,6 +50,25 @@ public class PatientController {
     public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto) {
         ModelAndView modelAndView = new ModelAndView("redirect:/");
         patientService.update(patientDto);
+        return modelAndView;
+    }
+
+    @GetMapping("/getAll")
+    public List<PatientDto> getAll() {
+        return patientService.getAll();
+    }
+
+    @GetMapping(value = "/delete")
+    public ModelAndView delete() {
+        ModelAndView modelAndView = new ModelAndView("editPatient");
+        modelAndView.addObject("patient", new PatientDto());
+        return modelAndView;
+    }
+
+    @PostMapping("/delete")
+    public ModelAndView delete(@ModelAttribute("patient") PatientDto patientDto) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        patientService.delete(patientDto.getId());
         return modelAndView;
     }
 }

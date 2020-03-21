@@ -6,8 +6,8 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Assignment</h2>
-<c:url value="/assignments/addAssignment" var="add"/>
+<h2>Add assignment to patient</h2>
+<c:url value="/assignments/add" var="add"/>
 <form:form action="${add}" method="post" modelAttribute="assignment">
     <table border="0" cellpadding="5">
         <tr>

@@ -40,7 +40,27 @@ public class AssignmentDAOImpl implements AssignmentDAO {
     }
 
     @Override
-    public Assignment getById(int id) {
+    @Transactional
+    public void update(Assignment assignment) {
+        try {
+            System.out.println("from dao:" + assignment.getName());
+//        entityManager.getTransaction().begin();
+            entityManager.persist(assignment);
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+        }catch(NullPointerException e){
+            System.out.println(e.getStackTrace());
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        entityManager.remove(getById(id));
+    }
+
+    @Override
+    @Transactional
+    public Assignment getById(Long id) {
         Assignment ass = (Assignment) entityManager.find(Assignment.class,id);
         return ass;
     }

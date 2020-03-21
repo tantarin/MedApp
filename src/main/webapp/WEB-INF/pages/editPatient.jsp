@@ -13,31 +13,31 @@
 </head>
 
 <body>
-<form method="post" modelAttribute="patient">
+<form:form method="post" modelAttribute="patient">
     <table border="0" cellpadding="5">
     <tr>
         <td>
             Patient id:
         </td>
         <td>
-            <form:input path="id" />
+            <form:input  path="id" />
         </td>
         <td>
             New name:
         </td>
         <td>
-            <form:input path="first_name" />
+            <form:input path="firstName" />
         </td>
         <td>
             New last name:
         </td>
         <td>
-            <form:input path="last_name" />
+            <form:input path="lastName" />
         </td>
     </tr>
 </table>
-    <button type="submit" formaction="/patients/update">update</button>
-    <button type="submit" formaction="/patients/delete">delete</button>
-    </form>
+    <button type="submit" formaction="update">update</button>
+    <button type="submit" formaction="delete">delete</button>
+    </form:form>
 </body>
 </html>

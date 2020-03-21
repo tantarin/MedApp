@@ -42,13 +42,34 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
+    public void update(Assignment assignment) {
+        System.out.println("from service "+assignment.getName());
+        System.out.println("from service "+assignment.getId());
+        AssignmentDto a = this.getById(assignment.getId());
+        Assignment as = new Assignment();
+        System.out.println(a.toString());
+        as.setId(assignment.getId());
+        as.setName(assignment.getName());
+        as.setType(assignment.getType());
+        as.setPatient(assignment.getPatient());
+        assignmentDAO.update(as);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Assignment assignment) {
+        assignmentDAO.delete(assignment.getId());
+    }
+
+    @Override
+    @Transactional
     public List<Assignment> getAll(Integer id) {
         return assignmentDAO.getAll(id);
     }
 
     @Override
     @Transactional
-    public AssignmentDto getById(int id) {
+    public AssignmentDto getById(Long id) {
         AssignmentDto ad = new AssignmentDto();
         return ad;
     }

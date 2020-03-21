@@ -9,7 +9,11 @@ public interface AssignmentService {
 
     List<Assignment> getAll(Integer id);
 
-    AssignmentDto getById(int id);
+    AssignmentDto getById(Long id);
 
     void add(AssignmentDto assignmentDto);
+
+    void update(Assignment assignment);
+
+    void delete(Assignment assignment);
 }
