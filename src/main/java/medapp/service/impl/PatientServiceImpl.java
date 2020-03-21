@@ -34,8 +34,8 @@ public class PatientServiceImpl implements PatientService {
         for(Patient p: patientDAO.getAll()){
             PatientDto patient = new PatientDto();
             patient.setId(p.getId());
-            patient.setFirst_name(p.getFirstName());
-            patient.setLast_name(p.getLastName());
+            patient.setFirstName(p.getFirstName());
+            patient.setLastName(p.getLastName());
             patient.setAssignments(p.getAssignments());
         }
         return list;
@@ -47,8 +47,8 @@ public class PatientServiceImpl implements PatientService {
         PatientDto patientDto = new PatientDto();
         Patient p = patientDAO.getById(theId);
         patientDto.setId(p.getId());
-        patientDto.setFirst_name(p.getFirstName());
-        patientDto.setLast_name(p.getLastName());
+        patientDto.setFirstName(p.getFirstName());
+        patientDto.setLastName(p.getLastName());
         patientDto.setAssignments(p.getAssignments());
         return new PatientDto();
     }
@@ -61,14 +61,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public void update(Patient patient) {
-        PatientDto patientDto = new PatientDto();
-        Patient p = patientDAO.getById(patient.getId());
-        patientDto.setId(p.getId());
-        patientDto.setFirst_name(p.getFirstName());
-        patientDto.setLast_name(p.getLastName());
-        patientDto.setAssignments(p.getAssignments());
-        patientDAO.update(patient);
+    public void update(PatientDto patientDto) {
+        Patient p = patientDAO.getById(patientDto.getId());
+        p.setFirstName(patientDto.getFirstName());
+        p.setLastName(patientDto.getLastName());
+        p.setAssignments(patientDto.getAssignments());
+        patientDAO.update(p);
     }
-
 }

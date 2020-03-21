@@ -64,22 +64,21 @@ public class PatientController {
     @PostMapping("/delete")
     public ModelAndView delete(@ModelAttribute("patient") PatientDto patientDto) {
         ModelAndView modelAndView = new ModelAndView("redirect:/");
-     //   if(patientDto.getAssignments() != null) patientDto.getAssignments().clear();
         patientService.delete(patientDto.getId());
         return modelAndView;
     }
 
     @GetMapping(value = "/update")
     public ModelAndView update() {
-        ModelAndView modelAndView = new ModelAndView("patient");
+        ModelAndView modelAndView = new ModelAndView("delete");
         modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }
 
     @PostMapping("/update")
-    public ModelAndView update(@ModelAttribute("patient") Patient patient) {
+    public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto) {
         ModelAndView modelAndView = new ModelAndView("redirect:/");
-        patientService.update(patient);
+        patientService.update(patientDto);
         return modelAndView;
     }
 }

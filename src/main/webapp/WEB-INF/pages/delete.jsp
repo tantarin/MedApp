@@ -13,21 +13,31 @@
 </head>
 
 <body>
-<c:url value="/patients/delete" var="del"/>
-<form:form action="${del}" method="post" modelAttribute="patient">
+<form method="post" modelAttribute="patient">
     <table border="0" cellpadding="5">
-        <tr>
-            <td>
-               Patient id:
-            </td>
-            <td>
-                <form:input path="id" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Save"></td>
-        </tr>
-    </table>
-</form:form>
+    <tr>
+        <td>
+            Patient id:
+        </td>
+        <td>
+            <form:input path="id" />
+        </td>
+        <td>
+            New name:
+        </td>
+        <td>
+            <form:input path="first_name" />
+        </td>
+        <td>
+            New last name:
+        </td>
+        <td>
+            <form:input path="last_name" />
+        </td>
+    </tr>
+</table>
+    <button type="submit" formaction="/patients/update">update</button>
+    <button type="submit" formaction="/patients/delete">delete</button>
+    </form>
 </body>
 </html>

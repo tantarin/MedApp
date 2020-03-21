@@ -16,5 +16,5 @@ public interface PatientService {
 
     void delete(Long theId);
 
-    void update(Patient patient);
+    void update(PatientDto patientDto);
 }
