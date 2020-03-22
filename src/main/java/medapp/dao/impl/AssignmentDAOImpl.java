@@ -6,25 +6,26 @@ import medapp.model.Assignment;
 import medapp.model.Patient;
 import org.springframework.stereotype.Component;
 import javax.persistence.*;
+import javax.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AssignmentDAOImpl extends AbstractDao implements AssignmentDAO {
+public class AssignmentDAOImpl implements AssignmentDAO {
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void add(Assignment assignment) {
-        try{
-        getEntityManager().merge(assignment);
-        getEntityManager().persist(assignment);}
-        catch (NullPointerException n){
-           n.printStackTrace();}
-        System.out.println("from ass dao hello");
+        entityManager.persist(assignment);
+        System.out.println("Record Successfully Inserted In The Database");
     }
 
     @Override
     public List<Assignment> getAll(int id) {
-        Query query = getEntityManager().createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
+        Query query = entityManager.createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
                 "p.id="+id);
         Patient patient = (Patient) query.getResultList();
         return new ArrayList<Assignment>(patient.getAssignments());
@@ -34,7 +35,7 @@ public class AssignmentDAOImpl extends AbstractDao implements AssignmentDAO {
     public void update(Assignment assignment) {
         try {
             System.out.println("from dao:" + assignment.getName());
-            getEntityManager().persist(assignment);
+            entityManager.persist(assignment);
         }catch(NullPointerException e){
             System.out.println(e.getStackTrace());
         }
@@ -42,11 +43,11 @@ public class AssignmentDAOImpl extends AbstractDao implements AssignmentDAO {
 
     @Override
     public void delete(Long id) {
-        getEntityManager().remove(getById(id));
+        entityManager.remove(getById(id));
     }
 
     @Override
     public Assignment getById(Long id) {
-            return  (Assignment) getEntityManager().find(Assignment.class, id);
+            return  (Assignment) entityManager.find(Assignment.class, id);
     }
 }

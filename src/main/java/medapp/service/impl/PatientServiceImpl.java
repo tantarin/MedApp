@@ -22,7 +22,6 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    @Transactional
     public void add(Patient patient) {
         patientDAO.addPatient(patient);
     }

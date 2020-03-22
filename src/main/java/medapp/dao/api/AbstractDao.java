@@ -1,14 +1,10 @@
 package medapp.dao.api;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
+import javax.persistence.*;
 
 public abstract class AbstractDao {
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
-    EntityManager entityManager;
-
-    protected EntityManager getEntityManager() {
-        return this.entityManager;
+    private static final EntityManagerFactory emFactoryObj = Persistence.createEntityManagerFactory("TestPersistence");
+    public static EntityManager getEntityManager() {
+        return emFactoryObj.createEntityManager();
     }
 }
