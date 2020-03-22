@@ -21,7 +21,7 @@ public class AssignmentController {
     @GetMapping(value = "/add")
     public ModelAndView add() {
         ModelAndView model = new ModelAndView("addAssignment");
-        model.addObject("assignment",new AssignmentDto());
+        model.addObject("assignmentDto",new AssignmentDto());
         return model;
     }
 
@@ -41,11 +41,11 @@ public class AssignmentController {
     }
 
     @PostMapping(value = "/update")
-    public ModelAndView edit(@ModelAttribute("assignment") Assignment assignment) {
+    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) {
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("from controller"+assignment.getName());
+        System.out.println("from controller"+assignmentDto.getName());
         modelAndView.setViewName("redirect:/");
-        assignmentService.update(assignment);
+        assignmentService.update(assignmentDto);
         return modelAndView;
     }
 

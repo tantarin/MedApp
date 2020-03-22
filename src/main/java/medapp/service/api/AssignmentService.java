@@ -13,7 +13,7 @@ public interface AssignmentService {
 
     void add(AssignmentDto assignmentDto);
 
-    void update(Assignment assignment);
+    void update(AssignmentDto assignment);
 
     void delete(Assignment assignment);
 }

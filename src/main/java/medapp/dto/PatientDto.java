@@ -18,5 +18,5 @@ public class PatientDto {
 
     private List<Assignment> assignments;
 
-    private Integer assignmentId;
+    private Long assignmentId;
 }

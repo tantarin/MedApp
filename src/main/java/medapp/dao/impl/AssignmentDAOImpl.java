@@ -1,53 +1,40 @@
 package medapp.dao.impl;
 
+import medapp.dao.api.AbstractDao;
 import medapp.dao.api.AssignmentDAO;
 import medapp.model.Assignment;
 import medapp.model.Patient;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AssignmentDAOImpl implements AssignmentDAO {
-
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
-    private EntityManager entityManager;
-
+public class AssignmentDAOImpl extends AbstractDao implements AssignmentDAO {
 
     @Override
-    @Transactional
     public void add(Assignment assignment) {
-        entityManager.persist(assignment);
-        System.out.println("hello");
+        try{
+        getEntityManager().merge(assignment);
+        getEntityManager().persist(assignment);}
+        catch (NullPointerException n){
+           n.printStackTrace();}
+        System.out.println("from ass dao hello");
     }
 
     @Override
     public List<Assignment> getAll(int id) {
-        Query query = entityManager.createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
+        Query query = getEntityManager().createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
                 "p.id="+id);
         Patient patient = (Patient) query.getResultList();
         return new ArrayList<Assignment>(patient.getAssignments());
     }
 
     @Override
-    @Transactional
     public void update(Assignment assignment) {
         try {
             System.out.println("from dao:" + assignment.getName());
-//        entityManager.getTransaction().begin();
-            entityManager.persist(assignment);
-//        entityManager.getTransaction().commit();
-//        entityManager.close();
+            getEntityManager().persist(assignment);
         }catch(NullPointerException e){
             System.out.println(e.getStackTrace());
         }
@@ -55,13 +42,11 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public void delete(Long id) {
-        entityManager.remove(getById(id));
+        getEntityManager().remove(getById(id));
     }
 
     @Override
-    @Transactional
     public Assignment getById(Long id) {
-        Assignment ass = (Assignment) entityManager.find(Assignment.class,id);
-        return ass;
+            return  (Assignment) getEntityManager().find(Assignment.class, id);
     }
 }
