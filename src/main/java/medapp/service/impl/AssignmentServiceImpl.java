@@ -43,18 +43,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     @Transactional
     public void update(AssignmentDto assignmentDto) {
-        System.out.println("from service "+assignmentDto.getName());
-        System.out.println("from service "+assignmentDto.getId());
-        try {
-            System.out.println(assignmentDAO.getById((long) 3));
-        } catch(NullPointerException n) {n.printStackTrace();}
-//       Assignment a = assignmentDAO.getById(assignmentDto.getId());
-//        System.out.println(a);
-//        a.setId(assignmentDto.getId());
-//        a.setName(assignmentDto.getName());
-//        a.setType(assignmentDto.getType());
-//       // a.setPatient(assignmentDto.getPatientId());
-//        assignmentDAO.update(a);
+       Assignment a = assignmentDAO.getById(assignmentDto.getId());
+        a.setName(assignmentDto.getName());
+        a.setType(assignmentDto.getType());
+        assignmentDAO.update(a);
     }
 
     @Override

@@ -19,7 +19,9 @@ public class PatientDAOImpl implements PatientDAO {
     @Override
     @Transactional
     public void addPatient(Patient patient) {
+   //     entityManager.getTransaction().begin();
         entityManager.persist(patient);
+   //     entityManager.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
