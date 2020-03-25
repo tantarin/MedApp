@@ -1,6 +1,5 @@
 package medapp.dao.impl;
 
-import medapp.dao.api.AbstractDao;
 import medapp.dao.api.PatientDAO;
 import medapp.model.Patient;
 import org.springframework.stereotype.Component;
@@ -19,9 +18,7 @@ public class PatientDAOImpl implements PatientDAO {
     @Override
     @Transactional
     public void addPatient(Patient patient) {
-   //     entityManager.getTransaction().begin();
         entityManager.persist(patient);
-   //     entityManager.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")

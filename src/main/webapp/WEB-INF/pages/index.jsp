@@ -16,5 +16,7 @@
 <a href="${edit}">Edit assignments</a>
 <c:url value="/assignments/delete" var="del"/>
 <a href="${del}">Delete assignment</a>
+<c:url value="events" var="del"/>
+<a href="${del}">Delete assignment</a>
 </body>
 </html>

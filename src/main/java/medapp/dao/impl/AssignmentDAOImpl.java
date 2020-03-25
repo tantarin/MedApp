@@ -1,12 +1,10 @@
 package medapp.dao.impl;
 
-import medapp.dao.api.AbstractDao;
 import medapp.dao.api.AssignmentDAO;
 import medapp.model.Assignment;
 import medapp.model.Patient;
 import org.springframework.stereotype.Component;
 import javax.persistence.*;
-import javax.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +31,8 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public void update(Assignment assignment) {
-        try {
             System.out.println("from dao:" + assignment.getName());
             entityManager.persist(assignment);
-        }catch(NullPointerException e){
-            System.out.println(e.getStackTrace());
-        }
     }
 
     @Override

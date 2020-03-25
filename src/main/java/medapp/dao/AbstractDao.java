@@ -1,4 +1,4 @@
-package medapp.dao.api;
+package medapp.dao;
 
 import javax.persistence.*;
 

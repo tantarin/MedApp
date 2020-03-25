@@ -1,7 +1,10 @@
 package medapp.dto;
 
-
 import lombok.Data;
+import medapp.model.Event;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Data
 public class AssignmentDto {
@@ -10,14 +13,13 @@ public class AssignmentDto {
     private String type;
     private String name;
     private Long patientId;
+    String [] weeks;
+    List<Integer> weeksInt;
+    String dateFrom;
+    String dateTo;
+    String time1;
+    String time2;
+    String time3;
+    List<Event> events;
 
-    @Override
-    public String toString() {
-        return "AssignmentDto{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", patientId=" + patientId +
-                '}';
-    }
 }

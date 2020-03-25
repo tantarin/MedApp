@@ -1,8 +1,6 @@
 package medapp.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import medapp.model.Assignment;
 
 import java.util.List;
