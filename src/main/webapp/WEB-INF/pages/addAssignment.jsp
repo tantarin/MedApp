@@ -41,13 +41,13 @@
         </tr>
     </table>
         <br>
-            <form:checkbox name="Mon" value="a1" path="weeks"/>Monday</b>
-            <form:checkbox name="Tues" value="a2" path="weeks"/>Tuesday</b>
-            <form:checkbox name="Wed" value="a3" path="weeks"/>Wednesday</b>
-            <form:checkbox name="Th" value="a4" path="weeks"/>Thursday</b>
-            <form:checkbox name="Fr" value="a5" path="weeks"/>Friday</b>
-            <form:checkbox name="Sat" value="a5" path="weeks"/>Saturday</b>
-            <form:checkbox name="Sun" value="a5" path="weeks"/>Sunday</b>
+            <form:checkbox name="Mon" value="1" path="weeks"/>Monday</b>
+            <form:checkbox name="Tues" value="2" path="weeks"/>Tuesday</b>
+            <form:checkbox name="Wed" value="3" path="weeks"/>Wednesday</b>
+            <form:checkbox name="Th" value="4" path="weeks"/>Thursday</b>
+            <form:checkbox name="Fr" value="5" path="weeks"/>Friday</b>
+            <form:checkbox name="Sat" value="6" path="weeks"/>Saturday</b>
+            <form:checkbox name="Sun" value="7" path="weeks"/>Sunday</b>
             <br>
              <br>
         <input type="checkbox" id="o1" value="a1" onclick="agreeForm(this.id)">Утро</b>

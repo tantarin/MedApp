@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @Table
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     Long id;
 
     @Column
@@ -20,11 +22,8 @@ public class Event {
     String time;
 
     @ManyToOne
-    @JoinColumn(name = "assignment_id")
-    private Assignment assignment;
-
-    @Column
-    Long assignmentId;
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
     public Event(){};
 }

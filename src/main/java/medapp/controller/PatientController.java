@@ -1,6 +1,7 @@
 package medapp.controller;
 
 import medapp.dto.PatientDto;
+import medapp.model.Event;
 import medapp.model.Patient;
 import medapp.service.api.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;

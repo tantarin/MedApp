@@ -13,7 +13,7 @@ public class AssignmentDto {
     private String type;
     private String name;
     private Long patientId;
-    String [] weeks;
+    String [] weeks; //1 2 3
     List<Integer> weeksInt;
     String dateFrom;
     String dateTo;

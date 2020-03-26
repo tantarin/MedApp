@@ -31,8 +31,5 @@ public class Assignment {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @OneToMany(mappedBy = "assignment",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Event> events;
-
     public Assignment(){}
 }

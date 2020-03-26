@@ -1,15 +1,10 @@
 package medapp.dao.impl;
 
 import medapp.dao.api.EventDAO;
-import medapp.model.Assignment;
 import medapp.model.Event;
-import medapp.model.Patient;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,6 +18,7 @@ public class EventDAOImpl implements EventDAO {
         entityManager.persist(event);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Event> getAll() {
         List<Event> eventList = entityManager.createQuery("FROM Event").getResultList();

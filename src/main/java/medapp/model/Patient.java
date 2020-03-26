@@ -19,6 +19,9 @@ public class Patient {
     @OneToMany(mappedBy = "patient",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Assignment> assignments;
 
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Event> events;
+
     @Column
     private String firstName ;
 
