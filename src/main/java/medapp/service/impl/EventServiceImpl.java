@@ -5,6 +5,7 @@ import medapp.model.Event;
 import medapp.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,5 +32,21 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event getById(Long id) {
         return eventDAO.getById(id);
+    }
+
+    @Override
+    public List<Event> filterByDate() {
+        return eventDAO.filterByDate();
+    }
+
+    @Override
+    public List<Event> filterByHour() {
+        return eventDAO.filterByHour();
+    }
+
+    @Override
+    @Transactional
+    public List<Event> filterByPatient(Integer id) {
+        return eventDAO.filterByPatient(id);
     }
 }

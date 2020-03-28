@@ -5,6 +5,10 @@ import medapp.model.Event;
 import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -21,13 +25,44 @@ public class EventDAOImpl implements EventDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Event> getAll() {
-        List<Event> eventList = entityManager.createQuery("FROM Event").getResultList();
-        return eventList;
+        return entityManager.createQuery("FROM Event").getResultList();
     }
 
     @Override
     public Event getById(Long id) {
-        Event event = (Event) entityManager.find(Event.class,id);
-        return event;
+        return  (Event) entityManager.find(Event.class,id);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Event> filterByDate() {
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.date = ?1");
+        String date = formatForDateNow.format(dateNow);
+        System.out.println("print date from dao "+date);
+        query.setParameter(1,date);
+        List<Event> resultList = query.getResultList();
+        System.out.println(Arrays.toString(resultList.toArray()));
+        return resultList;
+    }
+
+    @Override
+    public List<Event> filterByHour() {
+        Date dateNow = new Date();
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm");
+        String timeNow = time.format(dateNow);
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.time = ?1");
+        query.setParameter(1,timeNow);
+        List<Event> resultList = query.getResultList();
+        return resultList;
+    }
+
+    @Override
+    public List<Event> filterByPatient(Integer id) {
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.patient.id= ?1", Event.class);
+        query.setParameter(1,Integer.toString(id));
+        System.out.println("array "+Arrays.toString(query.getResultList().toArray()));
+        return query.getResultList();
     }
 }

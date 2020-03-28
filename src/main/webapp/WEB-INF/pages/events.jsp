@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: tanya
@@ -29,5 +30,23 @@
         </c:forEach>
     </table>
 </div>
+<c:url value="/events/filter" var="filter"/>
+<form:form method="post" action="${filter}">
+    <table border="0" cellpadding="5">
+        <tr>
+            <br>
+            <label>
+                <input type="checkbox" name="date" value="1"/>
+            </label>By today</b>
+            <label>
+                <input type="checkbox" name="hour" value="2" />
+            </label>By hour</b>
+            <label>
+                <input type="checkbox" name="patient" value="3"/>
+            </label>By patient</b>
+        </tr>
+    </table>
+    <button type="submit">Ok</button>
+</form:form>
 </body>
 </html>
