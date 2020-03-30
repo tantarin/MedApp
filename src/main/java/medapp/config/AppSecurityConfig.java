@@ -19,13 +19,16 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationMgr.inMemoryAuthentication()
                 .withUser("doctor")
                 .password(encoder.encode("123"))
-                .authorities("ROLE_USER");
+                .authorities("ROLE_ADMIN")
+                .and()
+                .withUser("nurse").password("123").authorities("ROLE_USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/homePage").access("hasRole('ROLE_USER')")
+                .antMatchers("/events/getAll").hasAnyRole("ROLE_ADMIN","ROLE_USER")
                 .and()
                 .formLogin().loginPage("/loginPage")
                 .defaultSuccessUrl("/homePage")
