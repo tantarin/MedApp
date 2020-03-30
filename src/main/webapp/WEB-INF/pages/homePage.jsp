@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: tanya
@@ -38,7 +39,10 @@
         <a href="${del}">All events</a>
     </li>
 </ul>
-
+<c:url value="/logout" var="logoutUrl" />
+<form id="logout" action="${logoutUrl}" method="post" >
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
 <a href="${pageContext.request.contextPath}/events/getAll">Nurse</a> | <a href="${pageContext.request.contextPath}/assignments/add">Doctor</a> | <a href="javascript:document.getElementById('logout').submit()">Logout</a>
 </body>
 </html>
