@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/r")
 public class MainController {
     @GetMapping
     public ModelAndView hello()
     {
-        return new ModelAndView("index");
+        return new ModelAndView("welcomePage");
     }
 }
