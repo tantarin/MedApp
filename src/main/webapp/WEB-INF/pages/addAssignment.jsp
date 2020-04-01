@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript">
         function agreeForm(f) {
             let chbox =document.getElementById(f);
@@ -14,7 +15,17 @@
     </script>
 </head>
 <body>
-<h2>Add assignment to patient</h2>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+        <div>
+            <a href="https://www.javaguides.net" class="navbar-brand"> Medical App </a>
+        </div>
+
+        <ul class="navbar-nav">
+            <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Add assignment</a></li>
+        </ul>
+    </nav>
+</header>
 <c:url value="/assignments/add" var="add"/>
 <form:form action="${add}" method="post" modelAttribute="assignmentDto">
     <table border="0" cellpadding="5">
@@ -33,12 +44,6 @@
             <td><form:input path="name" /></td>
         </tr>
         <tr>
-        <tr>
-            <td>
-                Id пациента:
-            </td>
-            <td><form:input path="patientId" /></td>
-        </tr>
     </table>
         <br>
             <form:checkbox name="Mon" value="1" path="weeks"/>Monday</b>

@@ -25,5 +25,8 @@ public class Event {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
+    @Column
+    String status;
+
     public Event(){};
 }

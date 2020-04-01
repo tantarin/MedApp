@@ -49,4 +49,10 @@ public class EventServiceImpl implements EventService {
     public List<Event> filterByPatient(Integer id) {
         return eventDAO.filterByPatient(id);
     }
+
+    @Override
+    @Transactional
+    public void deleteFromToday(Long patientId){
+        eventDAO.deleteFromToday(patientId);
+    }
 }

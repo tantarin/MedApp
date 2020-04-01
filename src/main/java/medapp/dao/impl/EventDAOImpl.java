@@ -62,7 +62,18 @@ public class EventDAOImpl implements EventDAO {
     public List<Event> filterByPatient(Integer id) {
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.patient.id= ?1", Event.class);
         query.setParameter(1,Integer.toString(id));
-        System.out.println("array "+Arrays.toString(query.getResultList().toArray()));
         return query.getResultList();
+    }
+
+    //TODO delete events by patient id from date
+    public void deleteFromToday(Long patientId) {
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formatForDateNow.format(dateNow);
+        Query query = entityManager.createQuery("delete from Event e  where e.date >= ?1 AND e.patient.id=?2");
+        query.setParameter(1,"'"+date+"'");
+        query.setParameter(2,Long.toString(patientId));
+        System.out.println("from dao event delete");
+
     }
 }

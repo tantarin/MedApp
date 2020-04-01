@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/assignments")
 public class AssignmentController {
+
+    Long id;
 
     private AssignmentService assignmentService;
 
@@ -19,16 +23,18 @@ public class AssignmentController {
     }
 
     @GetMapping(value = "/add")
-    public ModelAndView add() {
+    public ModelAndView add(HttpServletRequest request) {
+        id = Long.parseLong(request.getParameter("id"));
         ModelAndView model = new ModelAndView("addAssignment");
-        model.addObject("assignmentDto",new AssignmentDto());
+        AssignmentDto assignmentDto = new AssignmentDto();
+        model.addObject("assignmentDto",assignmentDto);
         return model;
     }
 
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
+        ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
+        assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
         return modelAndView;
     }
@@ -50,17 +56,11 @@ public class AssignmentController {
     }
 
     @GetMapping(value = "/delete")
-    public ModelAndView delete() {
-        ModelAndView model = new ModelAndView("editAssignment");
-        model.addObject("assignment",new Assignment());
-        return model;
-    }
-
-    @PostMapping(value = "/delete")
-    public ModelAndView delete(@ModelAttribute("assignment") Assignment assignment) {
+    public ModelAndView delete(HttpServletRequest request) {
+        id = Long.parseLong(request.getParameter("id"));
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
-        assignmentService.delete(assignment);
+        modelAndView.setViewName("redirect:/patients/getAll");
+        assignmentService.deleteById(id);
         return modelAndView;
     }
 }

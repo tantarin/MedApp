@@ -17,4 +17,6 @@ public class PatientDto {
     private List<Assignment> assignments;
 
     private Long assignmentId;
+
+    private String status;
 }

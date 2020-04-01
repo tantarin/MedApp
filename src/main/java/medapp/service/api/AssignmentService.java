@@ -15,5 +15,5 @@ public interface AssignmentService {
 
     void update(AssignmentDto assignment);
 
-    void delete(Assignment assignment);
+    void deleteById(Long id);
 }

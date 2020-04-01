@@ -90,8 +90,8 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
-    public void delete(Assignment assignment) {
-        assignmentDAO.delete(assignment.getId());
+    public void deleteById(Long id) {
+        assignmentDAO.delete(id);
     }
 
     @Override

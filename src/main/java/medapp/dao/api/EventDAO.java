@@ -12,4 +12,5 @@ public interface EventDAO {
     List<Event> filterByDate();
     List<Event> filterByHour();
     List<Event> filterByPatient(Integer id);
+    void deleteFromToday(Long patientId);
 }

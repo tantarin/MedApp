@@ -17,4 +17,6 @@ public interface PatientService {
     void delete(Long theId);
 
     void update(PatientDto patientDto);
+
+    List<Assignment> getAssignments(Long id);
 }
