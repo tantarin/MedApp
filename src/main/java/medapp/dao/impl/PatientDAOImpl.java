@@ -33,7 +33,6 @@ public class PatientDAOImpl implements PatientDAO {
     @Override
     public void deleteById(Long id) {
         entityManager.remove(getById(id));
-       // Query query = entityManager.createQuery("")
     }
 
     @Override
@@ -49,7 +48,7 @@ public class PatientDAOImpl implements PatientDAO {
     @Override
     public List<Assignment> getAssignments(Long id) {
         Query query = entityManager.createQuery("select a from Assignment a where a.patient.id = ?1");
-        query.setParameter(1,Long.toString(id));
+        query.setParameter(1,id);
         return query.getResultList();
     }
 }

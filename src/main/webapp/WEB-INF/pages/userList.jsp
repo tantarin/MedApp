@@ -69,7 +69,7 @@
                         </span>
                     </td>
                     <td><a href="${pageContext.request.contextPath}/patients/update?id=<c:out value='${patient.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a id="del" onclick="return agreeForm();" href="${pageContext.request.contextPath}/events/delete?id=<c:out value='${patient.id}' />">Discharge</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath}/events/delete?id=<c:out value='${patient.id}' />">Discharge</a> &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="${pageContext.request.contextPath}/patients/assignments?id=<c:out value='${patient.id}' />">Assignments</a>
                     </td>
                 </tr>

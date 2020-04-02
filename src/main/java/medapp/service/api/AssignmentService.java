@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AssignmentService {
 
-    List<Assignment> getAll(Integer id);
+    List<Assignment> getAll(Long id);
 
     AssignmentDto getById(Long id);
 

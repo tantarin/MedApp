@@ -47,13 +47,19 @@ public class EventController {
         return modelAndView;
     }
 
-    //TODO delete events
-    @PostMapping("/delete")
-    public ModelAndView delete(HttpServletRequest request) {
-        System.out.println("from event delete controller");
-        ModelAndView modelAndView = new ModelAndView("redirect:userList");
+    @GetMapping("/delete")
+    public ModelAndView deleteGet(HttpServletRequest request) {
+        System.out.println("from get event delete controller");
         Long id = Long.parseLong(request.getParameter("id"));
         eventService.deleteFromToday(id);
-        return modelAndView;
+        return new ModelAndView("redirect:/events/getAll");
     }
+//    @PostMapping("/delete")
+//    public ModelAndView delete(HttpServletRequest request) {
+//        System.out.println("from event delete controller");
+//        ModelAndView modelAndView = new ModelAndView("redirect:userList");
+//        Long id = Long.parseLong(request.getParameter("id"));
+//        eventService.deleteFromToday(id);
+//        return modelAndView;
+//    }
 }

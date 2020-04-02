@@ -22,9 +22,10 @@ public class AssignmentDAOImpl implements AssignmentDAO {
     }
 
     @Override
-    public List<Assignment> getAll(int id) {
-        Query query = entityManager.createQuery("FROM Patient as p LEFT join fetch p.assignments where " +
-                "p.id="+id);
+    public List<Assignment> getAll(Long id) {
+        System.out.println("from ass dao");
+        Query query = entityManager.createQuery("FROM Patient as p LEFT join fetch p.assignments where p.id=:id");
+        query.setParameter("id", id);
         Patient patient = (Patient) query.getResultList();
         return new ArrayList<Assignment>(patient.getAssignments());
     }

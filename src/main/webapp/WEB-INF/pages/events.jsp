@@ -1,16 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: tanya
-  Date: 24.03.2020
-  Time: 23:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Events</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript">
         function agreeForm(f) {
             let chbox =document.getElementById(f);
@@ -19,10 +13,30 @@
     </script>
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+        <div>
+            <a href="https://www.javaguides.net" class="navbar-brand"> Medical App </a>
+        </div>
+
+        <ul class="navbar-nav">
+            <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
+        </ul>
+    </nav>
+</header>
+<br>
+<div class="row">
+    <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+    <div class="container">
+        <h3 class="text-center">Events</h3>
+        <hr>
+        <div class="container text-left">
+        </div>
+        <br>
 <c:url value="/events/filter" var="filter"/>
 <form:form method="post" action="${filter}">
     <h4>Select a filter</h4>
-    <table border="0" cellpadding="5">
+    <table class="table table-bordered" border="0" cellpadding="5">
         <tr>
             <label>
                 <input type="checkbox" name="date" value="1"/>

@@ -3,7 +3,7 @@ package medapp.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
 
 
 @Entity
@@ -29,4 +29,15 @@ public class Event {
     String status;
 
     public Event(){};
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", patient=" + patient +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

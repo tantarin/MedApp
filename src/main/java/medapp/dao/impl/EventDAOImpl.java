@@ -3,6 +3,8 @@ package medapp.dao.impl;
 import medapp.dao.api.EventDAO;
 import medapp.model.Event;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -40,10 +42,8 @@ public class EventDAOImpl implements EventDAO {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.date = ?1");
         String date = formatForDateNow.format(dateNow);
-        System.out.println("print date from dao "+date);
         query.setParameter(1,date);
         List<Event> resultList = query.getResultList();
-        System.out.println(Arrays.toString(resultList.toArray()));
         return resultList;
     }
 
@@ -65,14 +65,14 @@ public class EventDAOImpl implements EventDAO {
         return query.getResultList();
     }
 
-    //TODO delete events by patient id from date
+    @Override
     public void deleteFromToday(Long patientId) {
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
         String date = formatForDateNow.format(dateNow);
-        Query query = entityManager.createQuery("delete from Event e  where e.date >= ?1 AND e.patient.id=?2");
-        query.setParameter(1,"'"+date+"'");
-        query.setParameter(2,Long.toString(patientId));
+        System.out.println("patient id "+patientId + "string "+date);
+        Query query = entityManager.createQuery("delete from Event e where e.date >=:date AND e.patient.id=:pId");
+        query.setParameter("date","'"+date+"'").setParameter("pId",patientId).executeUpdate();
         System.out.println("from dao event delete");
 
     }

@@ -29,7 +29,6 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public List<PatientDto> getAll() {
-        System.out.println("from p service");
         List<PatientDto> list = new ArrayList<>();
         for(Patient p: patientDAO.getAll()){
             PatientDto patient = new PatientDto();
