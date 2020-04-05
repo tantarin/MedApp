@@ -12,7 +12,14 @@ public class LoginController {
     @RequestMapping(value = { "/"}, method = RequestMethod.GET)
     public ModelAndView welcomePage() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("welcomePage");
+        model.setViewName("index");
+        return model;
+    }
+
+    @RequestMapping(value = { "/r"}, method = RequestMethod.GET)
+    public ModelAndView check() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("staticResourceTest");
         return model;
     }
 
@@ -23,7 +30,7 @@ public class LoginController {
         return model;
     }
 
-    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
                                   @RequestParam(value = "logout",	required = false) String logout) {
 
@@ -36,7 +43,7 @@ public class LoginController {
             model.addObject("message", "Logged out from medapp successfully.");
         }
 
-        model.setViewName("loginPage");
+        model.setViewName("index");
         return model;
     }
 

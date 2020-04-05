@@ -1,10 +1,7 @@
 package medapp.controller;
 
-import medapp.dto.PatientDto;
 import medapp.model.Event;
-import medapp.model.Patient;
 import medapp.service.api.EventService;
-import medapp.service.api.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +21,10 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/getAll")
     public ModelAndView getAll() {
         List<Event> listEvents = eventService.getAll();
@@ -32,6 +33,13 @@ public class EventController {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param date
+     * @param hour
+     * @param patient
+     * @return
+     */
     @PostMapping("/filter")
     public ModelAndView filter(@ModelAttribute("date") String date, @ModelAttribute("hour") String hour, @ModelAttribute("patient") String patient) {
         ModelAndView modelAndView = new ModelAndView("events");
@@ -47,19 +55,16 @@ public class EventController {
         return modelAndView;
     }
 
+    /**
+     * delete events by patient id when button discharge submitted
+     * and change status of patient on disharged
+     * @param request
+     * @return
+     */
     @GetMapping("/delete")
     public ModelAndView deleteGet(HttpServletRequest request) {
-        System.out.println("from get event delete controller");
-        Long id = Long.parseLong(request.getParameter("id"));
-        eventService.deleteFromToday(id);
-        return new ModelAndView("redirect:/events/getAll");
+        Long patientId = Long.parseLong(request.getParameter("id"));
+        eventService.deleteFromToday(patientId);
+        return new ModelAndView("redirect:/patients/getAll");
     }
-//    @PostMapping("/delete")
-//    public ModelAndView delete(HttpServletRequest request) {
-//        System.out.println("from event delete controller");
-//        ModelAndView modelAndView = new ModelAndView("redirect:userList");
-//        Long id = Long.parseLong(request.getParameter("id"));
-//        eventService.deleteFromToday(id);
-//        return modelAndView;
-//    }
 }

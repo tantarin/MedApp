@@ -21,5 +21,4 @@ public class AssignmentDto {
     String time2;
     String time3;
     List<Event> events;
-
 }

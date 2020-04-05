@@ -19,28 +19,42 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     @Transactional
+    /**
+     *
+     */
     public void addPatient(Patient patient) {
-        patient.setStatus("on treatment");
         entityManager.persist(patient);
     }
 
     @SuppressWarnings("unchecked")
     @Override
+    /**
+     *
+     */
     public List<Patient> getAll() {
         return entityManager.createQuery("from Patient").getResultList();
     }
 
     @Override
+    /**
+     *
+     */
     public void deleteById(Long id) {
         entityManager.remove(getById(id));
     }
 
     @Override
+    /**
+     *
+     */
     public Patient getById(Long id) {
         return (Patient) entityManager.find(Patient.class,id);
     }
 
     @Override
+    /**
+     *
+     */
     public void update(Patient patient) {
         entityManager.persist(patient);
     }

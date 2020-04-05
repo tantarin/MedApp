@@ -35,6 +35,11 @@ public class PatientController {
         return modelAndView;
     }
 
+    /**
+     *
+     * @param patient
+     * @return
+     */
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("patient") Patient patient) {
         ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
@@ -42,38 +47,30 @@ public class PatientController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/update")
-    public ModelAndView update() {
-        ModelAndView modelAndView = new ModelAndView("editPatient");
-        modelAndView.addObject("patient", new Patient());
-        return modelAndView;
-    }
-
-    @PostMapping("/update")
-    public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/");
-        patientService.update(patientDto);
-        return modelAndView;
-    }
-
+    /**
+     *
+     * @return
+     */
     @GetMapping(value = "/delete")
     public ModelAndView delete() {
-        ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
-        return modelAndView;
+        return new ModelAndView("redirect:/patients/getAll");
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     @PostMapping("/delete")
     public ModelAndView delete(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("redirect:userList");
         Long id = Long.parseLong(request.getParameter("id"));
         patientService.delete(id);
-        return modelAndView;
+        return new ModelAndView("redirect:/patients/getAll");
     }
 
     @GetMapping("/getAll")
     public ModelAndView getAll() {
         List<PatientDto> listPatients = patientService.getAll();
-        for(PatientDto d: listPatients) System.out.println("array patient status "+d.getStatus()+" ");
         List<Patient> patients = new ArrayList<>();
         for(PatientDto patientDto:listPatients) {
             Patient patient = new Patient();
@@ -83,15 +80,40 @@ public class PatientController {
             patient.setStatus(patientDto.getStatus());
             patients.add(patient);
         }
-        ModelAndView modelAndView = new ModelAndView("userList");
+        ModelAndView modelAndView = new ModelAndView("patients");
         modelAndView.addObject("patients", patients);
+        modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }
 
+    @PostMapping("/getAll")
+    public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        patientDto.setId(id);
+        System.out.println("patient dto"+patientDto.getFirstName());
+        ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
+        patientService.update(patientDto);
+        return modelAndView;
+    }
 
-
+    /**
+     *
+     * @param request
+     * @return
+     */
     @GetMapping("/assignments")
     public ModelAndView postAssignments(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        List<Assignment> listAssignments = patientService.getAssignments(id);
+        ModelAndView modelAndView = new ModelAndView("assignments");
+        modelAndView.addObject("assignments", listAssignments);
+        modelAndView.addObject("id",id);
+        return modelAndView;
+    }
+
+    //TODO
+    @GetMapping("/discharged")
+    public ModelAndView dischargePatient(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         List<Assignment> listAssignments = patientService.getAssignments(id);
         ModelAndView modelAndView = new ModelAndView("assignments");

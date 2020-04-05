@@ -96,15 +96,20 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
+    /**
+     *
+     */
     public List<Assignment> getAll(Long id) {
         return assignmentDAO.getAll(id);
     }
 
     @Override
     @Transactional
+    /**
+     *
+     */
     public AssignmentDto getById(Long id) {
-        AssignmentDto ad = new AssignmentDto();
-        return ad;
+        return new AssignmentDto();
     }
 }
 

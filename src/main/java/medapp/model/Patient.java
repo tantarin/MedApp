@@ -29,7 +29,13 @@ public class Patient {
     private String lastName;
 
     @Column
+    private String ensNumber;
+
+    @Column
     private String status;
+
+    @Column
+    private String doctor;
 
     public Patient() {
     }

@@ -14,6 +14,10 @@ public class PatientDto {
 
     private String lastName;
 
+    private String ensNumber;
+
+    private String doctor;
+
     private List<Assignment> assignments;
 
     private Long assignmentId;

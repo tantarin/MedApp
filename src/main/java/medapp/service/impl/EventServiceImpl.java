@@ -1,7 +1,9 @@
 package medapp.service.impl;
 
 import medapp.dao.api.EventDAO;
+import medapp.dao.api.PatientDAO;
 import medapp.model.Event;
+import medapp.model.Patient;
 import medapp.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,16 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
 
     EventDAO eventDAO;
+    PatientDAO patientDAO;
 
     @Autowired
     public void setEventDAO(EventDAO eventDAO) {
         this.eventDAO = eventDAO;
+    }
+
+    @Autowired
+    public void setPatientDAO(PatientDAO patientDAO) {
+        this.patientDAO = patientDAO;
     }
 
     @Override
@@ -54,5 +62,8 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void deleteFromToday(Long patientId){
         eventDAO.deleteFromToday(patientId);
+        Patient patient = patientDAO.getById(patientId);
+        patient.setStatus("charged");
+        patientDAO.update(patient);
     }
 }

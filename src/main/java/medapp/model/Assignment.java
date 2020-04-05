@@ -1,10 +1,8 @@
 package medapp.model;
 
-import Utils.Type;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -27,6 +25,9 @@ public class Assignment {
 
     @Column
     Date dateTo;
+
+    @Column
+    String doze;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

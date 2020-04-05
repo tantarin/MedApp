@@ -22,45 +22,62 @@ public class AssignmentController {
         this.assignmentService = assignmentService;
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/add")
     public ModelAndView add(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
         ModelAndView model = new ModelAndView("addAssignment");
-        AssignmentDto assignmentDto = new AssignmentDto();
-        model.addObject("assignmentDto",assignmentDto);
+        model.addObject("assignmentDto", new AssignmentDto());
         return model;
     }
 
+    /**
+     *
+     * @param assignmentDto
+     * @return
+     */
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
-        return modelAndView;
+        return new ModelAndView("redirect:/patients/assignments");
     }
 
-    @GetMapping(value = "/update")
+    /**
+     *
+     * @return
+     */
+    @GetMapping(value = "/edit")
     public ModelAndView edit() {
         ModelAndView model = new ModelAndView("editAssignment");
         model.addObject("assignment",new Assignment());
         return model;
     }
 
-    @PostMapping(value = "/update")
+    /**
+     *
+     * @param assignmentDto
+     * @return
+     */
+    @PostMapping(value = "/edit")
     public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) {
-        ModelAndView modelAndView = new ModelAndView();
-        System.out.println("from controller"+assignmentDto.getName());
-        modelAndView.setViewName("redirect:/");
         assignmentService.update(assignmentDto);
-        return modelAndView;
+        return new ModelAndView("redirect:/");
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/delete")
     public ModelAndView delete(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/patients/getAll");
         assignmentService.deleteById(id);
-        return modelAndView;
+        return new ModelAndView("redirect:/patients/getAll");
     }
 }

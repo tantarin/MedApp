@@ -6,14 +6,6 @@
 <head>
     <title>Medical App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script type="text/javascript">
-        //TODO change status
-        var del = document.getElementById("del");
-        agreeForm = function(){
-            document.getElementById("msgToReplace").innerHTML = "discharged";
-            return false;
-        };
-    </script>
 </head>
 
 <body>
@@ -32,8 +24,6 @@
 <br>
 
 <div class="row">
-    <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
-
     <div class="container">
         <h3 class="text-center">Patients</h3>
         <hr>
@@ -64,7 +54,7 @@
                         <c:out value="${patient.lastName}" />
                     </td>
                     <td>
-                        <span id="msgToReplace">
+                        <span id="${patient.id}">
                             <c:out value="${patient.status}" />
                         </span>
                     </td>

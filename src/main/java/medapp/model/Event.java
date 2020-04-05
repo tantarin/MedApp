@@ -28,6 +28,9 @@ public class Event {
     @Column
     String status;
 
+    @Column
+    String type;
+
     public Event(){};
 
     @Override
