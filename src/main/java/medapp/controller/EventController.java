@@ -27,6 +27,7 @@ public class EventController {
      */
     @GetMapping("/getAll")
     public ModelAndView getAll() {
+       // System.out.println("from controller events");
         List<Event> listEvents = eventService.getAll();
         ModelAndView modelAndView = new ModelAndView("events");
         modelAndView.addObject("listEvents", listEvents);

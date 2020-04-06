@@ -23,6 +23,9 @@ public class AssignmentDAOImpl implements AssignmentDAO {
     @Override
     public void add(Assignment assignment) {
         entityManager.persist(assignment);
+        assignment = entityManager.find(Assignment.class, assignment.getId());
+        entityManager.refresh(assignment);
+        System.out.println(assignment.getId());
     }
 
     /**

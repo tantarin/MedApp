@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -35,7 +36,19 @@ public class Assignment {
     String timePattern;
 
     @Column
-    String time;
+    String time1;
+
+    @Column
+    String time2;
+
+    @Column
+    String time3;
+
+   @Column
+    String period;
+
+    @OneToMany(mappedBy = "assignment",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Event> events;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -43,18 +56,4 @@ public class Assignment {
 
     public Assignment(){}
 
-    @Override
-    public String toString() {
-        return "Assignment{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", dateFrom='" + dateFrom + '\'' +
-                ", dateTo='" + dateTo + '\'' +
-                ", doze='" + doze + '\'' +
-                ", timePattern='" + timePattern + '\'' +
-                ", time='" + time + '\'' +
-                ", patient=" + patient +
-                '}';
-    }
 }

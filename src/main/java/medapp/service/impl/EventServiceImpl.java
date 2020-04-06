@@ -2,6 +2,7 @@ package medapp.service.impl;
 
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
+import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
 import medapp.service.api.EventService;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -33,7 +37,10 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public List<Event> getAll() {
+    //    System.out.println("list events from service");
+   //     generateEvents();
         return eventDAO.getAll();
     }
 
@@ -60,10 +67,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public void deleteFromToday(Long patientId){
+    public void deleteFromToday(Long patientId) {
         eventDAO.deleteFromToday(patientId);
         Patient patient = patientDAO.getById(patientId);
         patient.setStatus("charged");
         patientDAO.update(patient);
     }
 }
+

@@ -22,8 +22,8 @@ public class Event {
     String time;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
+    @JoinColumn(name = "assignment_id")
+    private Assignment assignment;
 
     @Column
     String status;
@@ -32,18 +32,8 @@ public class Event {
     String type;
 
     @Column
-    String assignment;
+    String patientName;
 
     public Event(){};
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                ", patient=" + patient +
-                ", status='" + status + '\'' +
-                '}';
-    }
 }

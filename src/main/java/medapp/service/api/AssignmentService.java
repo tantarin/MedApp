@@ -15,7 +15,7 @@ public interface AssignmentService {
 
     void update(AssignmentDto assignment);
 
-    void deleteById(Long id);
+    void deleteById(Long assignmentId);
 
     Long getPatientId(Long assId);
 }

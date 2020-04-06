@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface EventDAO {
     void addEvent(Event event);
+    void deleteByAssignmentId(Long assignmentId);
     List<Event> getAll();
     Event getById(Long id);
     List<Event> filterByDate();

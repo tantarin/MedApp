@@ -14,11 +14,13 @@ public class AssignmentDto {
     private String name;
     private Long patientId;
     String [] weeks;
+    List<Event> events;
     List<Integer> weeksInt;
     String dateFrom;
     String dateTo;
     String time1;
     String time2;
     String time3;
-    List<Event> events;
+    String doze;
+    String period;
 }

@@ -71,4 +71,5 @@ public class PatientDAOImpl implements PatientDAO {
         Query query = entityManager.createQuery("delete from Patient p where p.id = :pId");
         query.setParameter("pId",patientId).executeUpdate();
     }
+
 }

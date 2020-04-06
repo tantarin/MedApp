@@ -25,6 +25,13 @@ public class EventDAOImpl implements EventDAO {
         entityManager.persist(event);
     }
 
+    //delete Event by assignment id
+    @Override
+    public void deleteByAssignmentId(Long assignmentId){
+        Query query = entityManager.createQuery("delete from Event e where e.assignment.id= :aId");
+        query.setParameter("aId", assignmentId).executeUpdate();
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Event> getAll() {

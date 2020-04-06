@@ -27,6 +27,7 @@
         <ul class="navbar-nav">
             <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
             <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
+            <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
         </ul>
     </nav>
 </header>
@@ -43,7 +44,7 @@
       <div class="row">
           <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/add?id=<c:out value='${id}' />">Добавить</a> &nbsp;&nbsp;&nbsp;&nbsp;
         <div class="event-title">
-        <table border="1" cellpadding="5">
+        <table id="table" class="table table-striped table-bordered">
             <thead>
             <tr class="name-title width">
                 <td>Тип</td>
@@ -62,10 +63,10 @@
                         <c:out value="${ass.name}" />
                     </td>
                     <td>
-                        <c:out value="${ass.type}" />
+                        <c:out value="${ass.period}" />
                     </td>
                     <td>
-                        <c:out value="${ass.type}" />
+                        <c:out value="${ass.doze}" />
                     </td>
                     <td>
                         <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/edit?id=<c:out value='${ass.id}' />">Редактировать</a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -81,6 +82,10 @@
     </div>
     </div>
 </div>
+<c:url value="/logout" var="logoutUrl" />
+<form id="logout" action="${logoutUrl}" method="post" >
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
