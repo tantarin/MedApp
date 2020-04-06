@@ -41,7 +41,7 @@
 </div>
      <div class="col-xl-12 wrap">
       <div class="row">
-         <a href="${pageContext.request.contextPath}/assignments/add?id=" class="btn btn-success btn-list">Добавить</a>
+          <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/add?id=<c:out value='${id}' />">Добавить</a> &nbsp;&nbsp;&nbsp;&nbsp;
         <div class="event-title">
         <table border="1" cellpadding="5">
             <thead>
@@ -68,8 +68,8 @@
                         <c:out value="${ass.type}" />
                     </td>
                     <td>
-                        <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/edit?id=<c:out value='${patient.id}' />">Редактировать</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary btn-list" href="${pageContext.request.contextPath}/assignments/delete?id=<c:out value='${patient.id}' />">Удалить</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/edit?id=<c:out value='${ass.id}' />">Редактировать</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-secondary btn-list" href="${pageContext.request.contextPath}/assignments/delete?id=<c:out value='${ass.id}' />">Удалить</a> &nbsp;&nbsp;&nbsp;&nbsp;
 
                     </td>
                 </tr>

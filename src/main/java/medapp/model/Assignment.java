@@ -1,6 +1,8 @@
 package medapp.model;
 
 import lombok.Data;
+
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,17 +23,38 @@ public class Assignment {
     String name;
 
     @Column
-    Date dateFrom;
+    String dateFrom;
 
     @Column
-    Date dateTo;
+    String dateTo;
 
     @Column
     String doze;
+
+    @Column
+    String timePattern;
+
+    @Column
+    String time;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
     public Assignment(){}
+
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", doze='" + doze + '\'' +
+                ", timePattern='" + timePattern + '\'' +
+                ", time='" + time + '\'' +
+                ", patient=" + patient +
+                '}';
+    }
 }

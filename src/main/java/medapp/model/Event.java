@@ -31,6 +31,9 @@ public class Event {
     @Column
     String type;
 
+    @Column
+    String assignment;
+
     public Event(){};
 
     @Override

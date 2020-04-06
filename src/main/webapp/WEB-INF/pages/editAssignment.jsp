@@ -3,59 +3,50 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add assigment</title>
-
+    <title>Edit assigment</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-    <script type="text/javascript">
-        //TODO change status
-        var del = document.getElementById("del");
-        agreeForm = function(){
-            document.getElementById("msgToReplace").innerHTML = "discharged";
-            return false;
-        };
-    </script>
 </head>
 
-<body>
+<body onload="myFunction()">
 
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
-            <div>
-                <a href="https://www.javaguides.net" class="navbar-brand"> Medical App </a>
-            </div>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+        <div>
+            <a href="https://www.javaguides.net" class="navbar-brand"> Medical App </a>
+        </div>
 
-            <ul class="navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
-                <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
-            </ul>
-        </nav>
-    </header>
-    <br>
+        <ul class="navbar-nav">
+            <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
+            <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
+        </ul>
+    </nav>
+</header>
+<br>
 
-    <div class="container">
-        <div class="row">
-            <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
-            <c:url value="/assignments/add" var="add"/>
-            <form:form action="${add}" method="post" modelAttribute="assignmentDto">
-            <div class="col-xl-12 title">
-                <h2>Add assignment</h2>
-            </div>
-            <div class="col-xl-12 wrap">
-              <div class="row">
-                  <div class="add-assigment">
-                      <div class="add-box ad-box">
+<div class="container">
+    <div class="row">
+        <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+        <c:url value="/assignments/edit?id=${assignmentDto.id}" var="add"/>
+        <form:form action="${add}" method="post" modelAttribute="assignmentDto">
+        <div class="col-xl-12 title">
+            <h2>Edit assignment</h2>
+        </div>
+        <div class="col-xl-12 wrap">
+            <div class="row">
+                <div class="add-assigment">
+                    <div class="add-box ad-box">
                         <label>Name</label>
-                          <form:input path="name" />
-                    </div> 
+                        <form:input path="name" id="name"/>
+                    </div>
 
                     <div class="add-box">Type
-                        <form:select class="form-control form-control-lg" path="type">
+                        <form:select class="form-control form-control-lg" path="type" id="type">
                             <option ></option>
                             <option>Procedure</option>
                             <option>Medicine</option>
                         </form:select>
-                    </div> 
+                    </div>
 
                     <div class="add-box">Time pattern
                         <br>
@@ -67,14 +58,14 @@
                         <form:checkbox name="Sat" value="6" path="weeks"/>Saturday</b>
                         <form:checkbox name="Sun" value="7" path="weeks"/>Sunday</b>
                         <br>
-                    </div> 
+                    </div>
                     <div class="add-box">Number of times per day
                         <div class="flex">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
                                 <input class="custom-control-label" type="checkbox" id="o1" value="a1" onclick="agreeForm(this.id)">Утро</b>
                             </div>
-                             <form:input path="time1" type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true" disabled="true"/>
+                            <form:input path="time1" type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true" disabled="true"/>
                         </div>
                         <div class="flex">
                             <div class="custom-control custom-checkbox">
@@ -89,37 +80,36 @@
                                 <input class="custom-control-label" type="checkbox" id="o3" value="a1" onclick="agreeForm(this.id)">Вечер</b>
                             </div>
                             <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true" path="time3" disabled="true"/>
-                      </div>
-                  </div>
-                  <div class="add-box">
-                    <div class="from">
-                      <label>From</label>
-                      <form:input type="date" id="start" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
-                  </div>
-                  <div class="from">
-                      <label>To</label>
-                      <form:input type="date" id="start1" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateTo"/>
-                  </div>
-              </div>
-              <div class="add-box">
-                  <input type="submit" class="btn btn-success btn-list" value="Add">&nbsp;&nbsp;&nbsp;&nbsp;
-              </div>
-                      </form:form>
-          </div>
-      </div>
-  </div>
-</div>
+                        </div>
+                    </div>
+                    <div class="add-box">
+                        <div class="from">
+                            <label>From</label>
+                            <form:input type="date" id="start" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
+                        </div>
+                        <div class="from">
+                            <label>To</label>
+                            <form:input type="date" id="start1" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateTo"/>
+                        </div>
+                    </div>
+                    <div class="add-box">
+                        <td class="btn btn-success add" colspan="2"><input type="submit" value="Save"></td>
+                    </div>
+                    </form:form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    function agreeForm(f) {
-        let chbox =document.getElementById(f);
-        document.getElementById("tm1").disabled = !(chbox.checked && f === "o1");
-        document.getElementById("tm2").disabled = !(chbox.checked && f === "o2");
-        document.getElementById("tm3").disabled = !(chbox.checked && f === "o3");
+    function myFunction(){
+        document.getElementById("name").defaultValue = ${assignmentDto.name};
+        document.getElementById("type").defaultValue = ${assignmentDto.type};
+        document.getElementById("name").defaultValue = ${assignmentDto.name};
     }
 </script>
 </html>

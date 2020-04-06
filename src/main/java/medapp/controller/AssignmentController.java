@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/assignments")
@@ -44,7 +45,7 @@ public class AssignmentController {
     public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) {
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
-        return new ModelAndView("redirect:/patients/assignments");
+        return new ModelAndView("redirect:/patients/assignments?id="+id);
     }
 
     /**
@@ -52,11 +53,14 @@ public class AssignmentController {
      * @return
      */
     @GetMapping(value = "/edit")
-    public ModelAndView edit() {
+    public ModelAndView edit(HttpServletRequest request) {
+        id = Long.parseLong(request.getParameter("id"));
+        AssignmentDto ass = assignmentService.getById(id);
         ModelAndView model = new ModelAndView("editAssignment");
-        model.addObject("assignment",new Assignment());
+        model.addObject("assignmentDto",ass);
         return model;
     }
+
 
     /**
      *
@@ -64,9 +68,12 @@ public class AssignmentController {
      * @return
      */
     @PostMapping(value = "/edit")
-    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) {
+    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto,HttpServletRequest request) {
+        assignmentDto.setId(id);
+        System.out.println("from post3");
+        Long patientId = assignmentService.getPatientId(id);
         assignmentService.update(assignmentDto);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 
     /**
@@ -77,7 +84,8 @@ public class AssignmentController {
     @GetMapping(value = "/delete")
     public ModelAndView delete(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
+        Long patientId = assignmentService.getPatientId(id);
         assignmentService.deleteById(id);
-        return new ModelAndView("redirect:/patients/getAll");
+        return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 }

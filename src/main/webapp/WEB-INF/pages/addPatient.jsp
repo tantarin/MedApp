@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -15,7 +15,7 @@
                 </div>
 
                 <ul class="navbar-nav">
-                    <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Add Patients</a></li>
+                    <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
                     <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
                 </ul>
             </nav>
@@ -25,49 +25,51 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 title">
-                    <h2>Добавить нового пациента</h2>
+                    <h2>Add new patient</h2>
                 </div>
+                <c:url value="/patients/add" var="add"/>
+                <form:form action="${add}" method="post" modelAttribute="patient">
                 <div class="col-xl-12 wrap">
                   <div class="row">
                      <div class="add-assigment">
                        <div class="add-box">
-                        <label>Имя</label>
-                        <input type="text">
-                        <label>Фамилия</label>
-                        <input type="text">
+                        <label>Name</label>
+                        <form:input type="text" path="firstName"/>
+                        <label>Last name</label>
+                        <form:input type="text" path="lastName"/>
                     </div> 
                     <div class="add-assigment">
-                       <div class="add-pt">Номер страховки
-                        <input type="text">
+                       <div class="add-pt">Security number
+                        <form:input type="text" path="ensNumber"/>
                     </div> 
 
-                    <div class="add-box">Лечащий врач
-                        <select class="form-control form-control-lg">
+                    <div class="add-box">Doctor
+                        <form:select class="form-control form-control-lg" path="doctor">
                             <option></option>
-                            <option>Процедура</option>
-                            <option>Лекарство</option>
-                        </select>
+                            <option>Ivanov</option>
+                            <option>Sidorov</option>
+                        </form:select>
                     </div> 
-                    <div class="add-b">Статус
+                    <div class="add-b">Status
                         <div class="status">
                             <div class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                              <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios1" value="option1" checked="true" path="status"/>
                               <label class="form-check-label" for="exampleRadios1">
-                                Лечится
+                                  On medication
                             </label>
                         </div>
                         <div class="form-check break">
-                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                          <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios2" value="option2" path="status"/>
                           <label class="form-check-label" for="exampleRadios2">
-                            Выписан
+                            Disharged
                         </label>
                     </div>
                 </div>
 
             </div> 
-
+                
             <div class="add-box">
-              <button class="btn btn-success add">Добавить</button>
+               <input type="submit" class="btn btn-success btn-list" value="submit" >Add</input> &nbsp;&nbsp;&nbsp;&nbsp;
           </div>
       </div>
   </div>
@@ -75,6 +77,7 @@
 </div>
             </div>
         </div>
+        </form:form>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

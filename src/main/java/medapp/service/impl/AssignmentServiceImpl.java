@@ -47,36 +47,40 @@ public class AssignmentServiceImpl implements AssignmentService {
         a.setId(assignmentDto.getId());
         a.setName(assignmentDto.getName());
         a.setType(assignmentDto.getType());
+        StringBuilder tp = new StringBuilder();
+        for(String s:assignmentDto.getWeeks()){
+            tp.append(s);
+            tp.append(" ");
+        }
+        a.setTimePattern(tp.toString());
         assignmentDAO.add(a);
+        //add event TODO
         List<String> weeks = Arrays.asList(assignmentDto.getWeeks());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
         LocalDate startDate = LocalDate.parse(assignmentDto.getDateFrom(), formatter);
         LocalDate endDate = LocalDate.parse(assignmentDto.getDateTo(), formatter);
+        Event event = new Event();
         for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
             if (weeks.contains(String.valueOf(date.getDayOfWeek().getValue()))) {
                 if (assignmentDto.getTime1() != null) {
-                    Event event = new Event();
                     event.setDate(date.toString());
                     event.setTime(assignmentDto.getTime1());
                     event.setPatient(p);
-                    eventDAO.addEvent(event);
                 }
                 if (assignmentDto.getTime2() != null) {
-                    Event event = new Event();
                     event.setDate(date.toString());
                     event.setTime(assignmentDto.getTime1());
                     event.setPatient(p);
-                    eventDAO.addEvent(event);
                 }
                 if (assignmentDto.getTime3() != null) {
-                    Event event = new Event();
                     event.setDate(date.toString());
                     event.setTime(assignmentDto.getTime1());
                     event.setPatient(p);
-                    eventDAO.addEvent(event);
                 }
             }
         }
+        event.setAssignment(assignmentDto.getName());
+        eventDAO.addEvent(event);
     }
 
     @Override
@@ -96,6 +100,14 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
+    public Long getPatientId(Long assId) {
+        Assignment assignment = assignmentDAO.getById(assId);
+        Patient patient = assignment.getPatient();
+        return patient.getId();
+    }
+
+    @Override
+    @Transactional
     /**
      *
      */
@@ -109,7 +121,16 @@ public class AssignmentServiceImpl implements AssignmentService {
      *
      */
     public AssignmentDto getById(Long id) {
-        return new AssignmentDto();
+        Assignment ass = assignmentDAO.getById(id);
+        AssignmentDto assignmentDto = new AssignmentDto();
+        assignmentDto.setId(ass.getId());
+        assignmentDto.setName(ass.getName());
+        assignmentDto.setType(ass.getType());
+        assignmentDto.setWeeks(ass.getTimePattern().split("  "));
+        assignmentDto.setTime1(ass.getTime());
+        assignmentDto.setDateFrom(ass.getDateFrom());
+        assignmentDto.setDateTo(ass.getDateTo());
+        return assignmentDto;
     }
 }
 

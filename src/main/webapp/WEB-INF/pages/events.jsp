@@ -43,67 +43,62 @@
                             <th></th>
                             <th>
                                 <div class="dropdown">
-                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Ближайший день
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">No filter</a>
-                                </div>
+                                      <select class="btn btn-secondary dropdown-toggle">
+                                      <option>this day</option>
+                                      <option  selected="selected">no filter</option>
+                                      </select>
                             </div>
                         </th>
                         <th>
-                          <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ближайший час
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">No filter</a>
+                            <div class="dropdown">
+                                <select class="btn btn-secondary dropdown-toggle">
+                                    <option>this hour</option>
+                                    <option  selected="selected">no filter</option>
+                                </select>
                             </div>
-                        </div>  
                     </th>
                     <th>
                        <input class="type-input" type="text">
                    </th>
                    <th></th>
-                   <th><button class="confirm">Применить</button></th>
+                   <th><button class="confirm">Save</button></th>
                </tr>
-                           <thead>
+
                <tr class="name-title">
-                <td class="left">Назначение</td>
-                <td>Дата</td>
-                <td>Время</td>
-                <td>Пациент</td>
-                <td>Статус</td>
-                <td>Коментарий</td>
-                           </thead>
+                <td class="left">Assignment</td>
+                <td>Date</td>
+                <td>Time</td>
+                <td>Patient</td>
+                <td>Status</td>
+                <td>Comments</td>
+
             </tr>
             <c:forEach var="event" items="${listEvents}">
             <tr>
-                <th></th>
                 <td class="left">
-                <c:out value="${event.type}" />
+                <c:out value="${event.assignment}" />
                 </td>
                 <td>
                 <c:out value="${event.date}" />
                 </td>
                 <td>
-                <c:out value="${event.time}" />
+                    <c:out value="${event.time}" />
                 </td>
                 <td>
-                <c:out value="${event.time}" />
+                    <c:out value="${event.patient.lastName}" />
                 </td>
                 <td>
                     <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Отменено
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Выполнено</a>
-                        <a class="dropdown-item" href="#">Запланировано</a>
-                    </div>
+                        <div class="dropdown">
+                            <select class="btn btn-secondary dropdown-toggle">
+                                <option>Cancelled</option>
+                                <option>Done</option>
+                                <option  selected="selected">Scheduled</option>
+                            </select>
+                        </div>
                 </div>
             </td>
-            <th></th>
+                <td>test</td>
         </tr>
             </c:forEach>
 </table>

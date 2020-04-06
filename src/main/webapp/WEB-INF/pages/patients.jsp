@@ -17,6 +17,7 @@
         }
     </style>
     <title>Medical App</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 </head>
@@ -31,6 +32,7 @@
         <ul class="navbar-nav">
             <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
             <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
+            <li><a href="javascript:document.getElementById('logout').submit()" class="nav-link">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -42,49 +44,48 @@
         <div class="col-xl-12 title">
             <h2>Patients</h2>
         </div>
+    </div>
     <div class="col-xl-12 wrap">
         <div class="row">
-        <form:form method="post" modelAttribute="patient" id="url">
-            <table id="tableEdit" border="1" cellpadding="5">
-                <tr>
-                    <td>
-                        <form:input type = "text" id="fname" path="firstName"/>
-                    </td>
-                    <td>
-                        <form:input type = "text" id="lname" path="lastName"/>
-                    </td>
-                    <td>
-                        <form:input type = "text" id="ens" path="ensNumber"/>
-                    </td>
-                    <td>
-                        <form:input type = "text" id="doc" path="doctor"/>
-                    </td>
-                    <td>
-                        <form:input type = "text" id="st" path="status"/>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <br>
-            <td class="btn btn-info btn-list" colspan="2"><input type="submit" value="Save"></td>&nbsp;&nbsp;&nbsp;&nbsp;
-        </form:form>
-        </div>
-    </div>
-
-
-     <div class="col-xl-12 wrap">
-      <div class="row">
-        <div class="event-title">
-        <table id="table" border="1" cellpadding="5">
+            <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/patients/add">Add</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="event-title">
+        <table id="table" class="table table-striped table-bordered">
             <thead>
             <tr class="name-title width-users">
-                <td>Имя</td>
-                <td>Фамилия</td>
-                <td>Номер страховки</td>
-                <td>Лечащий врач</td>
-                <td>Статус</td>
+                <td>Name</td>
+                <td>Last name</td>
+                <td>Ensurance number</td>
+                <td>Doctor</td>
+                <td>Status</td>
             </tr>
             </thead>
+            <c:url value="/patients/getAll" var="add"/>
+            <form:form action="${add}" method="post" modelAttribute="patient" id="url">
+            <tr>
+                <td>
+                    <form:input type = "text" id="fname" path="firstName"/>
+                </td>
+                <td>
+                    <form:input type = "text" id="lname" path="lastName"/>
+                </td>
+                <td>
+                    <form:input type = "text" id="ens" path="ensNumber"/>
+                </td>
+                <td>
+                    <form:input type = "text" id="doc" path="doctor"/>
+                </td>
+                <td>
+                    <form:input type = "text" id="st" path="status"/>
+                </td>
+                <td width="23%">
+                    <div>
+                        <a type="submit" class="btn btn-default">
+                            <i class="material-icons">save</i>
+                        </a>
+                    </div>
+                </td>
+                </form:form>
+            </tr>
             <c:forEach var="patient" items="${patients}">
                 <tr>
                     <td>
@@ -94,18 +95,27 @@
                         <c:out value="${patient.lastName}" />
                     </td>
                     <td>
-                        <c:out value="${patient.lastName}" />
+                        <c:out value="${patient.ensNumber}" />
+                    </td>
+                    <td>
+                        <c:out value="${patient.doctor}" />
                     </td>
                     <td>
                         <c:out value="${patient.status}" />
                     </td>
-                    <td>
-                        <c:out value="${patient.status}" />
-                    </td>
-                    <td>
-                        <a id="${patient.id}" class="btn btn-success btn-list" onclick="Update(id)">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary btn-list" href="${pageContext.request.contextPath}/events/delete?id=<c:out value='${patient.id}' />">Discharge</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-info btn-list" href="${pageContext.request.contextPath}/patients/assignments?id=<c:out value='${patient.id}' />">Assignments</a>
+                    <td width="23%">
+                        <a type="submit" class="btn btn-default" id="${patient.id}"  onclick="Update(id)">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/events/delete?id=<c:out value='${patient.id}' />">
+                            <i class="material-icons">clear</i>
+                        </a>
+                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/assignments?id=<c:out value='${patient.id}'/>">
+                            <i class="material-icons">list</i>
+                        </a>
+                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/delete?id=<c:out value='${patient.id}'/>">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>
@@ -118,7 +128,6 @@
 <form id="logout" action="${logoutUrl}" method="post" >
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
-<a href="javascript:document.getElementById('logout').submit()">Logout</a>
 </body>
 <script type="text/javascript">
     function Update(id) {
