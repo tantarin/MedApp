@@ -80,6 +80,5 @@ public class EventDAOImpl implements EventDAO {
         String date = LocalDate.now().toString();
         Query query = entityManager.createQuery("delete from Event e where e.date >=:date AND e.patient.id = :pId");
         query.setParameter("date","'"+date+"'").setParameter("pId",patientId).executeUpdate();
-        System.out.println("from eventdaoimpl after method");
     }
 }

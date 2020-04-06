@@ -53,13 +53,13 @@
                     <div class="add-b">Status
                         <div class="status">
                             <div class="form-check">
-                              <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios1" value="option1" checked="true" path="status"/>
+                              <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios1" value="on medication" checked="true" path="status"/>
                               <label class="form-check-label" for="exampleRadios1">
                                   On medication
                             </label>
                         </div>
                         <div class="form-check break">
-                          <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios2" value="option2" path="status"/>
+                          <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios2" value="discharged" path="status"/>
                           <label class="form-check-label" for="exampleRadios2">
                             Disharged
                         </label>

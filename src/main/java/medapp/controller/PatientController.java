@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -91,7 +92,6 @@ public class PatientController {
     @PostMapping("/getAll")
     public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        System.out.println("from post1");
         patientDto.setId(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
         patientService.update(patientDto);
@@ -122,6 +122,20 @@ public class PatientController {
         modelAndView.addObject("assignments", listAssignments);
         modelAndView.addObject("id",id);
         return modelAndView;
+    }
+
+    @GetMapping(value = "/clear")
+    public ModelAndView clearr(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        patientService.clear(id);
+        return new ModelAndView("redirect:/patients/getAll");
+    }
+
+    @PostMapping("/clear")
+    public ModelAndView clear(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        patientService.delete(id);
+        return new ModelAndView("redirect:/patients/getAll");
     }
 }
 

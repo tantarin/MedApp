@@ -65,4 +65,10 @@ public class PatientDAOImpl implements PatientDAO {
         query.setParameter(1,id);
         return query.getResultList();
     }
+
+    @Override
+    public void clear(Long patientId) {
+        Query query = entityManager.createQuery("delete from Patient p where p.id = :pId");
+        query.setParameter("pId",patientId).executeUpdate();
+    }
 }

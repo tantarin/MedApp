@@ -78,11 +78,9 @@
                     <form:input type = "text" id="st" path="status"/>
                 </td>
                 <td width="23%">
-                    <div>
                         <a type="submit" class="btn btn-default">
                             <i class="material-icons">save</i>
                         </a>
-                    </div>
                 </td>
                 </form:form>
             </tr>
@@ -113,7 +111,7 @@
                         <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/assignments?id=<c:out value='${patient.id}'/>">
                             <i class="material-icons">list</i>
                         </a>
-                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/delete?id=<c:out value='${patient.id}'/>">
+                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/clear?id=<c:out value='${patient.id}'/>">
                             <i class="material-icons">delete</i>
                         </a>
                     </td>

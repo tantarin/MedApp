@@ -36,6 +36,8 @@ public class PatientServiceImpl implements PatientService {
             patient.setId(p.getId());
             patient.setFirstName(p.getFirstName());
             patient.setLastName(p.getLastName());
+            patient.setEnsNumber(p.getEnsNumber());
+            patient.setDoctor(p.getDoctor());
             patient.setAssignments(p.getAssignments());
             patient.setStatus(p.getStatus());
             list.add(patient);
@@ -51,6 +53,8 @@ public class PatientServiceImpl implements PatientService {
         patientDto.setId(p.getId());
         patientDto.setFirstName(p.getFirstName());
         patientDto.setLastName(p.getLastName());
+        patientDto.setDoctor(p.getDoctor());
+        patientDto.setEnsNumber(p.getEnsNumber());
         patientDto.setAssignments(p.getAssignments());
         return new PatientDto();
     }
@@ -63,11 +67,19 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
+    public void clear(Long patientId) {
+        patientDAO.clear(patientId);
+    }
+
+    @Override
+    @Transactional
     public void update(PatientDto patientDto) {
         Patient p = patientDAO.getById(patientDto.getId());
         p.setFirstName(patientDto.getFirstName());
         p.setLastName(patientDto.getLastName());
         p.setAssignments(patientDto.getAssignments());
+        p.setDoctor(patientDto.getDoctor());
+        p.setEnsNumber(patientDto.getEnsNumber());
         patientDAO.update(p);
     }
 

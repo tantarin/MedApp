@@ -13,4 +13,5 @@ public interface PatientDAO {
     Patient getById(Long id);
     void update(Patient patient);
     List<Assignment> getAssignments(Long id);
+    void clear(Long patientId);
 }
