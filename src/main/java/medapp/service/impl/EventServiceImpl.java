@@ -2,6 +2,8 @@ package medapp.service.impl;
 
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
+import medapp.dto.EventDto;
+import medapp.dto.FilterDto;
 import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
@@ -12,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -39,8 +43,6 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public List<Event> getAll() {
-    //    System.out.println("list events from service");
-   //     generateEvents();
         return eventDAO.getAll();
     }
 
@@ -50,28 +52,22 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> filterByDate() {
-        return eventDAO.filterByDate();
-    }
-
-    @Override
-    public List<Event> filterByHour() {
-        return eventDAO.filterByHour();
-    }
-
-    @Override
-    @Transactional
-    public List<Event> filterByPatient(Integer id) {
-        return eventDAO.filterByPatient(id);
-    }
-
-    @Override
-    @Transactional
-    public void deleteFromToday(Long patientId) {
-        eventDAO.deleteFromToday(patientId);
-        Patient patient = patientDAO.getById(patientId);
-        patient.setStatus("charged");
-        patientDAO.update(patient);
+    public List<EventDto> filter(FilterDto filterDto) {
+        List<Event> events = eventDAO.getAll();
+            if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
+            if (!filterDto.getByDay().equals("no filter")) events = eventDAO.filterByDate();
+            if (!filterDto.getByHour().equals("no filter")) events = eventDAO.filterByHour();
+        List<EventDto> eventDtos = new ArrayList<>();
+        for(Event e:events){
+            EventDto eventDto = new EventDto();
+            eventDto.setAssignmentName(e.getAssignment().getName());
+            eventDto.setDate(e.getDate());
+            eventDto.setTime(e.getTime());
+            eventDto.setPatientName(e.getPatientName());
+            eventDto.setStatus(e.getStatus());
+            eventDtos.add(eventDto);
+        }
+        return eventDtos;
     }
 }
 

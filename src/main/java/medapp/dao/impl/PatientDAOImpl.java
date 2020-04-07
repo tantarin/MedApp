@@ -39,14 +39,6 @@ public class PatientDAOImpl implements PatientDAO {
     /**
      *
      */
-    public void deleteById(Long id) {
-        entityManager.remove(getById(id));
-    }
-
-    @Override
-    /**
-     *
-     */
     public Patient getById(Long id) {
         return (Patient) entityManager.find(Patient.class,id);
     }
@@ -68,8 +60,6 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public void clear(Long patientId) {
-        Query query = entityManager.createQuery("delete from Patient p where p.id = :pId");
-        query.setParameter("pId",patientId).executeUpdate();
+        entityManager.remove(getById(patientId));
     }
-
 }

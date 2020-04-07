@@ -53,16 +53,6 @@ public class PatientController {
      * @return
      */
     @GetMapping(value = "/delete")
-    public ModelAndView delete() {
-        return new ModelAndView("redirect:/patients/getAll");
-    }
-
-    /**
-     *
-     * @param request
-     * @return
-     */
-    @PostMapping("/delete")
     public ModelAndView delete(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         patientService.delete(id);
@@ -125,16 +115,9 @@ public class PatientController {
     }
 
     @GetMapping(value = "/clear")
-    public ModelAndView clearr(HttpServletRequest request) {
-        Long id = Long.parseLong(request.getParameter("id"));
-        patientService.clear(id);
-        return new ModelAndView("redirect:/patients/getAll");
-    }
-
-    @PostMapping("/clear")
     public ModelAndView clear(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        patientService.delete(id);
+        patientService.clear(id);
         return new ModelAndView("redirect:/patients/getAll");
     }
 }

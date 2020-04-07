@@ -78,11 +78,7 @@
                     <form:input type = "text" id="st" path="status"/>
                 </td>
                 <td width="23%">
-<%--                        <a type="submit" class="btn btn-default">--%>
-<%--                            <i class="material-icons">save</i>--%>
-<%--                        </a>--%>
                      <input type="submit" class="btn btn-success btn-list" value="Submit" >
-
                 </td>
                 </form:form>
             </tr>

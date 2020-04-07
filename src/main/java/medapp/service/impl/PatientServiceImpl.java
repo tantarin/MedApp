@@ -61,8 +61,10 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public void delete(Long theId) {
-        patientDAO.deleteById(theId);
+    public void delete(Long patientId) {
+        Patient patient = patientDAO.getById(patientId);
+        patient.setStatus("discharged");
+        patientDAO.update(patient);
     }
 
     @Override

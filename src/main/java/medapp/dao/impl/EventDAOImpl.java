@@ -10,8 +10,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -46,10 +47,14 @@ public class EventDAOImpl implements EventDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Event> filterByDate() {
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("from filter by date");
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String date = formatter.format(localDate);
+        System.out.println("date now"+date);
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.date = ?1");
-        String date = formatForDateNow.format(LocalDate.now());
         query.setParameter(1,date);
+    //    System.out.println(Arrays.toString(query.getResultList().toArray()));
         return query.getResultList();
     }
 
@@ -59,8 +64,9 @@ public class EventDAOImpl implements EventDAO {
      */
     @Override
     public List<Event> filterByHour() {
-        SimpleDateFormat time = new SimpleDateFormat("hh:mm");
-        String timeNow = time.format(LocalDate.now());
+        LocalTime localTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String timeNow = formatter.format(localTime);
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.time = ?1");
         query.setParameter(1,timeNow);
         return query.getResultList();
@@ -68,24 +74,12 @@ public class EventDAOImpl implements EventDAO {
 
     /**
      *
-     * @param id
      * @return
      */
     @Override
-    public List<Event> filterByPatient(Integer id) {
-        Query query = entityManager.createQuery("select e FROM Event e WHERE e.patient.id= ?1", Event.class);
-        query.setParameter(1,Integer.toString(id));
+    public List<Event> filterByPatient(String lastName) {
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.patientName= ?1", Event.class);
+        query.setParameter(1, lastName);
         return query.getResultList();
-    }
-
-    /**
-     *
-     * @param patientId
-     */
-    @Override
-    public void deleteFromToday(Long patientId) {
-        String date = LocalDate.now().toString();
-        Query query = entityManager.createQuery("delete from Event e where e.date >=:date AND e.patient.id = :pId");
-        query.setParameter("date","'"+date+"'").setParameter("pId",patientId).executeUpdate();
     }
 }
