@@ -60,14 +60,25 @@ public class EventServiceImpl implements EventService {
         List<EventDto> eventDtos = new ArrayList<>();
         for(Event e:events){
             EventDto eventDto = new EventDto();
+            eventDto.setId(e.getId());
             eventDto.setAssignmentName(e.getAssignment().getName());
             eventDto.setDate(e.getDate());
             eventDto.setTime(e.getTime());
             eventDto.setPatientName(e.getPatientName());
             eventDto.setStatus(e.getStatus());
+            eventDto.setComments(e.getComments());
             eventDtos.add(eventDto);
         }
         return eventDtos;
+    }
+
+    @Override
+    @Transactional
+    public void update(EventDto eventDto) {
+        Event e = eventDAO.getById(eventDto.getId());
+        e.setComments(eventDto.getComments());
+        e.setStatus(eventDto.getStatus());
+        eventDAO.update(e);
     }
 }
 

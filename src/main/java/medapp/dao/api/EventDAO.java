@@ -13,4 +13,5 @@ public interface EventDAO {
     List<Event> filterByDate();
     List<Event> filterByHour();
     List<Event> filterByPatient(String lastName);
+    void update(Event event);
 }

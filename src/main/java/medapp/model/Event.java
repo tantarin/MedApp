@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 
-
 @Entity
 @Data
 @Table
@@ -29,10 +28,10 @@ public class Event {
     String status;
 
     @Column
-    String type;
+    String patientName;
 
     @Column
-    String patientName;
+    String comments;
 
     public Event(){};
 

@@ -96,15 +96,25 @@
                                 <td>
                                     <div class="dropdown">
                                         <div class="dropdown">
-                                            <select class="btn btn-secondary dropdown-toggle">
-                                                <option>Cancelled</option>
-                                                <option>Done</option>
-                                                <option selected="selected">Scheduled</option>
-                                            </select>
+                                            <c:url value="/events/comments?id=${event.id}" var="all"/>
+                                            <form:form action="${all}" method="post" modelAttribute="eventDto">
+                                            <form:select id="${event.id}" class="btn btn-secondary dropdown-toggle" onchange="func(this.id)" path="status">
+                                                <option value="none" selected>
+                                                    <c:out value="${event.status}"/>
+                                                </option>
+                                                <option value="Cancelled">Cancelled</option>
+                                                <option value="Done">Done</option>
+                                                <option value="Sheduled">Scheduled</option>
+                                            </form:select>
                                         </div>
                                     </div>
                                 </td>
-                                <td>test</td>
+                                <td>
+                                    <form:input path="comments" value="${event.comments}"  type="text" id="comm${event.id}" disabled="true"/>
+                                        <%--                                            <c:out value="${event.comments}"/>--%>
+                                        <input type="submit" class="btn btn-light" value="submit" >
+                                            </form:form>
+                                </td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -127,4 +137,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script>
+    function func(id) {
+        if (document.getElementById(id).value === "Cancelled") {
+            var idd = "comm"+id;
+            document.getElementById(idd).removeAttribute("disabled");
+            document.getElementById(idd).removeAttribute("hidden")
+            document.getElementById(idd).focus();
+        }
+    }
+</script>
 </html>

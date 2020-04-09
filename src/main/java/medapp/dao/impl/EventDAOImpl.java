@@ -2,6 +2,7 @@ package medapp.dao.impl;
 
 import medapp.dao.api.EventDAO;
 import medapp.model.Event;
+import medapp.model.Patient;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,14 +48,11 @@ public class EventDAOImpl implements EventDAO {
     @SuppressWarnings("unchecked")
     @Override
     public List<Event> filterByDate() {
-        System.out.println("from filter by date");
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String date = formatter.format(localDate);
-        System.out.println("date now"+date);
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.date = ?1");
         query.setParameter(1,date);
-    //    System.out.println(Arrays.toString(query.getResultList().toArray()));
         return query.getResultList();
     }
 
@@ -65,10 +63,15 @@ public class EventDAOImpl implements EventDAO {
     @Override
     public List<Event> filterByHour() {
         LocalTime localTime = LocalTime.now();
+        LocalTime plusHour = localTime.plusHours(1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String date = formatterDate.format(localDate);
         String timeNow = formatter.format(localTime);
-        Query query = entityManager.createQuery("select e FROM Event e WHERE e.time = ?1");
-        query.setParameter(1,timeNow);
+        String timePlusHour = formatter.format(plusHour);
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.time >= ?1 AND e.time <= ?2 and e.date = ?3");
+        query.setParameter(1,timeNow).setParameter(2,timePlusHour).setParameter(3,date);
         return query.getResultList();
     }
 
@@ -81,5 +84,9 @@ public class EventDAOImpl implements EventDAO {
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.patientName= ?1", Event.class);
         query.setParameter(1, lastName);
         return query.getResultList();
+    }
+
+    public void update(Event event) {
+        entityManager.persist(event);
     }
 }

@@ -77,23 +77,23 @@
                         <div class="flex">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                <input class="custom-control-label" type="checkbox" id="o1" value="a1" onclick="agreeForm(this.id)">Утро</b>
+                                <input class="custom-control-label" type="checkbox" id="o1" value="a1" onclick="agreeForm(this.id)">Morning</b>
                             </div>
-                             <form:input path="time1" type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true" disabled="true"/>
+                             <form:input path="time1" type="time" id="tm1" name="appt" min="06:00" max="12:00" required="true" disabled="true"/>
                         </div>
                         <div class="flex">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing1" >
-                                <input class="custom-control-label" type="checkbox" id="o2" value="a2" onclick="agreeForm(this.id)">День</b>
+                                <input class="custom-control-label" type="checkbox" id="o2" value="a2" onclick="agreeForm(this.id)">Afternoon</b>
                             </div>
-                            <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true" path="time2" disabled="true"/>
+                            <form:input type="time" id="tm2" name="appt" min="12:00" max="17:00" required="true" path="time2" disabled="true"/>
                         </div>
                         <div class="flex">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-                                <input class="custom-control-label" type="checkbox" id="o3" value="a1" onclick="agreeForm(this.id)">Вечер</b>
+                                <input class="custom-control-label" type="checkbox" id="o3" value="a1" onclick="agreeForm(this.id)">Evening</b>
                             </div>
-                            <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true" path="time3" disabled="true"/>
+                            <form:input type="time" id="tm3" name="appt" min="17:00" max="23:00" required="true" path="time3" disabled="true"/>
                       </div>
                   </div>
                   <div class="add-box">

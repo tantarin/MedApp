@@ -149,6 +149,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                 }
                 event.setAssignment(a);
                 event.setPatientName(patient.getLastName());
+                event.setStatus("Sheduled");
+                event.setComments("add comment");
                 eventDAO.addEvent(event);
             }
         }

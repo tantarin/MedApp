@@ -70,7 +70,6 @@ public class AssignmentController {
     @PostMapping(value = "/edit")
     public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto,HttpServletRequest request) {
         assignmentDto.setId(id);
-        System.out.println("from post3");
         Long patientId = assignmentService.getPatientId(id);
         assignmentService.update(assignmentDto);
         return new ModelAndView("redirect:/patients/assignments?id="+patientId);

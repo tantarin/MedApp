@@ -27,7 +27,7 @@
         <ul class="navbar-nav">
             <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
             <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
-            <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+            <li><a href="javascript:document.getElementById('logout').submit()" class="nav-link">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -42,15 +42,15 @@
 </div>
      <div class="col-xl-12 wrap">
       <div class="row">
-          <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/add?id=<c:out value='${id}' />">Добавить</a> &nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/add?id=<c:out value='${id}' />">Add</a> &nbsp;&nbsp;&nbsp;&nbsp;
         <div class="event-title">
         <table id="table" class="table table-striped table-bordered">
             <thead>
             <tr class="name-title width">
-                <td>Тип</td>
-                <td>Название</td>
-                <td>Период</td>
-                <td>Доза</td>
+                <td>Type</td>
+                <td>Name</td>
+                <td>Period</td>
+                <td>Doze</td>
                 <td></td>
             </tr>
             </thead>
@@ -69,8 +69,8 @@
                         <c:out value="${ass.doze}" />
                     </td>
                     <td>
-                        <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/edit?id=<c:out value='${ass.id}' />">Редактировать</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary btn-list" href="${pageContext.request.contextPath}/assignments/delete?id=<c:out value='${ass.id}' />">Удалить</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/assignments/edit?id=<c:out value='${ass.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-secondary btn-list" href="${pageContext.request.contextPath}/assignments/delete?id=<c:out value='${ass.id}' />">Delete</a> &nbsp;&nbsp;&nbsp;&nbsp;
 
                     </td>
                 </tr>

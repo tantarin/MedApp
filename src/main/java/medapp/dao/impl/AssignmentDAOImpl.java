@@ -25,7 +25,6 @@ public class AssignmentDAOImpl implements AssignmentDAO {
         entityManager.persist(assignment);
         assignment = entityManager.find(Assignment.class, assignment.getId());
         entityManager.refresh(assignment);
-        System.out.println(assignment.getId());
     }
 
     /**
@@ -39,6 +38,12 @@ public class AssignmentDAOImpl implements AssignmentDAO {
         query.setParameter("id", id);
         Patient patient = (Patient) query.getResultList();
         return new ArrayList<Assignment>(patient.getAssignments());
+    }
+
+    // TODO: 09.04.2020  remove
+    public void doSmth(){
+        // code.. ..
+        // some operation here, which can fail
     }
 
     /**
