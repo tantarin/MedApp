@@ -48,10 +48,6 @@ public class PatientController {
         return modelAndView;
     }
 
-    /**
-     *
-     * @return
-     */
     @GetMapping(value = "/delete")
     public ModelAndView delete(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));

@@ -35,18 +35,17 @@
                      <div class="add-assigment">
                        <div class="add-box">
                         <label>Name</label>
-                        <form:input type="text" path="firstName"/>
+                        <form:input type="text" path="firstName" placeholder="Ivan" required="true"/>
                         <label>Last name</label>
-                        <form:input type="text" path="lastName"/>
+                        <form:input type="text" path="lastName" placeholder="Ivanov" required="true"/>
                     </div> 
                     <div class="add-assigment">
                        <div class="add-pt">Security number
-                        <form:input type="text" path="ensNumber"/>
+                        <form:input type="text" path="ensNumber" required="true" oninvalid="this.setCustomValidity('16 digits are required')"  oninput="this.setCustomValidity('')" pattern="[0-9]{16}"/>
                     </div> 
 
                     <div class="add-box">Doctor
                         <form:select class="form-control form-control-lg" path="doctor">
-                            <option></option>
                             <option>Ivanov</option>
                             <option>Sidorov</option>
                         </form:select>

@@ -1,11 +1,10 @@
 package medapp.dao.impl;
 
+import medapp.activemq.JmsClient;
 import medapp.dao.api.EventDAO;
 import medapp.model.Event;
-import medapp.model.Patient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -27,7 +26,6 @@ public class EventDAOImpl implements EventDAO {
         entityManager.persist(event);
     }
 
-    //delete Event by assignment id
     @Override
     public void deleteByAssignmentId(Long assignmentId){
         Query query = entityManager.createQuery("delete from Event e where e.assignment.id= :aId");
@@ -81,7 +79,7 @@ public class EventDAOImpl implements EventDAO {
      */
     @Override
     public List<Event> filterByPatient(String lastName) {
-        Query query = entityManager.createQuery("select e FROM Event e WHERE e.patientName= ?1", Event.class);
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.patientName= ?1");
         query.setParameter(1, lastName);
         return query.getResultList();
     }

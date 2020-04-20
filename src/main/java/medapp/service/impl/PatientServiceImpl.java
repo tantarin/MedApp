@@ -65,6 +65,7 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = patientDAO.getById(patientId);
         patient.setStatus("discharged");
         patientDAO.update(patient);
+
     }
 
     @Override

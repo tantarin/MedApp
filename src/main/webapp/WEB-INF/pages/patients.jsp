@@ -37,6 +37,7 @@
     </nav>
 </header>
 <br>
+
 <div class="container">
     <div class="row">
         <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
@@ -63,19 +64,19 @@
             <form:form action="${add}" method="post" modelAttribute="patient" id="url">
             <tr>
                 <td>
-                    <form:input type = "text" id="fname" path="firstName"/>
+                    <form:input type = "text" id="fname" path="firstName" required="true"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="lname" path="lastName"/>
+                    <form:input type = "text" id="lname" path="lastName" required="true"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="ens" path="ensNumber"/>
+                    <form:input type = "text" id="ens" path="ensNumber" required="true"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="doc" path="doctor"/>
+                    <form:input type = "text" id="doc" path="doctor" required="true"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="st" path="status"/>
+                    <form:input type = "text" id="st" path="status" required="true"/>
                 </td>
                 <td width="23%">
                      <input type="submit" class="btn btn-success btn-list" value="Submit" >

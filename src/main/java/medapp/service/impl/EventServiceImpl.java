@@ -1,5 +1,6 @@
 package medapp.service.impl;
 
+import medapp.activemq.JmsClient;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.EventDto;

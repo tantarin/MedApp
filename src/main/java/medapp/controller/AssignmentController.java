@@ -1,14 +1,21 @@
 package medapp.controller;
 
+import medapp.activemq.JmsClient;
 import medapp.dto.AssignmentDto;
+import medapp.dto.EventDto;
 import medapp.model.Assignment;
+import medapp.model.Event;
 import medapp.service.api.AssignmentService;
+import medapp.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/assignments")
@@ -16,12 +23,14 @@ public class AssignmentController {
 
     Long id;
 
+    @Autowired(required=true)
     private AssignmentService assignmentService;
 
     @Autowired(required=true)
-    public void setAssignmentService(AssignmentService assignmentService) {
-        this.assignmentService = assignmentService;
-    }
+    private EventService eventService;
+
+    @Autowired
+    JmsClient jsmClient;
 
     /**
      *
@@ -42,9 +51,23 @@ public class AssignmentController {
      * @return
      */
     @PostMapping(value = "/add")
-    public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) {
+    public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException {
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
+        List<Event> events = eventService.getAll();
+        List<EventDto> eventDtoList = new ArrayList<>();
+        for(Event e:events){
+            EventDto eventDto = new EventDto();
+            eventDto.setId(e.getId());
+            eventDto.setAssignmentName(e.getAssignment().getName());
+            eventDto.setDate(e.getDate());
+            eventDto.setTime(e.getTime());
+            eventDto.setPatientName(e.getPatientName());
+            eventDto.setStatus(e.getStatus());
+            eventDto.setComments(e.getComments());
+            eventDtoList.add(eventDto);
+        }
+        jsmClient.sendListEvents(eventDtoList);
         return new ModelAndView("redirect:/patients/assignments?id="+id);
     }
 
@@ -81,10 +104,24 @@ public class AssignmentController {
      * @return
      */
     @GetMapping(value = "/delete")
-    public ModelAndView delete(HttpServletRequest request) {
+    public ModelAndView delete(HttpServletRequest request) throws JMSException {
         id = Long.parseLong(request.getParameter("id"));
         Long patientId = assignmentService.getPatientId(id);
         assignmentService.deleteById(id);
+        List<Event> events = eventService.getAll();
+        List<EventDto> eventDtoList = new ArrayList<>();
+        for(Event e:events){
+            EventDto eventDto = new EventDto();
+            eventDto.setId(e.getId());
+            eventDto.setAssignmentName(e.getAssignment().getName());
+            eventDto.setDate(e.getDate());
+            eventDto.setTime(e.getTime());
+            eventDto.setPatientName(e.getPatientName());
+            eventDto.setStatus(e.getStatus());
+            eventDto.setComments(e.getComments());
+            eventDtoList.add(eventDto);
+        }
+        jsmClient.sendListEvents(eventDtoList);
         return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 }

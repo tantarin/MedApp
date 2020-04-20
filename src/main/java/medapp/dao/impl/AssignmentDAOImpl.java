@@ -40,12 +40,6 @@ public class AssignmentDAOImpl implements AssignmentDAO {
         return new ArrayList<Assignment>(patient.getAssignments());
     }
 
-    // TODO: 09.04.2020  remove
-    public void doSmth(){
-        // code.. ..
-        // some operation here, which can fail
-    }
-
     /**
      *
      * @param assignment

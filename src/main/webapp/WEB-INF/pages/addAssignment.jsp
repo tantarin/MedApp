@@ -28,7 +28,7 @@
             <ul class="navbar-nav">
                 <li><a href="${pageContext.request.contextPath}/patients/getAll" class="nav-link">Patients</a></li>
                 <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
-                <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+                <li><a class="nav-link" href="<c:url value="/logout" />">Logout</a></li>
             </ul>
         </nav>
     </header>
