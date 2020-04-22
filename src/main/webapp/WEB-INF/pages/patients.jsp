@@ -50,7 +50,7 @@
         <div class="row">
             <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/patients/add">Add</a> &nbsp;&nbsp;&nbsp;&nbsp;
             <div class="event-title">
-        <table id="table" class="table table-striped table-bordered">
+        <table class="table table-striped">
             <thead>
             <tr class="name-title width-users">
                 <td>Name</td>

@@ -43,7 +43,7 @@ public class PatientController {
      */
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("patient") Patient patient) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
+        ModelAndView modelAndView = new ModelAndView("redirect: getAll");
         patientService.add(patient);
         return modelAndView;
     }
@@ -52,7 +52,7 @@ public class PatientController {
     public ModelAndView delete(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         patientService.delete(id);
-        return new ModelAndView("redirect:/patients/getAll");
+        return new ModelAndView("redirect:getAll");
     }
 
     @GetMapping("/getAll")
@@ -79,7 +79,7 @@ public class PatientController {
     public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         patientDto.setId(id);
-        ModelAndView modelAndView = new ModelAndView("redirect:/patients/getAll");
+        ModelAndView modelAndView = new ModelAndView("redirect:getAll");
         patientService.update(patientDto);
         return modelAndView;
     }
@@ -114,7 +114,7 @@ public class PatientController {
     public ModelAndView clear(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         patientService.clear(id);
-        return new ModelAndView("redirect:/patients/getAll");
+        return new ModelAndView("redirect: getAll");
     }
 }
 
