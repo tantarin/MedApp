@@ -61,22 +61,22 @@
             </tr>
             </thead>
             <c:url value="/patients/getAll" var="add"/>
-            <form:form action="${add}" method="post" modelAttribute="patient" id="url">
+            <form:form action="${add}" method="post" modelAttribute="patient" id="edit">
             <tr>
                 <td>
-                    <form:input type = "text" id="fname" path="firstName" required="true"/>
+                    <form:input type = "text" id="fname" path="firstName"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="lname" path="lastName" required="true"/>
+                    <form:input type = "text" id="lname" path="lastName"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="ens" path="ensNumber" required="true"/>
+                    <form:input type = "text" id="ens" path="ensNumber"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="doc" path="doctor" required="true"/>
+                    <form:input type = "text" id="doc" path="doctor"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="st" path="status" required="true"/>
+                    <form:input type = "text" id="st" path="status"/>
                 </td>
                 <td width="23%">
                      <input type="submit" class="btn btn-success btn-list" value="Submit" >
@@ -128,16 +128,16 @@
 </body>
 <script type="text/javascript">
     function Update(id) {
+        alert("hello world!"+id);
         var table = document.getElementById("table");
-        document.getElementById(id).onclick = function () {
-            document.getElementById('url').action = "/patients/getAll?id="+id;
+            document.getElementById('edit').action = "/patients/getAll?id="+id;
             var rIndex = document.getElementById(id).parentNode.parentNode.rowIndex;
+            alert(rIndex);
                 document.getElementById("fname").value = table.rows[rIndex].cells[0].innerHTML;
                 document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML;
                 document.getElementById("ens").value = table.rows[rIndex].cells[2].innerHTML;
                 document.getElementById("doc").value = table.rows[rIndex].cells[3].innerHTML;
                 document.getElementById("st").value = table.rows[rIndex].cells[4].innerHTML;
-            }
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

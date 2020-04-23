@@ -78,8 +78,9 @@ public class PatientController {
     @PostMapping("/getAll")
     public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
+        System.out.println("print id "+id);
         patientDto.setId(id);
-        ModelAndView modelAndView = new ModelAndView("redirect:getAll");
+        ModelAndView modelAndView = new ModelAndView("redirect: getAll");
         patientService.update(patientDto);
         return modelAndView;
     }
