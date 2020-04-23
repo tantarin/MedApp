@@ -50,7 +50,7 @@
         <div class="row">
             <a class="btn btn-success btn-list" href="${pageContext.request.contextPath}/patients/add">Add</a> &nbsp;&nbsp;&nbsp;&nbsp;
             <div class="event-title">
-        <table class="table table-striped">
+        <table id="table" class="table table-striped">
             <thead>
             <tr class="name-title width-users">
                 <td>Name</td>
@@ -64,13 +64,13 @@
             <form:form action="${add}" method="post" modelAttribute="patient" id="edit">
             <tr>
                 <td>
-                    <form:input type = "text" id="fname" path="firstName"/>
+                    <form:input type = "text" maxlength="9" id="fname" path="firstName"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="lname" path="lastName"/>
+                    <form:input type = "text" id="lname" maxlength="9" path="lastName"/>
                 </td>
                 <td>
-                    <form:input type = "text" id="ens" path="ensNumber"/>
+                    <form:input type = "text" id="ens" alignn="left" path="ensNumber"/>
                 </td>
                 <td>
                     <form:input type = "text" id="doc" path="doctor"/>
@@ -128,16 +128,14 @@
 </body>
 <script type="text/javascript">
     function Update(id) {
-        alert("hello world!"+id);
-        var table = document.getElementById("table");
+            var table = document.getElementById("table");
             document.getElementById('edit').action = "/patients/getAll?id="+id;
             var rIndex = document.getElementById(id).parentNode.parentNode.rowIndex;
-            alert(rIndex);
-                document.getElementById("fname").value = table.rows[rIndex].cells[0].innerHTML;
-                document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML;
-                document.getElementById("ens").value = table.rows[rIndex].cells[2].innerHTML;
-                document.getElementById("doc").value = table.rows[rIndex].cells[3].innerHTML;
-                document.getElementById("st").value = table.rows[rIndex].cells[4].innerHTML;
+            document.getElementById("fname").value= table.rows[rIndex].cells[0].innerHTML.replace(/\s/g, '');
+            document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML.replace(/\s/g, '');
+            document.getElementById("ens").value = table.rows[rIndex].cells[2].innerHTML.replace(/\s/g, '');
+            document.getElementById("doc").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');
+            document.getElementById("st").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
