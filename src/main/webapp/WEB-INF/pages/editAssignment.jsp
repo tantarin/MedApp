@@ -6,6 +6,16 @@
     <title>Edit assigment</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+    <style type="text/css">
+        .fix {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .fix:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+    </style>
 </head>
 
 <body onload="myFunction()">
@@ -49,39 +59,66 @@
                         </form:select>
                     </div>
 
-                    <div class="add-box">Time pattern
+                    <div class="add-box">
                         <br>
-                        <form:checkbox name="Mon" value="1" path="weeks"/>Monday</b>
-                        <form:checkbox name="Tues" value="2" path="weeks"/>Tuesday</b>
-                        <form:checkbox name="Wed" value="3" path="weeks"/>Wednesday</b>
-                        <form:checkbox name="Th" value="4" path="weeks"/>Thursday</b>
-                        <form:checkbox name="Fr" value="5" path="weeks"/>Friday</b>
-                        <form:checkbox name="Sat" value="6" path="weeks"/>Saturday</b>
-                        <form:checkbox name="Sun" value="7" path="weeks"/>Sunday</b>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Monday</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Tuesday</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Wednesday </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Thursday</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Friday</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Saturday</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <form:checkbox class="custom-control-input" path="weeks" checked="true" value="Monday"/>
+                            <label class="custom-control-label">Sunday</label>
+                        </div>
                         <br>
                     </div>
-                    <div class="add-box">Number of times per day
-                        <div class="flex">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                <input class="custom-control-label" type="checkbox" id="o1" value="a1" onclick="agreeForm(this.id)">Утро</b>
-                            </div>
-                            <form:input path="time1" type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true" disabled="true"/>
+                    <div class="add-box">
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked" checked>
+                            <label class="custom-control-label" onclick="agreeForm(this.id)">Morning</label>
                         </div>
-                        <div class="flex">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing1" >
-                                <input class="custom-control-label" type="checkbox" id="o2" value="a2" onclick="agreeForm(this.id)">День</b>
-                            </div>
+                            <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true" path="time1" disabled="true"/>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input"checked>
+                            <label class="custom-control-label" onclick="agreeForm(this.id)">Afternoon</label>
+                        </div>
                             <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true" path="time2" disabled="true"/>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                            <label class="custom-control-label" onclick="agreeForm(this.id)" for="defaultChecked2">Evening</label>
                         </div>
-                        <div class="flex">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-                                <input class="custom-control-label" type="checkbox" id="o3" value="a1" onclick="agreeForm(this.id)">Вечер</b>
-                            </div>
                             <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true" path="time3" disabled="true"/>
-                        </div>
                     </div>
                     <div class="add-box">
                         <div class="from">
@@ -94,14 +131,14 @@
                         </div>
                     </div>
                     <div class="add-box">
-                        <td class="btn btn-success add" colspan="2"><input type="submit" value="Save"></td>
+                        <input type="submit" class="btn btn-success btn-list" value="Add">&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
-                    </form:form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</form:form>
 <c:url value="/logout" var="logoutUrl" />
 <form id="logout" action="${logoutUrl}" method="post" >
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

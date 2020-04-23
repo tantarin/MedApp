@@ -69,7 +69,7 @@
             </div> 
                 
             <div class="add-box">
-               <input type="submit" class="btn btn-success btn-list" value="submit" >
+               <input type="submit" class="btn btn-default" value="submit" >
           </div>
       </div>
   </div>
