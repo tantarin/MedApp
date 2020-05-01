@@ -32,11 +32,6 @@ public class AssignmentController {
     @Autowired
     JmsClient jsmClient;
 
-    /**
-     *
-     * @param request
-     * @return
-     */
     @GetMapping(value = "/add")
     public ModelAndView add(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
@@ -45,11 +40,6 @@ public class AssignmentController {
         return model;
     }
 
-    /**
-     *
-     * @param assignmentDto
-     * @return
-     */
     @PostMapping(value = "/add")
     public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException {
         assignmentDto.setPatientId(id);
@@ -84,12 +74,6 @@ public class AssignmentController {
         return model;
     }
 
-
-    /**
-     *
-     * @param assignmentDto
-     * @return
-     */
     @PostMapping(value = "/edit")
     public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto,HttpServletRequest request) {
         assignmentDto.setId(id);
@@ -98,11 +82,6 @@ public class AssignmentController {
         return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 
-    /**
-     *
-     * @param request
-     * @return
-     */
     @GetMapping(value = "/delete")
     public ModelAndView delete(HttpServletRequest request) throws JMSException {
         id = Long.parseLong(request.getParameter("id"));

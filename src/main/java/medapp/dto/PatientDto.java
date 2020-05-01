@@ -23,4 +23,11 @@ public class PatientDto {
     private Long assignmentId;
 
     private String status;
+
+    public PatientDto(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public PatientDto(){ }
 }

@@ -43,22 +43,24 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Transactional
     public void add(AssignmentDto assignmentDto) {
         //get Patient by Dto id
-        Patient p = patientDAO.getById(assignmentDto.getPatientId());
+        Patient patient = patientDAO.getById(assignmentDto.getPatientId());
         //dto to ass
         Assignment a = new Assignment();
-        a.setPatient(p);
+        a.setPatient(patient);
         //a.setId(assignmentDto.getId());
         a.setName(assignmentDto.getName());
         a.setType(assignmentDto.getType());
         //create period
         a.setPeriod(assignmentDto.getDateFrom()+" - "+assignmentDto.getDateTo());
         a.setDoze(assignmentDto.getDoze());
+        //time pattern
         StringBuilder tp = new StringBuilder();
         for(String s:assignmentDto.getWeeks()){
             tp.append(s);
             tp.append(" ");
         }
         a.setTimePattern(tp.toString());
+        //set time
         a.setTime1(assignmentDto.getTime1());
         a.setTime2(assignmentDto.getTime2());
         a.setTime3(assignmentDto.getTime3());
@@ -74,6 +76,10 @@ public class AssignmentServiceImpl implements AssignmentService {
        Assignment a = assignmentDAO.getById(assignmentDto.getId());
         a.setName(assignmentDto.getName());
         a.setType(assignmentDto.getType());
+        a.setDateFrom(assignmentDto.getDateFrom());
+        a.setDateTo(assignmentDto.getDateTo());
+        a.setDoze(assignmentDto.getDoze());
+        a.setPeriod(assignmentDto.getDateFrom()+" - "+assignmentDto.getDateTo());
         assignmentDAO.update(a);
     }
 
@@ -112,12 +118,14 @@ public class AssignmentServiceImpl implements AssignmentService {
         assignmentDto.setId(ass.getId());
         assignmentDto.setName(ass.getName());
         assignmentDto.setType(ass.getType());
+        assignmentDto.setPeriod(ass.getTimePattern());
         assignmentDto.setWeeks(ass.getTimePattern().split("  "));
         assignmentDto.setTime1(ass.getTime1());
         assignmentDto.setTime2(ass.getTime2());
         assignmentDto.setTime3(ass.getTime3());
         assignmentDto.setDateFrom(ass.getDateFrom());
         assignmentDto.setDateTo(ass.getDateTo());
+        assignmentDto.setDoze(ass.getDoze());
         return assignmentDto;
     }
 

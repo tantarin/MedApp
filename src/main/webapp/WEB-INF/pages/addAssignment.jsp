@@ -55,55 +55,81 @@
                       </div>
                       <div class="add-box">Type
                         <form:select class="form-control form-control-lg" path="type">
-                            <option ></option>
                             <option>Procedure</option>
                             <option>Medicine</option>
                         </form:select>
                     </div>
 
 
-                    <div class="add-box">Time pattern
-                        <br>
-                        <form:checkbox name="Mon" value="1" path="weeks"/>Monday</b>
-                        <form:checkbox name="Tues" value="2" path="weeks"/>Tuesday</b>
-                        <form:checkbox name="Wed" value="3" path="weeks"/>Wednesday</b>
-                        <form:checkbox name="Th" value="4" path="weeks"/>Thursday</b>
-                        <form:checkbox name="Fr" value="5" path="weeks"/>Friday</b>
-                        <form:checkbox name="Sat" value="6" path="weeks"/>Saturday</b>
-                        <form:checkbox name="Sun" value="7" path="weeks"/>Sunday</b>
-                        <br>
-                    </div> 
-                    <div class="add-box">Number of times per day
-                        <div class="flex">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                <input class="custom-control-label" type="checkbox" id="o1" value="a1" onclick="agreeForm(this.id)">Morning</b>
-                            </div>
-                             <form:input path="time1" type="time" id="tm1" name="appt" min="06:00" max="12:00" required="true" disabled="true"/>
-                        </div>
-                        <div class="flex">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing1" >
-                                <input class="custom-control-label" type="checkbox" id="o2" value="a2" onclick="agreeForm(this.id)">Afternoon</b>
-                            </div>
-                            <form:input type="time" id="tm2" name="appt" min="12:00" max="17:00" required="true" path="time2" disabled="true"/>
-                        </div>
-                        <div class="flex">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-                                <input class="custom-control-label" type="checkbox" id="o3" value="a1" onclick="agreeForm(this.id)">Evening</b>
-                            </div>
-                            <form:input type="time" id="tm3" name="appt" min="17:00" max="23:00" required="true" path="time3" disabled="true"/>
+                      <div class="add-box">
+                          <br>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="mon" path="weeks" value="1"/>
+                              <label class="custom-control-label" for="mon">Monday</label>
+                          </div>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="tue" path="weeks" value="2"/>
+                              <label class="custom-control-label" for="tue">Tuesday</label>
+                          </div>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="w" path="weeks" value="3"/>
+                              <label class="custom-control-label" for="w">Wednesday </label>
+                          </div>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="t" path="weeks" value="4"/>
+                              <label class="custom-control-label" for="t">Thursday</label>
+                          </div>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="f" path="weeks" value="5"/>
+                              <label class="custom-control-label" for="f">Friday</label>
+                          </div>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="s" path="weeks" value="6"/>
+                              <label class="custom-control-label" for="s">Saturday</label>
+                          </div>
+                          <div class="custom-control custom-checkbox">
+                              <form:checkbox class="custom-control-input" id="san" path="weeks" value="7"/>
+                              <label class="custom-control-label" for="san">Sunday</label>
+                          </div>
+                          <br>
                       </div>
-                  </div>
+                      <div class="add-box">
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="a">
+                              <label  id="mor" class="custom-control-label" for="a" onclick="agreeForm(this.id)">Morning</label>
+                          </div>
+                          <form:input type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true" path="time1" disabled="true"/>
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id = "q">
+                              <label id="aft" class="custom-control-label" for="q" onclick="agreeForm(this.id)">Afternoon</label>
+                          </div>
+                          <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true" path="time2" disabled="true"/>
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          &nbsp;
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="r">
+                              <label id="eve" class="custom-control-label" for="r" onclick="agreeForm(this.id)">Evening</label>
+                          </div>
+                          <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true" path="time3" disabled="true"/>
+                      </div>
                   <div class="add-box">
                     <div class="from">
                       <label>From</label>
-                      <form:input type="date" id="start" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
+                      <form:input type="date" onclick="mindate()" id="fromDate" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
                   </div>
                   <div class="from">
                       <label>To</label>
-                      <form:input type="date" id="start1" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateTo"/>
+                      <form:input type="date" id="toDate" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateTo"/>
                   </div>
               </div>
               <div class="add-box">
@@ -125,10 +151,37 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript">
     function agreeForm(f) {
-        let chbox =document.getElementById(f);
-        document.getElementById("tm1").disabled = !(chbox.checked && f === "o1");
-        document.getElementById("tm2").disabled = !(chbox.checked && f === "o2");
-        document.getElementById("tm3").disabled = !(chbox.checked && f === "o3");
+        if(f==="mor") {
+            document.getElementById("tm1").removeAttribute("disabled");
+        }
+        if(f==="aft") {
+            document.getElementById("tm2").removeAttribute("disabled");
+        }
+        if(f==="eve") {
+            document.getElementById("tm3").removeAttribute("disabled");
+        }
     }
+    function mindate() {
+        var d = new Date();
+        var month = '' + (d.getMonth() + 1);
+        var day = '' + d.getDate();
+        var year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        document.getElementById("fromDate").min = [year, month, day].join('-');
+    }
+    document.getElementById('fromDate').oninput = () => {
+        let tt = new Date(document.getElementById('fromDate').value);
+        var month = '' + (tt.getMonth() + 1);
+        var day = '' + tt.getDate();
+        var year = tt.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        document.getElementById("toDate").min = [year, month, day].join('-');
+    };
 </script>
 </html>

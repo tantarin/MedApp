@@ -25,11 +25,11 @@
 
         <div class="container">
             <div class="row">
+                <c:url value="/patients/add" var="add"/>
+                <form:form action="${add}" method="post" modelAttribute="patient">
                 <div class="col-xl-12 title">
                     <h2>Add new patient</h2>
                 </div>
-                <c:url value="/patients/add" var="add"/>
-                <form:form action="${add}" method="post" modelAttribute="patient">
                 <div class="col-xl-12 wrap">
                   <div class="row">
                      <div class="add-assigment">
@@ -39,11 +39,10 @@
                         <label>Last name</label>
                         <form:input type="text" path="lastName" placeholder="Ivanov" required="true"/>
                     </div> 
-                    <div class="add-assigment">
-                       <div class="add-pt">Security number
+                    <div class="add-box">
+                       Security number
                         <form:input type="text" path="ensNumber" required="true" oninvalid="this.setCustomValidity('16 digits are required')"  oninput="this.setCustomValidity('')" pattern="[0-9]{16}"/>
-                    </div> 
-
+                    </div>
                     <div class="add-box">Doctor
                         <form:select class="form-control form-control-lg" path="doctor">
                             <option>Ivanov</option>
@@ -65,19 +64,16 @@
                         </label>
                     </div>
                 </div>
-
-            </div> 
-                
-            <div class="add-box">
-               <input type="submit" class="btn btn-default" value="submit" >
-          </div>
-      </div>
-  </div>
-</div>
-</div>
+                    </div>
+                         <div class="add-box">
+                             <input type="submit" class="btn btn-success btn-list" value="Add">&nbsp;&nbsp;
+                         </div>
+                         </form:form>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
-        </form:form>
         <c:url value="/logout" var="logoutUrl" />
         <form id="logout" action="${logoutUrl}" method="post" >
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

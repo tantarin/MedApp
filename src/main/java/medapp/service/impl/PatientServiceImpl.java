@@ -90,4 +90,8 @@ public class PatientServiceImpl implements PatientService {
     public List<Assignment> getAssignments(Long id) {
         return patientDAO.getAssignments(id);
     }
+
+    public List<Patient> getAllPatients(){
+        return patientDAO.getAll();
+    }
 }

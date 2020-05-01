@@ -21,4 +21,6 @@ public interface PatientService {
     void update(PatientDto patientDto);
 
     List<Assignment> getAssignments(Long id);
+
+     List<Patient> getAllPatients();
 }

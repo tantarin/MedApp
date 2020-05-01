@@ -1,25 +1,28 @@
 package medapp.dao.impl;
 
-import medapp.activemq.JmsClient;
 import medapp.dao.api.EventDAO;
 import medapp.model.Event;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.text.SimpleDateFormat;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import javax.ejb.*;
+
+import javax.persistence.*;
+import javax.transaction.UserTransaction;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Stateful
 public class EventDAOImpl implements EventDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
+
 
     @Override
     public void addEvent(Event event) {
