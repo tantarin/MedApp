@@ -1,4 +1,4 @@
-package medapp.controller;
+package medapp;
 
 import com.google.gson.Gson;
 import medapp.controller.PatientController;
