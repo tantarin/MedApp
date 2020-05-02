@@ -54,6 +54,29 @@ public class Assignment {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", doze='" + doze + '\'' +
+                ", timePattern='" + timePattern + '\'' +
+                ", time1='" + time1 + '\'' +
+                ", time2='" + time2 + '\'' +
+                ", time3='" + time3 + '\'' +
+                ", period='" + period + '\'' +
+                ", events=" + events +
+                ", patient=" + patient +
+                '}';
+    }
+
     public Assignment(){}
+
+    public Assignment(Long id){
+        this.id = id;
+    }
 
 }

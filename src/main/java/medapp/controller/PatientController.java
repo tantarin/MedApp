@@ -3,6 +3,7 @@ package medapp.controller;
 import medapp.dto.PatientDto;
 import medapp.model.Assignment;
 import medapp.model.Patient;
+import medapp.service.api.EventService;
 import medapp.service.api.PatientService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,12 @@ public class PatientController {
 
     private static final Logger LOGGER = Logger.getLogger(PatientController.class);
 
+    @Autowired
     private PatientService patientService;
 
-    @Autowired(required=true)
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
-    }
+    @Autowired
+    private EventService eventService;
 
-    /**
-     * 
-     * @return
-     */
     @GetMapping(value = "/add")
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("addPatient");
@@ -80,11 +76,11 @@ public class PatientController {
 
     @PostMapping("/getAll")
     public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) {
-        Long id = Long.parseLong(request.getParameter("id"));
-        System.out.println("print id "+id);
-        patientDto.setId(id);
+        Long patientId = Long.parseLong(request.getParameter("id"));
+        patientDto.setId(patientId);
         ModelAndView modelAndView = new ModelAndView("redirect: getAll");
         patientService.update(patientDto);
+        eventService.updateLastNameEvent(patientId);
         return modelAndView;
     }
 

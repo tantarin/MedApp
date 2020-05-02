@@ -14,4 +14,5 @@ public interface EventDAO {
     List<Event> filterByHour();
     List<Event> filterByPatient(String lastName);
     void update(Event event);
+    List<Event>  getByAssignmentId(Long assId);
 }

@@ -35,4 +35,16 @@ public class Event {
 
     public Event(){};
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", assignment=" + assignment +
+                ", status='" + status + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", comments='" + comments + '\'' +
+                '}';
+    }
 }

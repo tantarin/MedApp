@@ -50,6 +50,7 @@
                 <td>Type</td>
                 <td>Name</td>
                 <td>Period</td>
+                <td>Time</td>
                 <td>Doze</td>
                 <td></td>
             </tr>
@@ -64,6 +65,11 @@
                     </td>
                     <td>
                         <c:out value="${ass.period}" />
+                    </td>
+                    <td>
+                        <c:out value="${ass.time1}" />
+                        <c:out value="${ass.time2}" />
+                        <c:out value="${ass.time3}" />
                     </td>
                     <td>
                         <c:out value="${ass.doze}" />

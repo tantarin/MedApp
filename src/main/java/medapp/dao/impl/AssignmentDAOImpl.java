@@ -21,10 +21,11 @@ public class AssignmentDAOImpl implements AssignmentDAO {
      * @param assignment
      */
     @Override
-    public void add(Assignment assignment) {
+    public Assignment add(Assignment assignment) {
         entityManager.persist(assignment);
         assignment = entityManager.find(Assignment.class, assignment.getId());
         entityManager.refresh(assignment);
+        return assignment;
     }
 
     /**

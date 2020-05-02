@@ -57,20 +57,6 @@ public class EventController {
         model.addObject("listEvents", eventService.filter(filterDto));
         model.addObject("filterDto", filterDto);
         model.addObject("eventDto",eventDto);
-        List<EventDto> eventDtoList = new ArrayList<>();
-        List<Event> events = eventService.getAll();
-        for(Event e:events){
-            EventDto eventDto1 = new EventDto();
-            eventDto1.setId(e.getId());
-            eventDto1.setAssignmentName(e.getAssignment().getName());
-            eventDto1.setDate(e.getDate());
-            eventDto1.setTime(e.getTime());
-            eventDto1.setPatientName(e.getPatientName());
-            eventDto1.setStatus(e.getStatus());
-            eventDto1.setComments(e.getComments());
-            eventDtoList.add(eventDto1);
-        }
-        jsmClient.sendListEvents(eventDtoList);
         return model;
     }
 }

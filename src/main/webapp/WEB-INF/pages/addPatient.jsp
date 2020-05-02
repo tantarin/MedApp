@@ -7,6 +7,7 @@
     <title>Add patients</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+</head>
     <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
@@ -60,7 +61,7 @@
                         <div class="form-check break">
                           <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios2" value="discharged" path="status"/>
                           <label class="form-check-label" for="exampleRadios2">
-                            Disharged
+                            Disсharged
                         </label>
                     </div>
                 </div>

@@ -154,25 +154,36 @@ public class AssignmentServiceImpl implements AssignmentService {
         for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
             //если в этом периоде день недели совпадает с нужным
             if (weeks.contains(String.valueOf(date.getDayOfWeek().getValue()))) {
-                Event event = new Event();
-                //если время было выбрано
                 if (a.getTime1() != null) {
+                    Event event = new Event();
+                    event.setAssignment(a);
+                    event.setPatientName(patient.getLastName());
+                    event.setStatus("Sheduled");
+                    event.setComments("reason");
                     event.setDate(date.toString());
                     event.setTime(a.getTime1());
+                    eventDAO.addEvent(event);
                 }
                 if (a.getTime2() != null) {
+                    Event event = new Event();
+                    event.setAssignment(a);
+                    event.setPatientName(patient.getLastName());
+                    event.setStatus("Sheduled");
+                    event.setComments("reason");
                     event.setDate(date.toString());
                     event.setTime(a.getTime2());
+                    eventDAO.addEvent(event);
                 }
                 if (a.getTime3() != null) {
+                    Event event = new Event();
+                    event.setAssignment(a);
+                    event.setPatientName(patient.getLastName());
+                    event.setStatus("Sheduled");
+                    event.setComments("reason");
                     event.setDate(date.toString());
                     event.setTime(a.getTime3());
+                    eventDAO.addEvent(event);
                 }
-                event.setAssignment(a);
-                event.setPatientName(patient.getLastName());
-                event.setStatus("Sheduled");
-                event.setComments("add comment");
-                eventDAO.addEvent(event);
             }
         }
     }

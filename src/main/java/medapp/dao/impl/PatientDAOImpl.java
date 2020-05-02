@@ -52,9 +52,9 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public List<Assignment> getAssignments(Long id) {
+    public List<Assignment> getAssignments(Long patientId) {
         Query query = entityManager.createQuery("select a from Assignment a where a.patient.id = ?1");
-        query.setParameter(1,id);
+        query.setParameter(1,patientId);
         return query.getResultList();
     }
 

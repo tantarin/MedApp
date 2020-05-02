@@ -44,10 +44,7 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = {TestBeanConfig.class})
 public class PatientServiceTest {
 
-    private MockMvc mockMvc;
-
-    @InjectMocks
-    private PatientController patientController;
+    private static Patient patient;
 
     @Mock
     PatientDAO patientDAO;
@@ -56,14 +53,26 @@ public class PatientServiceTest {
     private PatientServiceImpl patientService;
 
     @Before
-    public void setup(){
+    public void init(){
+        patient = new Patient();
 
     }
 
     @Test
-    public void test(){
-        System.out.println("hi");
+    public void addPatientTest(){
+
     }
+
+    @Test
+    public void getPatientTest(){
+
+    }
+
+    @Test
+    public void deletePatientTest(){}
+
+    @Test
+    public void updatePatientTest(){}
 
     @Test
     public void getAllPatientsTest() {

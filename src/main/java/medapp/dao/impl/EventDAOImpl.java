@@ -87,8 +87,16 @@ public class EventDAOImpl implements EventDAO {
         return query.getResultList();
     }
 
+    @Override
     public void update(Event event) {
         entityManager.persist(event);
+    }
+
+    @Override
+    public List<Event> getByAssignmentId(Long assId) {
+        Query query = entityManager.createQuery("select e FROM Event e WHERE e.assignment.id= ?1");
+        query.setParameter(1, assId);
+        return query.getResultList();
     }
 
 }

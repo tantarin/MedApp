@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.log4j.Logger;
 
 @RestController
@@ -29,9 +27,6 @@ public class AssignmentController {
     @Autowired
     private EventService eventService;
 
-    @Autowired
-    JmsClient jsmClient;
-
     @GetMapping(value = "/add")
     public ModelAndView add(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
@@ -44,20 +39,7 @@ public class AssignmentController {
     public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException {
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
-        List<Event> events = eventService.getAll();
-        List<EventDto> eventDtoList = new ArrayList<>();
-        for(Event e:events){
-            EventDto eventDto = new EventDto();
-            eventDto.setId(e.getId());
-            eventDto.setAssignmentName(e.getAssignment().getName());
-            eventDto.setDate(e.getDate());
-            eventDto.setTime(e.getTime());
-            eventDto.setPatientName(e.getPatientName());
-            eventDto.setStatus(e.getStatus());
-            eventDto.setComments(e.getComments());
-            eventDtoList.add(eventDto);
-        }
-        jsmClient.sendListEvents(eventDtoList);
+        eventService.sendUpdatedEvents();
         return new ModelAndView("redirect:/patients/assignments?id="+id);
     }
 
@@ -87,20 +69,7 @@ public class AssignmentController {
         id = Long.parseLong(request.getParameter("id"));
         Long patientId = assignmentService.getPatientId(id);
         assignmentService.deleteById(id);
-        List<Event> events = eventService.getAll();
-        List<EventDto> eventDtoList = new ArrayList<>();
-        for(Event e:events){
-            EventDto eventDto = new EventDto();
-            eventDto.setId(e.getId());
-            eventDto.setAssignmentName(e.getAssignment().getName());
-            eventDto.setDate(e.getDate());
-            eventDto.setTime(e.getTime());
-            eventDto.setPatientName(e.getPatientName());
-            eventDto.setStatus(e.getStatus());
-            eventDto.setComments(e.getComments());
-            eventDtoList.add(eventDto);
-        }
-        jsmClient.sendListEvents(eventDtoList);
+        eventService.sendUpdatedEvents();
         return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 }

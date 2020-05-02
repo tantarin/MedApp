@@ -1,6 +1,7 @@
 package medapp.service.impl;
 
 import medapp.activemq.JmsClient;
+import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.EventDto;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jms.JMSException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ public class EventServiceImpl implements EventService {
 
     EventDAO eventDAO;
     PatientDAO patientDAO;
+
+    @Autowired
+    JmsClient jsmClient;
 
     @Autowired
     public void setEventDAO(EventDAO eventDAO) {
@@ -43,7 +48,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public List<Event> getAll() {
+    public List<Event> getAll() throws JMSException {
+        sendUpdatedEvents();
         return eventDAO.getAll();
     }
 
@@ -80,6 +86,40 @@ public class EventServiceImpl implements EventService {
         e.setComments(eventDto.getComments());
         e.setStatus(eventDto.getStatus());
         eventDAO.update(e);
+    }
+
+    @Override
+    @Transactional
+    public void sendUpdatedEvents() throws JMSException {
+        List<EventDto> eventDtoList = new ArrayList<>();
+        List<Event> events = eventDAO.filterByDate();
+        for(Event e:events){
+            EventDto eventDto = new EventDto();
+            eventDto.setId(e.getId());
+            eventDto.setAssignmentName(e.getAssignment().getName());
+            eventDto.setDate(e.getDate());
+            eventDto.setTime(e.getTime());
+            eventDto.setPatientName(e.getPatientName());
+            eventDto.setStatus(e.getStatus());
+            eventDto.setComments(e.getComments());
+            eventDtoList.add(eventDto);
+        }
+        jsmClient.sendListEvents(eventDtoList);
+    }
+
+    @Override
+    @Transactional
+    public void updateLastNameEvent(Long patientId) {
+        String lastName = patientDAO.getById(patientId).getLastName();
+        List<Assignment> assignmentList = patientDAO.getAssignments(patientId);
+        for(Assignment a: assignmentList){
+            Long assId = a.getId();
+            List<Event> eventList = eventDAO.getByAssignmentId(assId);
+            for(Event e:eventList) {
+                e.setPatientName(lastName);
+                eventDAO.update(e);
+            }
+        }
     }
 }
 

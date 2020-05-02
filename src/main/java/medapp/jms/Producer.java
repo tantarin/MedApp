@@ -22,9 +22,6 @@ public class Producer {
             Connection connection = connectionFactory.createConnection();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             MessageProducer messageProducer = session.createProducer(destination);
-
-            messageProducer.send(session.createTextMessage("Hello MDB"));
-            System.out.println("------------------------------------------");
             connection.close();
             session.close();
         } catch (JMSException ex) {
