@@ -1,4 +1,4 @@
-package medapp.controller.exception;
+package medapp.exceptions;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

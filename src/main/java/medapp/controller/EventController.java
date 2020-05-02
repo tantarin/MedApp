@@ -6,6 +6,7 @@ import medapp.dto.EventDto;
 import medapp.dto.FilterDto;
 import medapp.model.Event;
 import medapp.service.api.EventService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/events")
 public class EventController {
+
+    private static final Logger LOGGER = Logger.getLogger(EventController.class);
 
     private EventService eventService;
 

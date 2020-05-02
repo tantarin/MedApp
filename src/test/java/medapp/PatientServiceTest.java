@@ -48,23 +48,17 @@ public class PatientServiceTest {
 
     @InjectMocks
     private PatientController patientController;
-//
-//    @Rule
-//    public MockitoRule initRule = MockitoJUnit.rule();
 
-//    @Before
-//    public void init(){
-//        MockitoAnnotations.initMocks(this);
-//        mockMvc = MockMvcBuilders
-//                .standaloneSetup(patientController)
-//                .build();
-//    }
-//
     @Mock
     PatientDAO patientDAO;
 
     @InjectMocks
     private PatientServiceImpl patientService;
+
+    @Before
+    public void setup(){
+
+    }
 
     @Test
     public void test(){

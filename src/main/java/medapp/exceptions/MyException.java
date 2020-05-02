@@ -1,4 +1,4 @@
-package medapp;
+package medapp.exceptions;
 
 import org.springframework.stereotype.Component;
 

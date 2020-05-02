@@ -3,23 +3,23 @@ package medapp.controller;
 import medapp.activemq.JmsClient;
 import medapp.dto.AssignmentDto;
 import medapp.dto.EventDto;
-import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.service.api.AssignmentService;
 import medapp.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 @RestController
 @RequestMapping("/assignments")
 public class AssignmentController {
+
+    private static final Logger LOGGER = Logger.getLogger(AssignmentController.class);
 
     Long id;
 
