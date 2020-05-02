@@ -110,9 +110,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <form:input path="comments" value="${event.comments}"  type="text" id="comm${event.id}" disabled="true"/>
-                                        <%--                                            <c:out value="${event.comments}"/>--%>
-                                        <input type="submit" class="btn btn-light" value="submit" >
+                                    <form:input path="comments" value="${event.comments}"  type="text" id="comm${event.id}" disabled="true" onchange="ff(this.id)"/>
+<%--                                        <input type="submit" class="btn btn-light" value="submit" >--%>
                                             </form:form>
                                 </td>
                             </tr>
@@ -138,6 +137,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script>
+    document.body.onclick = iii();
+    function ff(id) {
+        document.getElementById(id).form.submit();
+    }
     function func(id) {
         if (document.getElementById(id).value === "Cancelled") {
             var idd = "comm"+id;

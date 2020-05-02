@@ -90,4 +90,5 @@ public class EventDAOImpl implements EventDAO {
     public void update(Event event) {
         entityManager.persist(event);
     }
+
 }

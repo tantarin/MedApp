@@ -42,9 +42,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     @Transactional
     public void add(AssignmentDto assignmentDto) {
-        //get Patient by Dto id
         Patient patient = patientDAO.getById(assignmentDto.getPatientId());
-        //dto to ass
         Assignment a = new Assignment();
         a.setPatient(patient);
         //a.setId(assignmentDto.getId());
@@ -73,14 +71,25 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     @Transactional
     public void update(AssignmentDto assignmentDto) {
-       Assignment a = assignmentDAO.getById(assignmentDto.getId());
-        a.setName(assignmentDto.getName());
+        Assignment a = assignmentDAO.getById(assignmentDto.getId());
         a.setType(assignmentDto.getType());
+        a.setName(assignmentDto.getName());
+        a.setPeriod(assignmentDto.getDateFrom()+" - "+assignmentDto.getDateTo());
         a.setDateFrom(assignmentDto.getDateFrom());
         a.setDateTo(assignmentDto.getDateTo());
         a.setDoze(assignmentDto.getDoze());
-        a.setPeriod(assignmentDto.getDateFrom()+" - "+assignmentDto.getDateTo());
+        a.setTime1(assignmentDto.getTime1());
+        a.setTime2(assignmentDto.getTime2());
+        a.setTime3(assignmentDto.getTime3());
+        StringBuilder tp = new StringBuilder();
+        for(String s:assignmentDto.getWeeks()){
+            tp.append(s);
+            tp.append(" ");
+        }
+        a.setTimePattern(tp.toString());
         assignmentDAO.update(a);
+        deleteEventsByAssId(a.getId());
+        generateEventsByAssId(a.getId());
     }
 
     @Override
@@ -127,6 +136,10 @@ public class AssignmentServiceImpl implements AssignmentService {
         assignmentDto.setDateTo(ass.getDateTo());
         assignmentDto.setDoze(ass.getDoze());
         return assignmentDto;
+    }
+
+    public void deleteEventsByAssId(Long assId){
+        eventDAO.deleteByAssignmentId(assId);
     }
 
     @Transactional

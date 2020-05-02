@@ -23,10 +23,10 @@ public class AssignmentController {
 
     Long id;
 
-    @Autowired(required=true)
+    @Autowired
     private AssignmentService assignmentService;
 
-    @Autowired(required=true)
+    @Autowired
     private EventService eventService;
 
     @Autowired
@@ -75,10 +75,10 @@ public class AssignmentController {
     }
 
     @PostMapping(value = "/edit")
-    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto,HttpServletRequest request) {
+    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) {
         assignmentDto.setId(id);
-        Long patientId = assignmentService.getPatientId(id);
         assignmentService.update(assignmentDto);
+        Long patientId = assignmentService.getPatientId(id);
         return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 
