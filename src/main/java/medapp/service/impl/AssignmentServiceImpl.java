@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,27 +59,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     public void add(AssignmentDto assignmentDto) throws ServiceException {
         try {
             Patient patient = patientDAO.getById(assignmentDto.getPatientId());
-            Assignment assignment = new Assignment();
-            assignment.setPatient(patient);
-            //a.setId(assignmentDto.getId());
-            assignment.setName(assignmentDto.getName());
-            assignment.setType(assignmentDto.getType());
-            //create period
-            assignment.setPeriod(assignmentDto.getDateFrom() + " - " + assignmentDto.getDateTo());
-            assignment.setDoze(assignmentDto.getDoze());
-            //time pattern
-            StringBuilder tp = new StringBuilder();
-            for (String s : assignmentDto.getWeeks()) {
-                tp.append(s);
-                tp.append(" ");
-            }
-            assignment.setTimePattern(tp.toString());
-            //set time
-            assignment.setTime1(assignmentDto.getTime1());
-            assignment.setTime2(assignmentDto.getTime2());
-            assignment.setTime3(assignmentDto.getTime3());
-            assignment.setDateFrom(assignmentDto.getDateFrom());
-            assignment.setDateTo(assignmentDto.getDateTo());
+            Assignment assignment = convertDtoToAssignment(new Assignment(), assignmentDto);
             assignmentDAO.add(assignment);
             generateEventsByAssId(assignment.getId());
         } catch (DaoException e) {
@@ -96,25 +77,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     @Transactional
     public void update(AssignmentDto assignmentDto) {
-        Assignment a = assignmentDAO.getById(assignmentDto.getId());
-        a.setType(assignmentDto.getType());
-        a.setName(assignmentDto.getName());
-        a.setPeriod(assignmentDto.getDateFrom() + " - " + assignmentDto.getDateTo());
-        a.setDateFrom(assignmentDto.getDateFrom());
-        a.setDateTo(assignmentDto.getDateTo());
-        a.setDoze(assignmentDto.getDoze());
-        a.setTime1(assignmentDto.getTime1());
-        a.setTime2(assignmentDto.getTime2());
-        a.setTime3(assignmentDto.getTime3());
-        StringBuilder tp = new StringBuilder();
-        for (String s : assignmentDto.getWeeks()) {
-            tp.append(s);
-            tp.append(" ");
-        }
-        a.setTimePattern(tp.toString());
-        assignmentDAO.update(a);
-        deleteEventsByAssId(a.getId());
-        generateEventsByAssId(a.getId());
+        Assignment assignment = assignmentDAO.getById(assignmentDto.getId());
+        assignmentDAO.update(convertDtoToAssignment(assignment, assignmentDto));
+        deleteEventsByAssId(assignment.getId());
+        generateEventsByAssId(assignment.getId());
     }
 
     /**
@@ -151,8 +117,14 @@ public class AssignmentServiceImpl implements AssignmentService {
      *get All assignments by Assignment id
      *
      */
-    public List<Assignment> getAll(Long id) {
-        return assignmentDAO.getAll(id);
+    public List<AssignmentDto> getAll(Long id) {
+        List<Assignment> assignmentList = assignmentDAO.getAll(id);
+        List<AssignmentDto> assignmentDtos = new ArrayList<>();
+        for(Assignment assignment : assignmentList){
+            AssignmentDto assignmentDto = convertAssignmentToDto(assignment);
+            assignmentDtos.add(assignmentDto);
+        }
+        return assignmentDtos;
     }
 
     @Override
@@ -164,19 +136,7 @@ public class AssignmentServiceImpl implements AssignmentService {
      */
     public AssignmentDto getById(Long id) {
         Assignment ass = assignmentDAO.getById(id);
-        AssignmentDto assignmentDto = new AssignmentDto();
-        assignmentDto.setId(ass.getId());
-        assignmentDto.setName(ass.getName());
-        assignmentDto.setType(ass.getType());
-        assignmentDto.setPeriod(ass.getTimePattern());
-        assignmentDto.setWeeks(ass.getTimePattern().split("  "));
-        assignmentDto.setTime1(ass.getTime1());
-        assignmentDto.setTime2(ass.getTime2());
-        assignmentDto.setTime3(ass.getTime3());
-        assignmentDto.setDateFrom(ass.getDateFrom());
-        assignmentDto.setDateTo(ass.getDateTo());
-        assignmentDto.setDoze(ass.getDoze());
-        return assignmentDto;
+        return convertAssignmentToDto(ass);
     }
 
     /**
@@ -239,6 +199,42 @@ public class AssignmentServiceImpl implements AssignmentService {
                 }
             }
         }
+    }
+
+    public AssignmentDto convertAssignmentToDto(Assignment assignment){
+        AssignmentDto assignmentDto = new AssignmentDto();
+        assignmentDto.setId(assignment.getId());
+        assignmentDto.setName(assignment.getName());
+        assignmentDto.setType(assignment.getType());
+        assignmentDto.setTimePattern(assignment.getTimePattern());
+        assignmentDto.setWeeks(assignment.getTimePattern().split("  "));
+        assignmentDto.setTime1(assignment.getTime1());
+        assignmentDto.setTime2(assignment.getTime2());
+        assignmentDto.setTime3(assignment.getTime3());
+        assignmentDto.setDateFrom(assignment.getDateFrom());
+        assignmentDto.setDateTo(assignment.getDateTo());
+        assignmentDto.setDoze(assignment.getDoze());
+        assignmentDto.setPeriod(assignment.getPeriod());
+        return assignmentDto;
+    }
+
+    public Assignment convertDtoToAssignment(Assignment assignment, AssignmentDto assignmentDto){
+        assignment.setType(assignmentDto.getType());
+        assignment.setName(assignmentDto.getName());
+        assignment.setPeriod(assignmentDto.getDateFrom() + " - " + assignmentDto.getDateTo());
+        assignment.setDateFrom(assignmentDto.getDateFrom());
+        assignment.setDateTo(assignmentDto.getDateTo());
+        assignment.setDoze(assignmentDto.getDoze());
+        assignment.setTime1(assignmentDto.getTime1());
+        assignment.setTime2(assignmentDto.getTime2());
+        assignment.setTime3(assignmentDto.getTime3());
+        StringBuilder tp = new StringBuilder();
+        for (String s : assignmentDto.getWeeks()) {
+            tp.append(s);
+            tp.append(" ");
+        }
+        assignment.setTimePattern(tp.toString());
+        return assignment;
     }
 }
 

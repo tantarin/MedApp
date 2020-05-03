@@ -35,21 +35,14 @@ public class PatientServiceImpl implements PatientService {
      * Gett all patients and convert
      * to patientDto.
      *
-     * @return
+     * @return List<PatientDto>
      */
     @Override
     @Transactional
     public List<PatientDto> getAll() {
         List<PatientDto> list = new ArrayList<>();
         for (Patient p : patientDAO.getAll()) {
-            PatientDto patient = new PatientDto();
-            patient.setId(p.getId());
-            patient.setFirstName(p.getFirstName());
-            patient.setLastName(p.getLastName());
-            patient.setEnsNumber(p.getEnsNumber());
-            patient.setDoctor(p.getDoctor());
-            patient.setAssignments(p.getAssignments());
-            patient.setStatus(p.getStatus());
+            PatientDto patient = convertPatientToDto(p);
             list.add(patient);
         }
         return list;
@@ -65,14 +58,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public PatientDto getById(Long theId) {
-        PatientDto patientDto = new PatientDto();
-        Patient p = patientDAO.getById(theId);
-        patientDto.setId(p.getId());
-        patientDto.setFirstName(p.getFirstName());
-        patientDto.setLastName(p.getLastName());
-        patientDto.setDoctor(p.getDoctor());
-        patientDto.setEnsNumber(p.getEnsNumber());
-        patientDto.setAssignments(p.getAssignments());
+        Patient patient = patientDAO.getById(theId);
+        PatientDto patientDto = convertPatientToDto(patient);
         return new PatientDto();
     }
 
@@ -139,7 +126,25 @@ public class PatientServiceImpl implements PatientService {
      * @return
      */
     @Override
-    public List<Patient> getAllPatients() {
-        return patientDAO.getAll();
+    public List<PatientDto> getAllPatients() {
+        List<PatientDto> dtoList = new ArrayList<>();
+        List<Patient> patientList = patientDAO.getAll();
+        for(Patient p:patientList){
+            PatientDto patientDto = convertPatientToDto(p);
+            dtoList.add(patientDto);
+        }
+        return dtoList;
+    }
+
+    public PatientDto convertPatientToDto(Patient patient){
+        PatientDto patientDto = new PatientDto();
+        patientDto.setId(patient.getId());
+        patientDto.setFirstName(patient.getFirstName());
+        patientDto.setLastName(patient.getLastName());
+        patientDto.setDoctor(patient.getDoctor());
+        patientDto.setEnsNumber(patient.getEnsNumber());
+        patientDto.setAssignments(patient.getAssignments());
+        patientDto.setStatus(patient.getStatus());
+        return patientDto;
     }
 }

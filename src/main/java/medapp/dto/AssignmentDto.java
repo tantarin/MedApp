@@ -31,5 +31,6 @@ public class AssignmentDto {
     String time2;
     String time3;
     String doze;
+    String timePattern;
     String period;
 }

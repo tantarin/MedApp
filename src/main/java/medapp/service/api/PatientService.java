@@ -22,5 +22,5 @@ public interface PatientService {
 
     List<Assignment> getAssignments(Long id);
 
-     List<Patient> getAllPatients();
+     List<PatientDto> getAllPatients();
 }
