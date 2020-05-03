@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
-import static utils.ApplicationConstant.*;
+import static medapp.config.ApplicationConstant.*;
 
 
 @Configuration

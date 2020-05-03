@@ -1,4 +1,4 @@
-package utils;
+package medapp.config;
 
 public class ApplicationConstant {
 
