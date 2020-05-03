@@ -9,6 +9,7 @@ import medapp.service.api.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class PatientServiceImpl implements PatientService {
     @Transactional
     public List<PatientDto> getAll() {
         List<PatientDto> list = new ArrayList<>();
-        for(Patient p: patientDAO.getAll()){
+        for (Patient p : patientDAO.getAll()) {
             PatientDto patient = new PatientDto();
             patient.setId(p.getId());
             patient.setFirstName(p.getFirstName());
@@ -88,7 +89,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setStatus("discharged");
         patientDAO.update(patient);
         List<Assignment> list = patientDAO.getAssignments(patientId);
-        for(Assignment a: list){
+        for (Assignment a : list) {
             assignmentDAO.delete(a.getId());
         }
     }
@@ -138,7 +139,7 @@ public class PatientServiceImpl implements PatientService {
      * @return
      */
     @Override
-    public List<Patient> getAllPatients(){
+    public List<Patient> getAllPatients() {
         return patientDAO.getAll();
     }
 }

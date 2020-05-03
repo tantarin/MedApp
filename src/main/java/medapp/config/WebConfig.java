@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"medapp.config", "medapp.controller"})
-@Import(value = { AppSecurityConfig.class })
+@Import(value = {AppSecurityConfig.class})
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -28,8 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public InternalResourceViewResolver resolver()
-    {
+    public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/pages/");

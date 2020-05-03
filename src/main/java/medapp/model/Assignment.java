@@ -44,10 +44,10 @@ public class Assignment {
     @Column
     String time3;
 
-   @Column
+    @Column
     String period;
 
-    @OneToMany(mappedBy = "assignment",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Event> events;
 
     @ManyToOne
@@ -73,9 +73,10 @@ public class Assignment {
                 '}';
     }
 
-    public Assignment(){}
+    public Assignment() {
+    }
 
-    public Assignment(Long id, String type){
+    public Assignment(Long id, String type) {
         this.id = id;
         this.type = type;
     }

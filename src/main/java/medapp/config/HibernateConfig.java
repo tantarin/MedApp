@@ -12,9 +12,11 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
+
 import static medapp.config.ApplicationConstant.*;
 
 

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = { "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView welcomePage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
@@ -23,8 +23,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
-                                  @RequestParam(value = "logout",	required = false) String logout) {
+    public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,
+                                  @RequestParam(value = "logout", required = false) String logout) {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
@@ -39,10 +39,10 @@ public class LoginController {
         return model;
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/index?logout";

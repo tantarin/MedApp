@@ -36,7 +36,6 @@ public class PatientController {
     }
 
     /**
-     *
      * @param patient
      * @return
      */
@@ -58,7 +57,7 @@ public class PatientController {
     public ModelAndView getAll() {
         List<PatientDto> listPatients = patientService.getAll();
         List<Patient> patients = new ArrayList<>();
-        for(PatientDto patientDto:listPatients) {
+        for (PatientDto patientDto : listPatients) {
             Patient patient = new Patient();
             patient.setId(patientDto.getId());
             patient.setFirstName(patientDto.getFirstName());
@@ -85,7 +84,6 @@ public class PatientController {
     }
 
     /**
-     *
      * @param request
      * @return
      */
@@ -95,7 +93,7 @@ public class PatientController {
         List<Assignment> listAssignments = patientService.getAssignments(id);
         ModelAndView modelAndView = new ModelAndView("assignments");
         modelAndView.addObject("assignments", listAssignments);
-        modelAndView.addObject("id",id);
+        modelAndView.addObject("id", id);
         return modelAndView;
     }
 
@@ -106,7 +104,7 @@ public class PatientController {
         List<Assignment> listAssignments = patientService.getAssignments(id);
         ModelAndView modelAndView = new ModelAndView("assignments");
         modelAndView.addObject("assignments", listAssignments);
-        modelAndView.addObject("id",id);
+        modelAndView.addObject("id", id);
         return modelAndView;
     }
 

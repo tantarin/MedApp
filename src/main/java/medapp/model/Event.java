@@ -33,9 +33,11 @@ public class Event {
     @Column
     String comments;
 
-    public Event(){};
+    public Event() {
+    }
 
-    public Event(Long id, String patientName){
+
+    public Event(Long id, String patientName) {
         this.id = id;
         this.patientName = patientName;
     }

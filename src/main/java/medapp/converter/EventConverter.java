@@ -6,6 +6,7 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import medapp.dto.EventDto;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.support.converter.MessageConverter;
@@ -23,11 +24,14 @@ public class EventConverter implements MessageConverter {
             LoggerFactory.getLogger(EventConverter.class);
 
     ObjectMapper mapper;
+
     public EventConverter() {
         mapper = new ObjectMapper();
     }
+
+    @NotNull
     @Override
-    public Message toMessage(Object object, Session session)
+    public Message toMessage(@NotNull Object object, @NotNull Session session)
             throws JMSException {
         List<EventDto> eventDtoList = (List<EventDto>) object;
         String payload = null;
@@ -41,7 +45,6 @@ public class EventConverter implements MessageConverter {
         message.setText(payload);
         return message;
     }
-
 
 
     @Override

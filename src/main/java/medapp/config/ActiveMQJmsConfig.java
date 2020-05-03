@@ -20,7 +20,7 @@ public class ActiveMQJmsConfig {
     private AnnotationConfigApplicationContext context;
 
     @Bean
-    public ActiveMQConnectionFactory connectionFactory(){
+    public ActiveMQConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
         connectionFactory.setTrustAllPackages(true);
         return connectionFactory;
@@ -28,7 +28,7 @@ public class ActiveMQJmsConfig {
 
 
     @Bean
-    public JmsMessagingTemplate jmsTemplate(){
+    public JmsMessagingTemplate jmsTemplate() {
         JmsMessagingTemplate messagingTemplate = new JmsMessagingTemplate();
         messagingTemplate.setConnectionFactory(connectionFactory());
         messagingTemplate.setDefaultDestinationName("superqueue");

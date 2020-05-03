@@ -29,11 +29,11 @@ public class JmsProducer {
     @Value("superqueue")
     String destinationQueue;
 
-    @Schedule(hour="*",minute="*",second = "*/1",persistent = false)
+    @Schedule(hour = "*", minute = "*", second = "*/1", persistent = false)
     public void sendListEvents(final List<EventDto> msg) throws JMSException {
         Connection connection = connectionFactory.createConnection();
         Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
         Message message = eventConverter.toMessage(msg, session);
-        jmsTemplate.convertAndSend(destinationQueue,message);
+        jmsTemplate.convertAndSend(destinationQueue, message);
     }
 }

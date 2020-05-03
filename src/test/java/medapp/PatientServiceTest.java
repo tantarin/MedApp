@@ -11,8 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -31,10 +33,10 @@ public class PatientServiceTest {
     private PatientServiceImpl patientService;
 
     @Before
-    public void init(){
+    public void init() {
         List<Patient> patients = new ArrayList<>();
-        patient1 = new Patient(1L, "Ivan","Ivanov");
-        patient2 = new Patient(2L, "Petr","Petrov");
+        patient1 = new Patient(1L, "Ivan", "Ivanov");
+        patient2 = new Patient(2L, "Petr", "Petrov");
         patients.add(patient1);
         patients.add(patient2);
         when(patientDAO.getAll()).thenReturn(patients);
@@ -42,26 +44,26 @@ public class PatientServiceTest {
     }
 
     @Test
-    public void addPatientTest(){
+    public void addPatientTest() {
         patientService.add(patient1);
-        verify(patientDAO,times(1)).addPatient(patient1);
+        verify(patientDAO, times(1)).addPatient(patient1);
     }
 
     @Test
-    public void getPatientByIdTest(){
+    public void getPatientByIdTest() {
         patientService.getById(1L);
         assertEquals("Ivan", patient1.getFirstName());
         assertEquals("Ivanov", patient1.getLastName());
     }
 
     @Test
-    public void deletePatientTest(){
+    public void deletePatientTest() {
         patientDAO.clear(1L);
         when(patientDAO.getById(patient1.getId())).thenReturn(null);
     }
 
     @Test
-    public void updatePatientTest(){
+    public void updatePatientTest() {
         patient2.setId(3L);
         patientDAO.update(patient2);
         when(patientDAO.getById(3L)).thenReturn(patient2);

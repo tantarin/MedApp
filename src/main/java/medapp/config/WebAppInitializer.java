@@ -8,23 +8,19 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 @Configuration
 @EnableWebMvc
 @ComponentScan("medapp")
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
-{
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
-    protected Class<?>[] getRootConfigClasses()
-    {
-        return new Class[] {HibernateConfig.class, WebConfig.class};
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{HibernateConfig.class, WebConfig.class};
     }
 
     @Override
-    protected Class<?>[] getServletConfigClasses()
-    {
-        return new Class[] {WebAppInitializer.class};
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebAppInitializer.class};
     }
 
     @Override
-    protected String[] getServletMappings()
-    {
-        return new String[] {"/"};
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 }

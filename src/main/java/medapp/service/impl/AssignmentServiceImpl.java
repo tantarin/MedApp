@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -80,7 +81,7 @@ public class AssignmentServiceImpl implements AssignmentService {
             assignment.setDateTo(assignmentDto.getDateTo());
             assignmentDAO.add(assignment);
             generateEventsByAssId(assignment.getId());
-        }catch (DaoException e){
+        } catch (DaoException e) {
             throw new ServiceException(ErrorService.DATABASE_EXCEPTION, e);
         }
     }
@@ -98,7 +99,7 @@ public class AssignmentServiceImpl implements AssignmentService {
         Assignment a = assignmentDAO.getById(assignmentDto.getId());
         a.setType(assignmentDto.getType());
         a.setName(assignmentDto.getName());
-        a.setPeriod(assignmentDto.getDateFrom()+" - "+assignmentDto.getDateTo());
+        a.setPeriod(assignmentDto.getDateFrom() + " - " + assignmentDto.getDateTo());
         a.setDateFrom(assignmentDto.getDateFrom());
         a.setDateTo(assignmentDto.getDateTo());
         a.setDoze(assignmentDto.getDoze());
@@ -106,7 +107,7 @@ public class AssignmentServiceImpl implements AssignmentService {
         a.setTime2(assignmentDto.getTime2());
         a.setTime3(assignmentDto.getTime3());
         StringBuilder tp = new StringBuilder();
-        for(String s:assignmentDto.getWeeks()){
+        for (String s : assignmentDto.getWeeks()) {
             tp.append(s);
             tp.append(" ");
         }
@@ -180,10 +181,11 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     /**
      * Delete Assignment by Id
+     *
      * @param assId
      */
     @Override
-    public void deleteEventsByAssId(Long assId){
+    public void deleteEventsByAssId(Long assId) {
         eventDAO.deleteByAssignmentId(assId);
     }
 

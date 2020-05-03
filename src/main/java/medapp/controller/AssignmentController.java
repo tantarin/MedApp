@@ -7,8 +7,10 @@ import medapp.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 
 @RestController
@@ -47,7 +49,6 @@ public class AssignmentController {
      * it to the assignmentService.
      * Then update the list of events.
      *
-     *
      * @param assignmentDto
      * @return ModelandView
      * @throws JMSException
@@ -58,7 +59,7 @@ public class AssignmentController {
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
         eventService.sendUpdatedEvents();
-        return new ModelAndView("redirect:/patients/assignments?id="+id);
+        return new ModelAndView("redirect:/patients/assignments?id=" + id);
     }
 
     /**
@@ -74,7 +75,7 @@ public class AssignmentController {
         id = Long.parseLong(request.getParameter("id"));
         AssignmentDto ass = assignmentService.getById(id);
         ModelAndView model = new ModelAndView("editAssignment");
-        model.addObject("assignmentDto",ass);
+        model.addObject("assignmentDto", ass);
         return model;
     }
 
@@ -89,7 +90,7 @@ public class AssignmentController {
         assignmentDto.setId(id);
         assignmentService.update(assignmentDto);
         Long patientId = assignmentService.getPatientId(id);
-        return new ModelAndView("redirect:/patients/assignments?id="+patientId);
+        return new ModelAndView("redirect:/patients/assignments?id=" + patientId);
     }
 
     /**
@@ -105,6 +106,6 @@ public class AssignmentController {
         Long patientId = assignmentService.getPatientId(id);
         assignmentService.deleteById(id);
         eventService.sendUpdatedEvents();
-        return new ModelAndView("redirect:/patients/assignments?id="+patientId);
+        return new ModelAndView("redirect:/patients/assignments?id=" + patientId);
     }
 }

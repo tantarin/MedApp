@@ -40,12 +40,12 @@ public class EventController {
 
 
     @PostMapping("/getAll")
-    public ModelAndView filter(@ModelAttribute("filter") FilterDto filterDto,@ModelAttribute("eventDto") EventDto eventDto) throws JMSException {
+    public ModelAndView filter(@ModelAttribute("filter") FilterDto filterDto, @ModelAttribute("eventDto") EventDto eventDto) throws JMSException {
         return commonCode(filterDto, eventDto);
     }
 
     @PostMapping("/comments")
-    public ModelAndView getComments(@ModelAttribute("filter") FilterDto filterDto,@ModelAttribute("eventDto") EventDto eventDto, HttpServletRequest request) throws JMSException {
+    public ModelAndView getComments(@ModelAttribute("filter") FilterDto filterDto, @ModelAttribute("eventDto") EventDto eventDto, HttpServletRequest request) throws JMSException {
         Long id = Long.parseLong(request.getParameter("id"));
         eventDto.setId(id);
         eventService.update(eventDto);
@@ -56,7 +56,7 @@ public class EventController {
         ModelAndView model = new ModelAndView("events");
         model.addObject("listEvents", eventService.filter(filterDto));
         model.addObject("filterDto", filterDto);
-        model.addObject("eventDto",eventDto);
+        model.addObject("eventDto", eventDto);
         return model;
     }
 }

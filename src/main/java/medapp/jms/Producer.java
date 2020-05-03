@@ -10,14 +10,14 @@ import javax.jms.*;
 @LocalBean
 public class Producer {
 
-    @Resource(name="java:/RemoteConnectionFactory")
+    @Resource(name = "java:/RemoteConnectionFactory")
     private ConnectionFactory connectionFactory;
 
-    @Resource(name="java:jboss/exported/jms/queue/test")
+    @Resource(name = "java:jboss/exported/jms/queue/test")
     private Destination destination;
 
-    @Schedule(hour="*",minute="*",second = "*/1",persistent = false)
-    void produceMessage(){
+    @Schedule(hour = "*", minute = "*", second = "*/1", persistent = false)
+    void produceMessage() {
         try {
             Connection connection = connectionFactory.createConnection();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);

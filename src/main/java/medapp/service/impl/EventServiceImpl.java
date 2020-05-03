@@ -80,11 +80,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDto> filter(FilterDto filterDto) {
         List<Event> events = eventDAO.getAll();
-            if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
-            if (!filterDto.getByDay().equals("no filter")) events = eventDAO.filterByDate();
-            if (!filterDto.getByHour().equals("no filter")) events = eventDAO.filterByHour();
+        if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
+        if (!filterDto.getByDay().equals("no filter")) events = eventDAO.filterByDate();
+        if (!filterDto.getByHour().equals("no filter")) events = eventDAO.filterByHour();
         List<EventDto> eventDtos = new ArrayList<>();
-        for(Event e:events){
+        for (Event e : events) {
             EventDto eventDto = new EventDto();
             eventDto.setId(e.getId());
             eventDto.setAssignmentName(e.getAssignment().getName());
@@ -123,7 +123,7 @@ public class EventServiceImpl implements EventService {
     public void sendUpdatedEvents() throws JMSException {
         List<EventDto> eventDtoList = new ArrayList<>();
         List<Event> events = eventDAO.filterByDate();
-        for(Event e:events){
+        for (Event e : events) {
             EventDto eventDto = new EventDto();
             eventDto.setId(e.getId());
             eventDto.setAssignmentName(e.getAssignment().getName());
@@ -149,10 +149,10 @@ public class EventServiceImpl implements EventService {
     public void updateLastNameEvent(Long patientId) {
         String lastName = patientDAO.getById(patientId).getLastName();
         List<Assignment> assignmentList = patientDAO.getAssignments(patientId);
-        for(Assignment a: assignmentList){
+        for (Assignment a : assignmentList) {
             Long assId = a.getId();
             List<Event> eventList = eventDAO.getByAssignmentId(assId);
-            for(Event e:eventList) {
+            for (Event e : eventList) {
                 e.setPatientName(lastName);
                 eventDAO.update(e);
             }

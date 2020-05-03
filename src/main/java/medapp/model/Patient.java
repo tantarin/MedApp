@@ -16,11 +16,11 @@ public class Patient {
     @Column
     private Long id;
 
-    @OneToMany(mappedBy = "patient",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Assignment> assignments;
 
     @Column
-    private String firstName ;
+    private String firstName;
 
     @Column
     private String lastName;
@@ -37,7 +37,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, String firstName,String lastName){
+    public Patient(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

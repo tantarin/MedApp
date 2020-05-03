@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +42,11 @@ public class AssignmentServiceTest {
     AssignmentServiceImpl assignmentService;
 
     @Before
-    public void init(){
+    public void init() {
         assignment1 = new Assignment(1L, "Fisioterapy");
         assignment2 = new Assignment(2L, "Massage");
-        assignmentDto = new AssignmentDto(1L, "Fisioterapy",1L);
-        patient = new Patient(1L, "Ivan","Ivanov");
+        assignmentDto = new AssignmentDto(1L, "Fisioterapy", 1L);
+        patient = new Patient(1L, "Ivan", "Ivanov");
         assignmentList = new ArrayList<>();
         assignmentList.add(assignment1);
         assignmentList.add(assignment2);
@@ -57,24 +58,24 @@ public class AssignmentServiceTest {
 
     @Test
     public void testAddAssignment() throws ServiceException, DaoException {
-         assignmentService.add(assignmentDto);
-         verify(assignmentDAO, times(1)).add(assignment1);
+        assignmentService.add(assignmentDto);
+        verify(assignmentDAO, times(1)).add(assignment1);
     }
 
     @Test
-    public void getAssignmentByIdTest(){
+    public void getAssignmentByIdTest() {
         assignmentService.getById(1L);
         assertEquals("Fisioterapy", assignment1.getType());
     }
 
     @Test
-    public void testDeleteAssignment(){
+    public void testDeleteAssignment() {
         assignmentDAO.delete(1L);
         when(assignmentDAO.getById(1L)).thenReturn(null);
     }
 
     @Test
-    public void getAllAssignmentsByPatientTest(){
+    public void getAllAssignmentsByPatientTest() {
         assertEquals(assignmentService.getAll(patient.getId()), assignmentList);
     }
 }

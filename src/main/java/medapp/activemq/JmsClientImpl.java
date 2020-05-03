@@ -9,7 +9,7 @@ import javax.jms.JMSException;
 import java.util.List;
 
 @Service
-public class JmsClientImpl implements JmsClient{
+public class JmsClientImpl implements JmsClient {
 
     @Autowired
     JmsProducer jmsProducer;

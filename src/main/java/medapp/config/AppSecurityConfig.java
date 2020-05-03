@@ -35,7 +35,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationMgr.inMemoryAuthentication()
                 .withUser("doctor")
                 .password(encoder.encode("123"))
-                .roles("ADMIN","USER")
+                .roles("ADMIN", "USER")
                 .and()
                 .withUser("nurse")
                 .password(encoder.encode("123"))
@@ -76,7 +76,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied");
-                //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+        //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         http.authorizeRequests().antMatchers("/resources/css/**").permitAll();
     }
 }

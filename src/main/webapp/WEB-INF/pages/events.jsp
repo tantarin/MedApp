@@ -62,11 +62,12 @@
                                 </div>
                             </th>
                             <th>
-                                <form:input class="type-input" placeholder="patient's last name" type="text" path="byPatient"/>
+                                <form:input class="type-input" placeholder="patient's last name" type="text"
+                                            path="byPatient"/>
                             </th>
                             <th></th>
                             <td width="23%">
-                                <input type="submit" class="btn btn-success btn-list" value="Submit" >
+                                <input type="submit" class="btn btn-success btn-list" value="Submit">
                             </td>
                         </tr>
                         </form:form>
@@ -98,7 +99,8 @@
                                         <div class="dropdown">
                                             <c:url value="/events/comments?id=${event.id}" var="all"/>
                                             <form:form action="${all}" method="post" modelAttribute="eventDto">
-                                            <form:select id="${event.id}" class="btn btn-secondary dropdown-toggle" onchange="func(this.id)" path="status">
+                                            <form:select id="${event.id}" class="btn btn-secondary dropdown-toggle"
+                                                         onchange="func(this.id)" path="status">
                                                 <option value="none" selected>
                                                     <c:out value="${event.status}"/>
                                                 </option>
@@ -110,9 +112,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <form:input path="comments" value="${event.comments}"  type="text" id="comm${event.id}" disabled="true" onchange="ff(this.id)"/>
-<%--                                        <input type="submit" class="btn btn-light" value="submit" >--%>
-                                            </form:form>
+                                    <form:input path="comments" value="${event.comments}" type="text"
+                                                id="comm${event.id}" disabled="true" onchange="ff(this.id)"/>
+                                        <%--                                        <input type="submit" class="btn btn-light" value="submit" >--%>
+                                    </form:form>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -138,12 +141,14 @@
         crossorigin="anonymous"></script>
 <script>
     document.body.onclick = iii();
+
     function ff(id) {
         document.getElementById(id).form.submit();
     }
+
     function func(id) {
         if (document.getElementById(id).value === "Cancelled") {
-            var idd = "comm"+id;
+            var idd = "comm" + id;
             document.getElementById(idd).removeAttribute("disabled");
             document.getElementById(idd).removeAttribute("hidden")
             document.getElementById(idd).focus();

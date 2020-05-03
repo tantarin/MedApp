@@ -4,7 +4,8 @@
 <html>
 <head>
     <title>Edit assigment</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <style type="text/css">
     </style>
@@ -57,31 +58,31 @@
                     <div class="add-box">
                         <br>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="1" path="weeks" value="1" unchecked = "true" />
+                            <form:checkbox class="custom-control-input" id="1" path="weeks" value="1" unchecked="true"/>
                             <label id="11" class="custom-control-label" for="1">Monday</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="2" path="weeks" value="2" unchecked = "true"/>
+                            <form:checkbox class="custom-control-input" id="2" path="weeks" value="2" unchecked="true"/>
                             <label id="22" class="custom-control-label" for="2">Tuesday</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="3" path="weeks" value="3" unchecked = "true"/>
+                            <form:checkbox class="custom-control-input" id="3" path="weeks" value="3" unchecked="true"/>
                             <label class="custom-control-label" for="3">Wednesday </label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="4" path="weeks" value="4" unchecked = "true"/>
+                            <form:checkbox class="custom-control-input" id="4" path="weeks" value="4" unchecked="true"/>
                             <label class="custom-control-label" for="4">Thursday</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="5" path="weeks" value="5" unchecked = "true"/>
+                            <form:checkbox class="custom-control-input" id="5" path="weeks" value="5" unchecked="true"/>
                             <label class="custom-control-label" for="5">Friday</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="6" path="weeks" value="6" unchecked = "true"/>
+                            <form:checkbox class="custom-control-input" id="6" path="weeks" value="6" unchecked="true"/>
                             <label class="custom-control-label" for="6">Saturday</label>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <form:checkbox class="custom-control-input" id="7" path="weeks" value="7" unchecked = "true"/>
+                            <form:checkbox class="custom-control-input" id="7" path="weeks" value="7" unchecked="true"/>
                             <label class="custom-control-label" for="7">Sunday</label>
                         </div>
                         <br>
@@ -93,36 +94,44 @@
                         &nbsp;
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="a">
-                            <label  id="mor" class="custom-control-label" for="a" onclick="agreeForm(this.id)">Morning</label>
+                            <label id="mor" class="custom-control-label" for="a"
+                                   onclick="agreeForm(this.id)">Morning</label>
                         </div>
-                        <form:input type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true" path="time1" disabled="true"/>
+                        <form:input type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true"
+                                    path="time1" disabled="true"/>
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id = "q">
-                            <label id="aft" class="custom-control-label" for="q" onclick="agreeForm(this.id)">Afternoon</label>
+                            <input type="checkbox" class="custom-control-input" id="q">
+                            <label id="aft" class="custom-control-label" for="q"
+                                   onclick="agreeForm(this.id)">Afternoon</label>
                         </div>
-                        <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true" path="time2" disabled="true"/>
+                        <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true"
+                                    path="time2" disabled="true"/>
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         &nbsp;
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="r">
-                            <label id="eve" class="custom-control-label" for="r" onclick="agreeForm(this.id)">Evening</label>
+                            <label id="eve" class="custom-control-label" for="r"
+                                   onclick="agreeForm(this.id)">Evening</label>
                         </div>
-                        <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true" path="time3" disabled="true"/>
+                        <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true"
+                                    path="time3" disabled="true"/>
                     </div>
                     <div class="add-box">
                         <div class="from">
                             <label>From</label>
-                            <form:input type="date" id="fromDate" name="trip-start" value="2018-02-02" onclick="mindate()" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
+                            <form:input type="date" id="fromDate" name="trip-start" value="2018-02-02"
+                                        onclick="mindate()" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
                         </div>
                         <div class="from">
                             <label>To</label>
-                            <form:input type="date" id="toDate" name="trip-start" min="2018-01-01" max="2020-12-31" path="dateTo"/>
+                            <form:input type="date" id="toDate" name="trip-start" min="2018-01-01" max="2020-12-31"
+                                        path="dateTo"/>
                         </div>
                     </div>
                     <div class="add-box">
@@ -134,42 +143,49 @@
     </div>
 </div>
 </form:form>
-<c:url value="/logout" var="logoutUrl" />
-<form id="logout" action="${logoutUrl}" method="post" >
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<c:url value="/logout" var="logoutUrl"/>
+<form id="logout" action="${logoutUrl}" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <script type="text/javascript">
     var dayOfWeeks = "";
-    dayOfWeeks =  "${assignmentDto.weeks[0]}";
+    dayOfWeeks = "${assignmentDto.weeks[0]}";
     var array = dayOfWeeks.split(" ");
     var val;
     for (val of array) {
-        if(val === "1") {
+        if (val === "1") {
             document.getElementById("1").checked = true;
         }
-        if(val === "2"){
+        if (val === "2") {
             document.getElementById("2").checked = true;
         }
-        if(val === "3"){
+        if (val === "3") {
             document.getElementById("3").checked = true;
         }
-        if(val === "4"){
+        if (val === "4") {
             document.getElementById("4").checked = true;
         }
-        if(val === "5"){
+        if (val === "5") {
             document.getElementById("5").checked = true;
         }
-        if(val === "6"){
+        if (val === "6") {
             document.getElementById("6").checked = true;
         }
-        if(val === "7"){
+        if (val === "7") {
             document.getElementById("7").checked = true;
         }
     }
+
     function mindate() {
         var d = new Date();
         var month = '' + (d.getMonth() + 1);
@@ -181,6 +197,7 @@
             day = '0' + day;
         document.getElementById("fromDate").min = [year, month, day].join('-');
     }
+
     document.getElementById('fromDate').oninput = () => {
         let tt = new Date(document.getElementById('fromDate').value);
         var month = '' + (tt.getMonth() + 1);
@@ -192,14 +209,15 @@
             day = '0' + day;
         document.getElementById("toDate").min = [year, month, day].join('-');
     };
+
     function agreeForm(f) {
-        if(f==="mor") {
+        if (f === "mor") {
             document.getElementById("tm1").removeAttribute("disabled");
         }
-        if(f==="aft") {
+        if (f === "aft") {
             document.getElementById("tm2").removeAttribute("disabled");
         }
-        if(f==="eve") {
+        if (f === "eve") {
             document.getElementById("tm3").removeAttribute("disabled");
         }
     }
