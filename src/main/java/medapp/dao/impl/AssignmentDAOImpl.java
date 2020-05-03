@@ -1,6 +1,8 @@
 package medapp.dao.impl;
 
 import medapp.dao.api.AssignmentDAO;
+import medapp.exceptions.DaoException;
+import medapp.exceptions.ErrorDao;
 import medapp.model.Assignment;
 import medapp.model.Patient;
 import org.springframework.stereotype.Component;
@@ -21,11 +23,15 @@ public class AssignmentDAOImpl implements AssignmentDAO {
      * @param assignment
      */
     @Override
-    public Assignment add(Assignment assignment) {
-        entityManager.persist(assignment);
-        assignment = entityManager.find(Assignment.class, assignment.getId());
-        entityManager.refresh(assignment);
-        return assignment;
+    public Assignment add(Assignment assignment) throws DaoException {
+        try {
+            entityManager.persist(assignment);
+            assignment = entityManager.find(Assignment.class, assignment.getId());
+            entityManager.refresh(assignment);
+            return assignment;
+        } catch (Exception e){
+            throw new DaoException(ErrorDao.DATABASE_EXCEPTION, e);
+        }
     }
 
     /**

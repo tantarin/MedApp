@@ -4,11 +4,15 @@ import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
+import medapp.exceptions.DaoException;
+import medapp.exceptions.ErrorService;
+import medapp.exceptions.ServiceException;
 import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
 import medapp.service.api.AssignmentService;
 import medapp.service.api.EventService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +24,7 @@ import java.util.List;
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
 
+    private static final Logger LOGGER = Logger.getLogger(AssignmentService.class);
     private AssignmentDAO assignmentDAO;
     private PatientDAO patientDAO;
     private EventDAO eventDAO;
@@ -41,31 +46,35 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     @Transactional
-    public void add(AssignmentDto assignmentDto) {
-        Patient patient = patientDAO.getById(assignmentDto.getPatientId());
-        Assignment a = new Assignment();
-        a.setPatient(patient);
-        //a.setId(assignmentDto.getId());
-        a.setName(assignmentDto.getName());
-        a.setType(assignmentDto.getType());
-        //create period
-        a.setPeriod(assignmentDto.getDateFrom()+" - "+assignmentDto.getDateTo());
-        a.setDoze(assignmentDto.getDoze());
-        //time pattern
-        StringBuilder tp = new StringBuilder();
-        for(String s:assignmentDto.getWeeks()){
-            tp.append(s);
-            tp.append(" ");
+    public void add(AssignmentDto assignmentDto) throws ServiceException {
+        try {
+            Patient patient = patientDAO.getById(assignmentDto.getPatientId());
+            Assignment a = new Assignment();
+            a.setPatient(patient);
+            //a.setId(assignmentDto.getId());
+            a.setName(assignmentDto.getName());
+            a.setType(assignmentDto.getType());
+            //create period
+            a.setPeriod(assignmentDto.getDateFrom() + " - " + assignmentDto.getDateTo());
+            a.setDoze(assignmentDto.getDoze());
+            //time pattern
+            StringBuilder tp = new StringBuilder();
+            for (String s : assignmentDto.getWeeks()) {
+                tp.append(s);
+                tp.append(" ");
+            }
+            a.setTimePattern(tp.toString());
+            //set time
+            a.setTime1(assignmentDto.getTime1());
+            a.setTime2(assignmentDto.getTime2());
+            a.setTime3(assignmentDto.getTime3());
+            a.setDateFrom(assignmentDto.getDateFrom());
+            a.setDateTo(assignmentDto.getDateTo());
+            assignmentDAO.add(a);
+            generateEventsByAssId(a.getId());
+        }catch (DaoException e){
+            throw new ServiceException(ErrorService.DATABASE_EXCEPTION, e);
         }
-        a.setTimePattern(tp.toString());
-        //set time
-        a.setTime1(assignmentDto.getTime1());
-        a.setTime2(assignmentDto.getTime2());
-        a.setTime3(assignmentDto.getTime3());
-        a.setDateFrom(assignmentDto.getDateFrom());
-        a.setDateTo(assignmentDto.getDateTo());
-        assignmentDAO.add(a);
-        generateEventsByAssId(a.getId());
     }
 
     @Override
