@@ -53,6 +53,11 @@ public class PatientController {
         return new ModelAndView("redirect:getAll");
     }
 
+    /**
+     *
+     *
+     * @return
+     */
     @GetMapping("/getAll")
     public ModelAndView getAll() {
         List<PatientDto> listPatients = patientService.getAll();

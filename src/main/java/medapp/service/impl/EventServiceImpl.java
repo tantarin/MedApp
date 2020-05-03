@@ -10,6 +10,7 @@ import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
 import medapp.service.api.EventService;
+import org.apache.log4j.spi.TriggeringEventEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,16 +48,23 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     * Get all events through dao.
+     * Get all events through dao and send
+     * events to queue.
      *
      * @return
      * @throws JMSException
      */
     @Override
     @Transactional
-    public List<Event> getAll() throws JMSException {
+    public List<EventDto> getAll() throws JMSException {
         sendUpdatedEvents();
-        return eventDAO.getAll();
+        List<Event> events = eventDAO.getAll();
+        List<EventDto> eventDtoList = new ArrayList<>();
+        for (Event e : events) {
+            EventDto eventDto = convertEventToEventDto(e);
+            eventDtoList.add(eventDto);
+        }
+        return eventDtoList;
     }
 
     /**
@@ -66,8 +74,9 @@ public class EventServiceImpl implements EventService {
      * @return
      */
     @Override
-    public Event getById(Long id) {
-        return eventDAO.getById(id);
+    public EventDto getById(Long id) {
+        Event event = eventDAO.getById(id);
+        return convertEventToEventDto(event);
     }
 
     /**
@@ -85,14 +94,7 @@ public class EventServiceImpl implements EventService {
         if (!filterDto.getByHour().equals("no filter")) events = eventDAO.filterByHour();
         List<EventDto> eventDtos = new ArrayList<>();
         for (Event e : events) {
-            EventDto eventDto = new EventDto();
-            eventDto.setId(e.getId());
-            eventDto.setAssignmentName(e.getAssignment().getName());
-            eventDto.setDate(e.getDate());
-            eventDto.setTime(e.getTime());
-            eventDto.setPatientName(e.getPatientName());
-            eventDto.setStatus(e.getStatus());
-            eventDto.setComments(e.getComments());
+            EventDto eventDto = convertEventToEventDto(e);
             eventDtos.add(eventDto);
         }
         return eventDtos;
@@ -124,14 +126,7 @@ public class EventServiceImpl implements EventService {
         List<EventDto> eventDtoList = new ArrayList<>();
         List<Event> events = eventDAO.filterByDate();
         for (Event e : events) {
-            EventDto eventDto = new EventDto();
-            eventDto.setId(e.getId());
-            eventDto.setAssignmentName(e.getAssignment().getName());
-            eventDto.setDate(e.getDate());
-            eventDto.setTime(e.getTime());
-            eventDto.setPatientName(e.getPatientName());
-            eventDto.setStatus(e.getStatus());
-            eventDto.setComments(e.getComments());
+            EventDto eventDto = convertEventToEventDto(e);
             eventDtoList.add(eventDto);
         }
         jsmClient.sendListEvents(eventDtoList);
@@ -158,5 +153,19 @@ public class EventServiceImpl implements EventService {
             }
         }
     }
+
+    public EventDto convertEventToEventDto(Event event){
+        EventDto eventDto = new EventDto();
+        eventDto.setId(event.getId());
+        eventDto.setAssignmentName(event.getAssignment().getName());
+        eventDto.setDate(event.getDate());
+        eventDto.setTime(event.getTime());
+        eventDto.setPatientName(event.getPatientName());
+        eventDto.setStatus(event.getStatus());
+        eventDto.setComments(event.getComments());
+        return eventDto;
+    }
+
+
 }
 
