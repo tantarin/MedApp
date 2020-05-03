@@ -9,6 +9,15 @@ import java.util.List;
 @Data
 public class AssignmentDto {
 
+    public AssignmentDto(Long id, String type, Long patientId) {
+        this.id = id;
+        this.type = type;
+        this.patientId = patientId;
+    }
+    public AssignmentDto(){
+
+    }
+
     private Long id;
     private String type;
     private String name;

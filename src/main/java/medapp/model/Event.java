@@ -35,6 +35,11 @@ public class Event {
 
     public Event(){};
 
+    public Event(Long id, String patientName){
+        this.id = id;
+        this.patientName = patientName;
+    }
+
     @Override
     public String toString() {
         return "Event{" +

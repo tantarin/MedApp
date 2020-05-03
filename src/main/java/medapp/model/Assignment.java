@@ -75,8 +75,9 @@ public class Assignment {
 
     public Assignment(){}
 
-    public Assignment(Long id){
+    public Assignment(Long id, String type){
         this.id = id;
+        this.type = type;
     }
 
 }

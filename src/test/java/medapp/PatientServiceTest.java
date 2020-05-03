@@ -1,50 +1,28 @@
 package medapp;
 
-import com.google.gson.Gson;
-import medapp.controller.PatientController;
+
 import medapp.dao.api.PatientDAO;
 import medapp.model.Patient;
-import medapp.service.api.PatientService;
 import medapp.service.impl.PatientServiceImpl;
-import medapp.test.config.TestBeanConfig;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import static org.mockito.Matchers.any;
-
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.MockitoRule;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-@WebAppConfiguration
+
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = {TestBeanConfig.class})
 public class PatientServiceTest {
 
-    private static Patient patient;
+    private static Patient patient1;
+    private static Patient patient2;
+    private static Patient newPatient;
 
     @Mock
     PatientDAO patientDAO;
@@ -54,37 +32,43 @@ public class PatientServiceTest {
 
     @Before
     public void init(){
-        patient = new Patient();
-
+        List<Patient> patients = new ArrayList<>();
+        patient1 = new Patient(1L, "Ivan","Ivanov");
+        patient2 = new Patient(2L, "Petr","Petrov");
+        patients.add(patient1);
+        patients.add(patient2);
+        when(patientDAO.getAll()).thenReturn(patients);
+        when(patientDAO.getById(1L)).thenReturn(patient1);
     }
 
     @Test
     public void addPatientTest(){
-
+        patientService.add(patient1);
+        verify(patientDAO,times(1)).addPatient(patient1);
     }
 
     @Test
-    public void getPatientTest(){
-
+    public void getPatientByIdTest(){
+        patientService.getById(1L);
+        assertEquals("Ivan", patient1.getFirstName());
+        assertEquals("Ivanov", patient1.getLastName());
     }
 
     @Test
-    public void deletePatientTest(){}
+    public void deletePatientTest(){
+        patientDAO.clear(1L);
+        when(patientDAO.getById(patient1.getId())).thenReturn(null);
+    }
 
     @Test
-    public void updatePatientTest(){}
+    public void updatePatientTest(){
+        patient2.setId(3L);
+        patientDAO.update(patient2);
+        when(patientDAO.getById(3L)).thenReturn(patient2);
+    }
 
     @Test
     public void getAllPatientsTest() {
-        Mockito.mock(PatientServiceImpl.class, Mockito.RETURNS_DEEP_STUBS);
-        System.out.println("junit test4");
-        List<Patient> patients = new ArrayList<>();
-        Patient patient1 = new Patient("Ivan","Ivanov");
-        Patient patient2 = new Patient("Petr","Petrov");
-        patients.add(patient1);
-        patients.add(patient2);
-        when(patientDAO.getAll()).thenReturn(patients);
-        //test
         List<Patient> list = patientService.getAllPatients();
         assertEquals(2, list.size());
         verify(patientDAO, times(1)).getAll();
