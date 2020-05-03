@@ -7,6 +7,8 @@ import static org.mockito.Mockito.*;
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
+import medapp.exceptions.DaoException;
+import medapp.exceptions.ServiceException;
 import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
@@ -54,7 +56,7 @@ public class AssignmentServiceTest {
     }
 
     @Test
-    public void testAddAssignment(){
+    public void testAddAssignment() throws ServiceException, DaoException {
          assignmentService.add(assignmentDto);
          verify(assignmentDAO, times(1)).add(assignment1);
     }

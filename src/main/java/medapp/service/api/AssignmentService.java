@@ -19,4 +19,8 @@ public interface AssignmentService {
     void deleteById(Long assignmentId);
 
     Long getPatientId(Long assId);
+
+    void deleteEventsByAssId(Long assId);
+
+    void generateEventsByAssId(Long assId);
 }

@@ -47,10 +47,10 @@ public class PatientController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/delete")
-    public ModelAndView delete(HttpServletRequest request) {
+    @GetMapping(value = "/disharge")
+    public ModelAndView disharge(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        patientService.delete(id);
+        patientService.disharge(id);
         return new ModelAndView("redirect:getAll");
     }
 

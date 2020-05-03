@@ -1,5 +1,6 @@
 package medapp.service.impl;
 
+import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.PatientDto;
 import medapp.model.Assignment;
@@ -16,6 +17,8 @@ public class PatientServiceImpl implements PatientService {
 
 
     private PatientDAO patientDAO;
+    @Autowired
+    private AssignmentDAO assignmentDAO;
 
     @Autowired
     public void setPatientDAO(PatientDAO patientDAO) {
@@ -27,6 +30,12 @@ public class PatientServiceImpl implements PatientService {
         patientDAO.addPatient(patient);
     }
 
+    /**
+     * Gett all patients and convert
+     * to patientDto.
+     *
+     * @return
+     */
     @Override
     @Transactional
     public List<PatientDto> getAll() {
@@ -45,6 +54,13 @@ public class PatientServiceImpl implements PatientService {
         return list;
     }
 
+    /**
+     * Get patient by patient's id
+     * and convert to patientDto.
+     *
+     * @param theId
+     * @return
+     */
     @Override
     @Transactional
     public PatientDto getById(Long theId) {
@@ -59,21 +75,40 @@ public class PatientServiceImpl implements PatientService {
         return new PatientDto();
     }
 
+    /**
+     * Change patient's status and delete all assignments
+     * and events of this patient.
+     *
+     * @param patientId
+     */
     @Override
     @Transactional
-    public void delete(Long patientId) {
+    public void disharge(Long patientId) {
         Patient patient = patientDAO.getById(patientId);
         patient.setStatus("discharged");
         patientDAO.update(patient);
-
+        List<Assignment> list = patientDAO.getAssignments(patientId);
+        for(Assignment a: list){
+            assignmentDAO.delete(a.getId());
+        }
     }
 
+    /**
+     * Delete patient.
+     *
+     * @param patientId
+     */
     @Override
     @Transactional
     public void clear(Long patientId) {
         patientDAO.clear(patientId);
     }
 
+    /**
+     * Update patient.
+     *
+     * @param patientDto
+     */
     @Override
     @Transactional
     public void update(PatientDto patientDto) {
@@ -86,11 +121,23 @@ public class PatientServiceImpl implements PatientService {
         patientDAO.update(p);
     }
 
+    /**
+     * Get all assignment of this patient.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<Assignment> getAssignments(Long id) {
         return patientDAO.getAssignments(id);
     }
 
+    /**
+     * Get all patients.
+     *
+     * @return
+     */
+    @Override
     public List<Patient> getAllPatients(){
         return patientDAO.getAll();
     }

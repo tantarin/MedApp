@@ -104,7 +104,7 @@
                         <a type="submit" class="btn btn-default" id="${patient.id}"  onclick="Update(id)">
                             <i class="material-icons">edit</i>
                         </a>
-                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/delete?id=<c:out value='${patient.id}' />">
+                        <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/disharge?id=<c:out value='${patient.id}' />">
                             <i class="material-icons">clear</i>
                         </a>
                         <a type="submit" class="btn btn-default" href="${pageContext.request.contextPath}/patients/assignments?id=<c:out value='${patient.id}'/>">

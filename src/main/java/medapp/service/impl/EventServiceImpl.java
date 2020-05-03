@@ -46,6 +46,12 @@ public class EventServiceImpl implements EventService {
         eventDAO.addEvent(event);
     }
 
+    /**
+     * Get all events through dao.
+     *
+     * @return
+     * @throws JMSException
+     */
     @Override
     @Transactional
     public List<Event> getAll() throws JMSException {
@@ -53,11 +59,24 @@ public class EventServiceImpl implements EventService {
         return eventDAO.getAll();
     }
 
+    /**
+     * Get event by event's id through dao.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Event getById(Long id) {
         return eventDAO.getById(id);
     }
 
+    /**
+     * Filter table of events by Patient's last name
+     * or by by day or by time.
+     *
+     * @param filterDto
+     * @return List<EventDto>
+     */
     @Override
     public List<EventDto> filter(FilterDto filterDto) {
         List<Event> events = eventDAO.getAll();
@@ -79,6 +98,11 @@ public class EventServiceImpl implements EventService {
         return eventDtos;
     }
 
+    /**
+     * Update Event when add new comment to event.
+     *
+     * @param eventDto
+     */
     @Override
     @Transactional
     public void update(EventDto eventDto) {
@@ -88,6 +112,12 @@ public class EventServiceImpl implements EventService {
         eventDAO.update(e);
     }
 
+    /**
+     * Convert all events to eventDtos
+     * and send to queue.
+     *
+     * @throws JMSException
+     */
     @Override
     @Transactional
     public void sendUpdatedEvents() throws JMSException {
@@ -107,6 +137,13 @@ public class EventServiceImpl implements EventService {
         jsmClient.sendListEvents(eventDtoList);
     }
 
+    /**
+     * When edit patient last name,
+     * then also update patient's last name in
+     * table of events.
+     *
+     * @param patientId
+     */
     @Override
     @Transactional
     public void updateLastNameEvent(Long patientId) {

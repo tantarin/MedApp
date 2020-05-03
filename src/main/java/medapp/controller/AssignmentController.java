@@ -1,9 +1,7 @@
 package medapp.controller;
 
-import medapp.activemq.JmsClient;
 import medapp.dto.AssignmentDto;
-import medapp.dto.EventDto;
-import medapp.model.Event;
+import medapp.exceptions.ServiceException;
 import medapp.service.api.AssignmentService;
 import medapp.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,14 @@ public class AssignmentController {
     @Autowired
     private EventService eventService;
 
+    /**
+     * Displaying the jsp page "addAssignment"
+     * at the url address http://localhost:8080/add?id=?
+     * and passing the object new AssignmentDto() there
+     *
+     * @param request
+     * @return model
+     */
     @GetMapping(value = "/add")
     public ModelAndView add(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
@@ -35,8 +41,20 @@ public class AssignmentController {
         return model;
     }
 
+    /**
+     * send assignmentDto data from client
+     * to the server and send
+     * it to the assignmentService.
+     * Then update the list of events.
+     *
+     *
+     * @param assignmentDto
+     * @return ModelandView
+     * @throws JMSException
+     * @throws ServiceException
+     */
     @PostMapping(value = "/add")
-    public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException {
+    public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException, ServiceException {
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
         eventService.sendUpdatedEvents();
@@ -44,6 +62,10 @@ public class AssignmentController {
     }
 
     /**
+     * Displaying the jsp page "editAssignment"
+     * at the url address http://localhost:8080/edit?id=?
+     * and passing the object AssignmentDto
+     * from database there
      *
      * @return
      */
@@ -56,6 +78,12 @@ public class AssignmentController {
         return model;
     }
 
+    /**
+     * update AsssignmentDto
+     *
+     * @param assignmentDto
+     * @return ModelAndView
+     */
     @PostMapping(value = "/edit")
     public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) {
         assignmentDto.setId(id);
@@ -64,6 +92,13 @@ public class AssignmentController {
         return new ModelAndView("redirect:/patients/assignments?id="+patientId);
     }
 
+    /**
+     * delete Assignment and update table of Events
+     *
+     * @param request
+     * @return
+     * @throws JMSException
+     */
     @GetMapping(value = "/delete")
     public ModelAndView delete(HttpServletRequest request) throws JMSException {
         id = Long.parseLong(request.getParameter("id"));

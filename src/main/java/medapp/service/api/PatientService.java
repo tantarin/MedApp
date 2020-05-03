@@ -14,7 +14,7 @@ public interface PatientService {
 
     PatientDto getById(Long theId);
 
-    void delete(Long theId);
+    void disharge(Long theId);
 
     void clear(Long patientId);
 
