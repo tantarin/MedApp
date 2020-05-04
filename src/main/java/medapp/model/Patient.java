@@ -1,7 +1,8 @@
 package medapp.model;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 @Entity
 @Data
 @Table
+@ToString
+@NoArgsConstructor
 public class Patient {
 
     @Id
@@ -34,23 +37,9 @@ public class Patient {
     @Column
     private String doctor;
 
-    public Patient() {
-    }
-
     public Patient(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
-
-
 }

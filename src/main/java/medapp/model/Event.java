@@ -1,6 +1,8 @@
 package medapp.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table
+@ToString
+@NoArgsConstructor
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,26 +37,9 @@ public class Event {
     @Column
     String comments;
 
-    public Event() {
-    }
-
-
     public Event(Long id, String patientName, Assignment assignment) {
         this.id = id;
         this.patientName = patientName;
         this.assignment = assignment;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
-                ", assignment=" + assignment +
-                ", status='" + status + '\'' +
-                ", patientName='" + patientName + '\'' +
-                ", comments='" + comments + '\'' +
-                '}';
     }
 }

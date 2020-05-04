@@ -1,18 +1,11 @@
 package medapp;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
-
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
 import medapp.exceptions.DaoException;
 import medapp.exceptions.ServiceException;
 import medapp.model.Assignment;
-import org.junit.Assert.*;
 import medapp.model.Patient;
 import medapp.service.impl.AssignmentServiceImpl;
 import org.junit.Before;
@@ -21,9 +14,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import javax.inject.Inject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AssignmentServiceTest {

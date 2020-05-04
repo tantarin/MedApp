@@ -1,10 +1,6 @@
 package medapp;
 
 
-import medapp.controller.EventController;
-
-import static org.junit.Assert.assertEquals;
-
 import medapp.dao.api.EventDAO;
 import medapp.model.Assignment;
 import medapp.model.Event;
@@ -16,11 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.inject.Inject;
 import javax.jms.JMSException;
-
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

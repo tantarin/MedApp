@@ -24,5 +24,4 @@ public class UserDto {
     @NotEmpty
     private String email;
 
-    // standard getters and setters
 }

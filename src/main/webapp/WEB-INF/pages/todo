@@ -54,7 +54,7 @@
 	Think how to fix it
 !!!16. If you use lombok do not use toString(), Constructors and so on.
 	Read the documentation about the lombok annotations you use and clean your models and dtos
-!!!17. Remove class Main from the model folder
+!!!17. fixed Remove class Main from the model folder
 18. fixed REmove all unused imports
 !!!19. fixed Explain the method:
 		    @Override

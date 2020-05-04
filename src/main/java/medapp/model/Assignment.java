@@ -1,15 +1,17 @@
 package medapp.model;
 
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table
 @Data
+@ToString
+@NoArgsConstructor
 public class Assignment {
 
     @Id
@@ -71,9 +73,6 @@ public class Assignment {
                 ", events=" + events +
                 ", patient=" + patient +
                 '}';
-    }
-
-    public Assignment() {
     }
 
     public Assignment(Long id, String timePattern, Patient patient, String dateFrom, String dateTo) {
