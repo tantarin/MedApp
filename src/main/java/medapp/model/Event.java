@@ -37,9 +37,10 @@ public class Event {
     }
 
 
-    public Event(Long id, String patientName) {
+    public Event(Long id, String patientName, Assignment assignment) {
         this.id = id;
         this.patientName = patientName;
+        this.assignment = assignment;
     }
 
     @Override

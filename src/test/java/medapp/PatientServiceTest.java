@@ -2,6 +2,7 @@ package medapp;
 
 
 import medapp.dao.api.PatientDAO;
+import medapp.dto.PatientDto;
 import medapp.model.Patient;
 import medapp.service.impl.PatientServiceImpl;
 import org.junit.Before;
@@ -59,19 +60,18 @@ public class PatientServiceTest {
     @Test
     public void deletePatientTest() {
         patientDAO.clear(1L);
-        when(patientDAO.getById(patient1.getId())).thenReturn(null);
     }
 
     @Test
     public void updatePatientTest() {
         patient2.setId(3L);
         patientDAO.update(patient2);
-        when(patientDAO.getById(3L)).thenReturn(patient2);
+    
     }
 
     @Test
     public void getAllPatientsTest() {
-        List<Patient> list = patientService.getAllPatients();
+        List<PatientDto> list = patientService.getAllPatients();
         assertEquals(2, list.size());
         verify(patientDAO, times(1)).getAll();
     }

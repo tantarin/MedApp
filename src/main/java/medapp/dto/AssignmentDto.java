@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 public class AssignmentDto {
 
-    public AssignmentDto(Long id, String type, Long patientId) {
+    public AssignmentDto(Long id, String[] weeks, Long patientId) {
         this.id = id;
-        this.type = type;
+        this.weeks = weeks;
         this.patientId = patientId;
     }
     public AssignmentDto(){

@@ -6,12 +6,14 @@ import medapp.controller.EventController;
 import static org.junit.Assert.assertEquals;
 
 import medapp.dao.api.EventDAO;
+import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.service.impl.EventServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.inject.Inject;
@@ -26,7 +28,7 @@ public class EventServiceTest {
 
     private static Event event;
 
-    @Inject
+    @Mock
     EventDAO eventDAO;
 
     @InjectMocks
@@ -34,7 +36,8 @@ public class EventServiceTest {
 
     @Before
     public void init() {
-        event = new Event(1L, "Ivanov");
+        event = new Event(1L, "Ivanov", new Assignment());
+        when(eventDAO.getById(1L)).thenReturn(event);
     }
 
     @Test
@@ -52,7 +55,7 @@ public class EventServiceTest {
     @Test
     public void deleteEventTest() {
         eventDAO.deleteByAssignmentId(1L);
-        when(eventDAO.getByAssignmentId(1L)).thenReturn(null);
+
     }
 
     @Test

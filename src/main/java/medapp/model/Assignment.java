@@ -76,9 +76,12 @@ public class Assignment {
     public Assignment() {
     }
 
-    public Assignment(Long id, String type) {
+    public Assignment(Long id, String timePattern, Patient patient, String dateFrom, String dateTo) {
         this.id = id;
-        this.type = type;
+        this.timePattern = timePattern;
+        this.patient = patient;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
     }
 
 }

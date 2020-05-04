@@ -12,7 +12,7 @@ public interface AssignmentService {
 
     AssignmentDto getById(Long id);
 
-    void add(AssignmentDto assignmentDto) throws ServiceException;
+    boolean add(AssignmentDto assignmentDto) throws ServiceException;
 
     void update(AssignmentDto assignment);
 

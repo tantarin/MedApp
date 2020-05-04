@@ -1,5 +1,7 @@
 package medapp;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -10,15 +12,15 @@ import medapp.dto.AssignmentDto;
 import medapp.exceptions.DaoException;
 import medapp.exceptions.ServiceException;
 import medapp.model.Assignment;
-import medapp.model.Event;
+import org.junit.Assert.*;
 import medapp.model.Patient;
 import medapp.service.impl.AssignmentServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,56 +28,54 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class AssignmentServiceTest {
 
-    private static Assignment assignment1;
-    private static Assignment assignment2;
+    private static Assignment assignment;
     private static AssignmentDto assignmentDto;
     private static Patient patient;
     private static List<Assignment> assignmentList;
 
-    @Inject
+    @Mock
     PatientDAO patientDAO;
 
-    @Inject
+    @Mock
     AssignmentDAO assignmentDAO;
 
     @InjectMocks
     AssignmentServiceImpl assignmentService;
 
     @Before
-    public void init() {
-        assignment1 = new Assignment(1L, "Fisioterapy");
-        assignment2 = new Assignment(2L, "Massage");
-        assignmentDto = new AssignmentDto(1L, "Fisioterapy", 1L);
+    public void init() throws DaoException {
         patient = new Patient(1L, "Ivan", "Ivanov");
+        assignment = new Assignment(1L, "1 2", patient, "2020-05-04","2020-06-04");
+        assignmentDto = new AssignmentDto(1L, new String[]{"10","20"}, 1L);
         assignmentList = new ArrayList<>();
-        assignmentList.add(assignment1);
-        assignmentList.add(assignment2);
+        assignmentList.add(assignment);
         when(patientDAO.getById(1L)).thenReturn(patient);
         when(assignmentDAO.getAll(patient.getId())).thenReturn(assignmentList);
-        when(assignmentDAO.getById(1L)).thenReturn(assignment1);
-
+        when(assignmentDAO.getById(1L)).thenReturn(assignment);
+        when(assignmentDAO.add(any())).thenReturn(assignment);
+       // doNothing().when(assignmentService).generateEventsByAssId(1L);
     }
 
     @Test
     public void testAddAssignment() throws ServiceException, DaoException {
-        assignmentService.add(assignmentDto);
-        verify(assignmentDAO, times(1)).add(assignment1);
+        boolean added = assignmentService.add(assignmentDto);
+        assertThat(added, is(true));
     }
 
     @Test
     public void getAssignmentByIdTest() {
         assignmentService.getById(1L);
-        assertEquals("Fisioterapy", assignment1.getType());
+        assertEquals("1 2", assignment.getTimePattern());
     }
 
     @Test
     public void testDeleteAssignment() {
         assignmentDAO.delete(1L);
-        when(assignmentDAO.getById(1L)).thenReturn(null);
+
     }
 
     @Test
     public void getAllAssignmentsByPatientTest() {
-        assertEquals(assignmentService.getAll(patient.getId()), assignmentList);
+        assertEquals(assignmentService.getAll(patient.getId()).size(), assignmentList.size());
     }
 }

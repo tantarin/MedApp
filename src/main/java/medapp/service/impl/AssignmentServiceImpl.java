@@ -56,12 +56,14 @@ public class AssignmentServiceImpl implements AssignmentService {
      */
     @Override
     @Transactional
-    public void add(AssignmentDto assignmentDto) throws ServiceException {
+    public boolean add(AssignmentDto assignmentDto) throws ServiceException {
         try {
             Patient patient = patientDAO.getById(assignmentDto.getPatientId());
             Assignment assignment = convertDtoToAssignment(new Assignment(), assignmentDto);
-            assignmentDAO.add(assignment);
-            generateEventsByAssId(assignment.getId());
+            assignment.setPatient(patientDAO.getById(assignmentDto.getPatientId()));
+            Assignment a = assignmentDAO.add(assignment);
+            generateEventsByAssId(a.getId());
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(ErrorService.DATABASE_EXCEPTION, e);
         }
