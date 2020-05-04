@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
-import static medapp.config.ApplicationConstant.*;
+import static medapp.constants.ApplicationConstant.*;
 
 
 @Configuration

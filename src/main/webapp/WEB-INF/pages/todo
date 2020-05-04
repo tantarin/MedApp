@@ -3,14 +3,14 @@
 	Do not commit redundant files
 !!!2. Exceptions
 !!!3. Tests
-4. Utils folder should named from the small letter
-5. Constants and enums are not utils. Utils are the methods with some logic.
+4. fixed Utils folder should named from the small letter
+5. fixed Constants and enums are not utils. Utils are the methods with some logic.
 	They're like helper classes
-6.  Enum Type unused
-7. All public methods should be documented except for the getter/setter
+6. fixed Enum Type unused
+7. fixed All public methods should be documented except for the getter/setter
 !!!8. AssignmentServiceImpl.add().
-	8a. Assignment a = new Assignment(); It's a bad case to call a var without meaning
-	All vars should be named so they described what they store
+	 fixed 8a. Assignment a = new Assignment(); It's a bad case to call a var without meaning
+	fixed All vars should be named so they described what they store
 	Assignment assignment = new Assignment();
 	8b. Use converter like object mapper or dozer mapper instead of manual convertion.
 		!!!For all the such cases
@@ -41,8 +41,8 @@
 		Think how to fix it
 	12b. Use converter like object mapper or dozer mapper instead of manual convertion.
 		!!!For all the such cases
-13. Rename MyUserDetailService to AppUserDetailService. To use my words is not well
-14. fixed All the strings and numbers which used everywhere in the project or got ont from db could
+13. fixed Rename MyUserDetailService to AppUserDetailService. To use my words is not well
+14. fixed fixed All the strings and numbers which used everywhere in the project or got ont from db could
 	be stored in the separated Constans file or enum. For example, for Patient statuses like "discharged"
 
 	enum PatientStatus {

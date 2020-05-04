@@ -4,14 +4,13 @@ import medapp.dto.AssignmentDto;
 import medapp.exceptions.ServiceException;
 import medapp.service.api.AssignmentService;
 import medapp.service.api.EventService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
 
 @RestController
 @RequestMapping("/assignments")
@@ -73,9 +72,10 @@ public class AssignmentController {
     @GetMapping(value = "/edit")
     public ModelAndView edit(HttpServletRequest request) {
         id = Long.parseLong(request.getParameter("id"));
-        AssignmentDto ass = assignmentService.getById(id);
+        AssignmentDto assignmentDto = assignmentService.getById(id);
+   //     if(assignmentDto == null) throw new AssignmentNotFoundException(id);
         ModelAndView model = new ModelAndView("editAssignment");
-        model.addObject("assignmentDto", ass);
+        model.addObject("assignmentDto", assignmentDto);
         return model;
     }
 

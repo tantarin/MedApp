@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
          pageEncoding="US-ASCII" isErrorPage="true" %>
 <html>
@@ -6,10 +7,13 @@
     <title>Error Page</title>
 </head>
 <body>
-<font color="red">Error: <%=exception.getMessage() %>
-</font><br>
 
-Hi There, error code is <%=response.getContentType() %><br>
-Please go to <a href="/patients/getAll">home page</a>
+
+<div class="inner cover">
+    <h1 class="cover-heading">Something wrong.</h1>
+    <p class="lead"><spring:message text="${exception}" javaScriptEscape="false"/></p>
+</div>
+
+
 </body>
 </html>

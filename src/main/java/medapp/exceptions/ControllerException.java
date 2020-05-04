@@ -1,21 +1,21 @@
 package medapp.exceptions;
 
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
-public class ControllerException extends Exception {
+@ControllerAdvice
+class ControllerException {
+    public static final String DEFAULT_ERROR_VIEW = "error";
 
-    private final ErrorController error;
-
-    public ControllerException(ErrorController error, Throwable cause) {
-        super(error.getMessage(), cause);
-        this.error = error;
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView
+    defaultErrorHandler(Exception e) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", e.getMessage());
+        mav.setViewName(DEFAULT_ERROR_VIEW);
+        return mav;
     }
 
-    public ControllerException(ErrorController error) {
-        this.error = error;
-    }
 
-    public ErrorController getError() {
-        return error;
-
-    }
 }

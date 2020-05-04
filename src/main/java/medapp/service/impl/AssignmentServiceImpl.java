@@ -1,6 +1,6 @@
 package medapp.service.impl;
 
-import medapp.constants.Constants;
+import medapp.constants.ApplicationConstant;
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
@@ -173,8 +173,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                     Event event = new Event();
                     event.setAssignment(a);
                     event.setPatientName(patient.getLastName());
-                    event.setStatus(Constants.EVENT_STATUS_SHEDULED);
-                    event.setComments(Constants.DEFAULT_COMMENTS);
+                    event.setStatus(ApplicationConstant.EVENT_STATUS_SHEDULED);
+                    event.setComments(ApplicationConstant.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getTime1());
                     eventDAO.addEvent(event);
@@ -183,8 +183,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                     Event event = new Event();
                     event.setAssignment(a);
                     event.setPatientName(patient.getLastName());
-                    event.setStatus(Constants.EVENT_STATUS_SHEDULED);
-                    event.setComments(Constants.DEFAULT_COMMENTS);
+                    event.setStatus(ApplicationConstant.EVENT_STATUS_SHEDULED);
+                    event.setComments(ApplicationConstant.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getTime2());
                     eventDAO.addEvent(event);
@@ -193,8 +193,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                     Event event = new Event();
                     event.setAssignment(a);
                     event.setPatientName(patient.getLastName());
-                    event.setStatus(Constants.EVENT_STATUS_SHEDULED);
-                    event.setComments(Constants.DEFAULT_COMMENTS);
+                    event.setStatus(ApplicationConstant.EVENT_STATUS_SHEDULED);
+                    event.setComments(ApplicationConstant.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getTime3());
                     eventDAO.addEvent(event);

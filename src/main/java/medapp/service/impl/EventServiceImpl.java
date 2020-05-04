@@ -1,7 +1,7 @@
 package medapp.service.impl;
 
 import medapp.activemq.JmsClient;
-import medapp.constants.Constants;
+import medapp.constants.ApplicationConstant;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.EventDto;
@@ -84,8 +84,8 @@ public class EventServiceImpl implements EventService {
     public List<EventDto> filter(FilterDto filterDto) {
         List<Event> events = eventDAO.getAll();
         if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
-        if (!filterDto.getByDay().equals(Constants.NO_FILTER)) events = eventDAO.filterByDate();
-        if (!filterDto.getByHour().equals(Constants.NO_FILTER)) events = eventDAO.filterByHour();
+        if (!filterDto.getByDay().equals(ApplicationConstant.NO_FILTER)) events = eventDAO.filterByDate();
+        if (!filterDto.getByHour().equals(ApplicationConstant.NO_FILTER)) events = eventDAO.filterByHour();
         List<EventDto> eventDtos = new ArrayList<>();
         for (Event e : events) {
             EventDto eventDto = convertEventToEventDto(e);
