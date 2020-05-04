@@ -41,7 +41,7 @@ public class PatientServiceTest {
         patients.add(patient1);
         patients.add(patient2);
         when(patientDAO.getAll()).thenReturn(patients);
-        when(patientDAO.getById(1L)).thenReturn(patient1);
+        when(patientDAO.getById(1L)).thenReturn(patient1).thenReturn(null);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PatientServiceTest {
     public void updatePatientTest() {
         patient2.setId(3L);
         patientDAO.update(patient2);
-    
+
     }
 
     @Test

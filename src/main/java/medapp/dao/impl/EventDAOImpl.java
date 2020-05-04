@@ -3,14 +3,8 @@ package medapp.dao.impl;
 import medapp.dao.api.EventDAO;
 import medapp.model.Event;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.ejb.*;
-
 import javax.persistence.*;
-import javax.transaction.UserTransaction;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

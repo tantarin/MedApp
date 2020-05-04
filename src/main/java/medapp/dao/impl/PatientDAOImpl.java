@@ -5,7 +5,6 @@ import medapp.model.Assignment;
 import medapp.model.Patient;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.ejb.Stateful;
 import javax.persistence.*;
 import java.util.List;

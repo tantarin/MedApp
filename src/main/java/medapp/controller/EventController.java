@@ -35,24 +35,28 @@ public class EventController {
 
     @GetMapping("/getAll")
     public ModelAndView getAll() throws JMSException {
-        return commonCode(new FilterDto(), new EventDto());
+        ModelAndView model = new ModelAndView("events");
+        model.addObject("listEvents", eventService.filter(new FilterDto()));
+        model.addObject("filterDto", new FilterDto());
+        model.addObject("eventDto", new EventDto());
+        return model;
     }
 
 
     @PostMapping("/getAll")
     public ModelAndView filter(@ModelAttribute("filter") FilterDto filterDto, @ModelAttribute("eventDto") EventDto eventDto) throws JMSException {
-        return commonCode(filterDto, eventDto);
+        ModelAndView model = new ModelAndView("events");
+        model.addObject("listEvents", eventService.filter(filterDto));
+        model.addObject("filterDto", filterDto);
+        model.addObject("eventDto", eventDto);
+        return model;
     }
 
     @PostMapping("/comments")
-    public ModelAndView getComments(@ModelAttribute("filter") FilterDto filterDto, @ModelAttribute("eventDto") EventDto eventDto, HttpServletRequest request) throws JMSException {
+    public ModelAndView addComments(@ModelAttribute("filter") FilterDto filterDto, @ModelAttribute("eventDto") EventDto eventDto, HttpServletRequest request) throws JMSException {
         Long id = Long.parseLong(request.getParameter("id"));
         eventDto.setId(id);
         eventService.update(eventDto);
-        return commonCode(filterDto, eventDto);
-    }
-
-    private ModelAndView commonCode(FilterDto filterDto, EventDto eventDto) throws JMSException {
         ModelAndView model = new ModelAndView("events");
         model.addObject("listEvents", eventService.filter(filterDto));
         model.addObject("filterDto", filterDto);

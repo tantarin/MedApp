@@ -61,19 +61,8 @@ public class PatientController {
     @GetMapping("/getAll")
     public ModelAndView getAll() {
         List<PatientDto> listPatients = patientService.getAll();
-        List<Patient> patients = new ArrayList<>();
-        for (PatientDto patientDto : listPatients) {
-            Patient patient = new Patient();
-            patient.setId(patientDto.getId());
-            patient.setFirstName(patientDto.getFirstName());
-            patient.setDoctor(patientDto.getDoctor());
-            patient.setEnsNumber(patientDto.getEnsNumber());
-            patient.setLastName(patientDto.getLastName());
-            patient.setStatus(patientDto.getStatus());
-            patients.add(patient);
-        }
         ModelAndView modelAndView = new ModelAndView("patients");
-        modelAndView.addObject("patients", patients);
+        modelAndView.addObject("patients", listPatients);
         modelAndView.addObject("patient", new Patient());
         return modelAndView;
     }

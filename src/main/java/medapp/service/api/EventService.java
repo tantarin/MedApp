@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EventService {
     void addEvent(Event event);
-    List<EventDto>  getAll() throws JMSException;
+    List<EventDto> getAll() throws JMSException;
     EventDto getById(Long id);
     List<EventDto> filter(FilterDto filterDto);
     void update(EventDto eventDto);
