@@ -55,8 +55,8 @@
 !!!16. If you use lombok do not use toString(), Constructors and so on.
 	Read the documentation about the lombok annotations you use and clean your models and dtos
 !!!17. Remove class Main from the model folder
-18. REmove all unused imports
-!!!19. Explain the method:
+18. fixed REmove all unused imports
+!!!19. fixed Explain the method:
 		    @Override
     public void add(Assignment assignment) {
         entityManager.persist(assignment);
