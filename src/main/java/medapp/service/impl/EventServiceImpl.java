@@ -1,27 +1,21 @@
 package medapp.service.impl;
 
 import medapp.activemq.JmsClient;
-import medapp.dao.api.AssignmentDAO;
+import medapp.constants.Constants;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.EventDto;
 import medapp.dto.FilterDto;
 import medapp.model.Assignment;
 import medapp.model.Event;
-import medapp.model.Patient;
 import medapp.service.api.EventService;
-import org.apache.log4j.spi.TriggeringEventEvaluator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.JMSException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -90,8 +84,8 @@ public class EventServiceImpl implements EventService {
     public List<EventDto> filter(FilterDto filterDto) {
         List<Event> events = eventDAO.getAll();
         if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
-        if (!filterDto.getByDay().equals("no filter")) events = eventDAO.filterByDate();
-        if (!filterDto.getByHour().equals("no filter")) events = eventDAO.filterByHour();
+        if (!filterDto.getByDay().equals(Constants.NO_FILTER)) events = eventDAO.filterByDate();
+        if (!filterDto.getByHour().equals(Constants.NO_FILTER)) events = eventDAO.filterByHour();
         List<EventDto> eventDtos = new ArrayList<>();
         for (Event e : events) {
             EventDto eventDto = convertEventToEventDto(e);

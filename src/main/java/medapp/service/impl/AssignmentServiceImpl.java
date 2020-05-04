@@ -1,5 +1,6 @@
 package medapp.service.impl;
 
+import medapp.constants.Constants;
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
@@ -11,7 +12,6 @@ import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
 import medapp.service.api.AssignmentService;
-import medapp.service.api.EventService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -173,8 +173,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                     Event event = new Event();
                     event.setAssignment(a);
                     event.setPatientName(patient.getLastName());
-                    event.setStatus("Sheduled");
-                    event.setComments("reason");
+                    event.setStatus(Constants.EVENT_STATUS_SHEDULED);
+                    event.setComments(Constants.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getTime1());
                     eventDAO.addEvent(event);
@@ -183,8 +183,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                     Event event = new Event();
                     event.setAssignment(a);
                     event.setPatientName(patient.getLastName());
-                    event.setStatus("Sheduled");
-                    event.setComments("reason");
+                    event.setStatus(Constants.EVENT_STATUS_SHEDULED);
+                    event.setComments(Constants.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getTime2());
                     eventDAO.addEvent(event);
@@ -193,8 +193,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                     Event event = new Event();
                     event.setAssignment(a);
                     event.setPatientName(patient.getLastName());
-                    event.setStatus("Sheduled");
-                    event.setComments("reason");
+                    event.setStatus(Constants.EVENT_STATUS_SHEDULED);
+                    event.setComments(Constants.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getTime3());
                     eventDAO.addEvent(event);

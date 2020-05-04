@@ -1,5 +1,6 @@
 package medapp.service.impl;
 
+import medapp.constants.Constants;
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.PatientDto;
@@ -73,7 +74,7 @@ public class PatientServiceImpl implements PatientService {
     @Transactional
     public void disharge(Long patientId) {
         Patient patient = patientDAO.getById(patientId);
-        patient.setStatus("discharged");
+        patient.setStatus(Constants.STATUS_DISHARGED);
         patientDAO.update(patient);
         List<Assignment> list = patientDAO.getAssignments(patientId);
         for (Assignment a : list) {
@@ -136,6 +137,12 @@ public class PatientServiceImpl implements PatientService {
         return dtoList;
     }
 
+    /**
+     * Convert Patient entity to dto
+     *
+     * @param patient
+     * @return PatientDto
+     */
     public PatientDto convertPatientToDto(Patient patient){
         PatientDto patientDto = new PatientDto();
         patientDto.setId(patient.getId());

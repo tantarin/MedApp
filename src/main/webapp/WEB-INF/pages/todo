@@ -42,7 +42,7 @@
 	12b. Use converter like object mapper or dozer mapper instead of manual convertion.
 		!!!For all the such cases
 13. Rename MyUserDetailService to AppUserDetailService. To use my words is not well
-14. All the strings and numbers which used everywhere in the project or got ont from db could
+14. fixed All the strings and numbers which used everywhere in the project or got ont from db could
 	be stored in the separated Constans file or enum. For example, for Patient statuses like "discharged"
 
 	enum PatientStatus {
@@ -52,7 +52,7 @@
 
 !!!15. PatientServiceImpl.update() You don't need to get the patient to update it.
 	Think how to fix it
-!!!16. If you use lombok do not use toString(), Constructors and so on.
+!!!16. fixed If you use lombok do not use toString(), Constructors and so on.
 	Read the documentation about the lombok annotations you use and clean your models and dtos
 !!!17. fixed Remove class Main from the model folder
 18. fixed REmove all unused imports
