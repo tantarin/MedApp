@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -82,7 +80,7 @@ public class PatientController {
      * @return
      */
     @GetMapping("/assignments")
-    public ModelAndView getAssignments(HttpServletRequest request) {
+    public ModelAndView getAssignments(HttpServletRequest request) throws Exception {
         Long id = Long.valueOf(request.getParameter("id"));
         List<Assignment> listAssignments = patientService.getAssignments(id);
         ModelAndView modelAndView = new ModelAndView("assignments");

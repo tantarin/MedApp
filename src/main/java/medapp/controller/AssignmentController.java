@@ -1,7 +1,6 @@
 package medapp.controller;
 
 import medapp.dto.AssignmentDto;
-import medapp.exceptions.ServiceException;
 import medapp.service.api.AssignmentService;
 import medapp.service.api.EventService;
 import org.apache.log4j.Logger;
@@ -51,10 +50,9 @@ public class AssignmentController {
      * @param assignmentDto
      * @return ModelandView
      * @throws JMSException
-     * @throws ServiceException
      */
     @PostMapping(value = "/add")
-    public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException, ServiceException {
+    public ModelAndView add(@ModelAttribute("assignmentDto") AssignmentDto assignmentDto) throws JMSException {
         assignmentDto.setPatientId(id);
         assignmentService.add(assignmentDto);
         eventService.sendUpdatedEvents();
@@ -70,10 +68,9 @@ public class AssignmentController {
      * @return
      */
     @GetMapping(value = "/edit")
-    public ModelAndView edit(HttpServletRequest request) {
+    public ModelAndView edit(HttpServletRequest request) throws Exception {
         id = Long.parseLong(request.getParameter("id"));
         AssignmentDto assignmentDto = assignmentService.getById(id);
-   //     if(assignmentDto == null) throw new AssignmentNotFoundException(id);
         ModelAndView model = new ModelAndView("editAssignment");
         model.addObject("assignmentDto", assignmentDto);
         return model;

@@ -3,8 +3,6 @@ package medapp;
 import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
-import medapp.exceptions.DaoException;
-import medapp.exceptions.ServiceException;
 import medapp.model.Assignment;
 import medapp.model.Patient;
 import medapp.service.impl.AssignmentServiceImpl;
@@ -42,7 +40,7 @@ public class AssignmentServiceTest {
     AssignmentServiceImpl assignmentService;
 
     @Before
-    public void init() throws DaoException {
+    public void init(){
         patient = new Patient(1L, "Ivan", "Ivanov");
         assignment = new Assignment(1L, "1 2", patient, "2020-05-04","2020-06-04");
         assignmentDto = new AssignmentDto(1L, new String[]{"10","20"}, 1L);
@@ -56,7 +54,7 @@ public class AssignmentServiceTest {
     }
 
     @Test
-    public void testAddAssignment() throws ServiceException, DaoException {
+    public void testAddAssignment() {
         boolean added = assignmentService.add(assignmentDto);
         assertThat(added, is(true));
     }

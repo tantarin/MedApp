@@ -1,8 +1,6 @@
 package medapp.service.api;
 
 import medapp.dto.AssignmentDto;
-import medapp.exceptions.ServiceException;
-import medapp.model.Assignment;
 
 import java.util.List;
 
@@ -12,7 +10,7 @@ public interface AssignmentService {
 
     AssignmentDto getById(Long id);
 
-    boolean add(AssignmentDto assignmentDto) throws ServiceException;
+    boolean add(AssignmentDto assignmentDto);
 
     void update(AssignmentDto assignment);
 

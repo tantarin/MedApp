@@ -5,9 +5,6 @@ import medapp.dao.api.AssignmentDAO;
 import medapp.dao.api.EventDAO;
 import medapp.dao.api.PatientDAO;
 import medapp.dto.AssignmentDto;
-import medapp.exceptions.DaoException;
-import medapp.exceptions.ErrorService;
-import medapp.exceptions.ServiceException;
 import medapp.model.Assignment;
 import medapp.model.Event;
 import medapp.model.Patient;
@@ -56,17 +53,13 @@ public class AssignmentServiceImpl implements AssignmentService {
      */
     @Override
     @Transactional
-    public boolean add(AssignmentDto assignmentDto) throws ServiceException {
-        try {
+    public boolean add(AssignmentDto assignmentDto) {
             Patient patient = patientDAO.getById(assignmentDto.getPatientId());
             Assignment assignment = convertDtoToAssignment(new Assignment(), assignmentDto);
             assignment.setPatient(patientDAO.getById(assignmentDto.getPatientId()));
             Assignment a = assignmentDAO.add(assignment);
             generateEventsByAssId(a.getId());
             return true;
-        } catch (DaoException e) {
-            throw new ServiceException(ErrorService.DATABASE_EXCEPTION, e);
-        }
     }
 
     /**

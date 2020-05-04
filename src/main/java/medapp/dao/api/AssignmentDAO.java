@@ -1,6 +1,5 @@
 package medapp.dao.api;
 
-import medapp.exceptions.DaoException;
 import medapp.model.Assignment;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 
 public interface AssignmentDAO {
 
-    Assignment add(Assignment assignment) throws DaoException;
+    Assignment add(Assignment assignment);
     List<Assignment> getAll(Long id);
     Assignment getById(Long id);
     void update(Assignment assignment);

@@ -50,10 +50,8 @@ public class LoginController {
 
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
     public ModelAndView accesssDenied() {
-
         ModelAndView model = new ModelAndView();
         model.addObject("msg", "You do not have permission to access this page!");
-
         model.setViewName("accessDenied");
         return model;
 
