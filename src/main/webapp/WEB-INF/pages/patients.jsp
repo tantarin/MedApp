@@ -62,6 +62,7 @@
                     <tr class="name-title width-users">
                         <td>Name</td>
                         <td>Last name</td>
+                        <td>Diagnosis</td>
                         <td>Ensurance number</td>
                         <td>Doctor</td>
                         <td>Status</td>
@@ -75,6 +76,9 @@
                         </td>
                         <td>
                             <form:input type="text" id="lname" maxlength="9" path="lastName"/>
+                        </td>
+                        <td>
+                            <form:input type="text" id="diagnosis" maxlength="9" path="diagnosis"/>
                         </td>
                         <td>
                             <form:input type="text" id="ens" alignn="left" path="ensNumber"/>
@@ -97,6 +101,9 @@
                             </td>
                             <td>
                                 <c:out value="${patient.lastName}"/>
+                            </td>
+                            <td>
+                                <c:out value="${patient.diagnosis}"/>
                             </td>
                             <td>
                                 <c:out value="${patient.ensNumber}"/>
@@ -146,6 +153,7 @@
         document.getElementById("ens").value = table.rows[rIndex].cells[2].innerHTML.replace(/\s/g, '');
         document.getElementById("doc").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');
         document.getElementById("st").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
+        document.getElementById("diagnosis").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
