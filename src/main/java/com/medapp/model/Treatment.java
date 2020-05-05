@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -24,5 +25,6 @@ public class Treatment {
     @Column
     String name;
 
-    
+    @OneToMany(mappedBy = "treatment", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Assignment> assignments;
 }

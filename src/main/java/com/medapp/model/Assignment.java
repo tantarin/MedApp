@@ -53,6 +53,10 @@ public class Assignment {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
+    @ManyToOne
+    @JoinColumn(name = "treatment_id")
+    private Treatment treatment;
+
     public Assignment(Long id, String timesPerWeek, Patient patient, String dateFrom, String dateTo) {
         this.id = id;
         this.timesPerWeek = timesPerWeek;

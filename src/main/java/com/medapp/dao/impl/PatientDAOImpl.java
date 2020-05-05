@@ -27,6 +27,7 @@ public class PatientDAOImpl implements PatientDAO {
     @Override
     @Transactional
     /**
+     * Add patient to database.
      *
      */
     public void addPatient(Patient patient) {
