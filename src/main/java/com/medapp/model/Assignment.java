@@ -2,7 +2,6 @@ package com.medapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
 @Entity
 @Table
 @Data
-@ToString
 @NoArgsConstructor
 public class Assignment {
 
@@ -65,4 +63,22 @@ public class Assignment {
         this.dateTo = dateTo;
     }
 
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", doze='" + doze + '\'' +
+                ", timesPerWeek='" + timesPerWeek + '\'' +
+                ", morningTime='" + morningTime + '\'' +
+                ", afternoonTime='" + afternoonTime + '\'' +
+                ", eveningTime='" + eveningTime + '\'' +
+                ", events=" + events +
+                ", patient=" + patient +
+                ", treatment=" + treatment +
+                '}';
+    }
 }

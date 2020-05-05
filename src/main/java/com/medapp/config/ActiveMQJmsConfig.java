@@ -6,7 +6,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 
 @Configuration
@@ -24,10 +26,16 @@ public class ActiveMQJmsConfig {
 
 
     @Bean
-    public JmsMessagingTemplate jmsTemplate() {
-        JmsMessagingTemplate messagingTemplate = new JmsMessagingTemplate();
+    public JmsTemplate jmsTemplate() {
+        JmsTemplate messagingTemplate = new JmsTemplate();
         messagingTemplate.setConnectionFactory(connectionFactory());
         messagingTemplate.setDefaultDestinationName("superqueue");
         return messagingTemplate;
+    }
+
+    @Bean
+    MessageConverter converter(){
+        return new SimpleMessageConverter();
+
     }
 }

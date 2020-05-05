@@ -30,7 +30,7 @@ public class EventServiceTest {
     EventServiceImpl eventService;
 
     @Before
-    public void init() {
+    public void init() throws JMSException {
         event = new Event(1L, "Ivanov", new Assignment());
         when(eventDAO.getById(1L)).thenReturn(event);
     }
@@ -42,13 +42,13 @@ public class EventServiceTest {
     }
 
     @Test
-    public void getEventTest() {
+    public void getEventTest() throws JMSException {
         eventService.getById(1L);
         assertEquals("Ivanov", event.getPatientName());
     }
 
     @Test
-    public void deleteEventTest() {
+    public void deleteEventTest() throws JMSException {
         eventDAO.deleteByAssignmentId(1L);
 
     }

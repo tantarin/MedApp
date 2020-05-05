@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class PatientController {
     }
 
     @PostMapping("/getAll")
-    public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) {
+    public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) throws JMSException {
         Long patientId = Long.parseLong(request.getParameter("id"));
         patientDto.setId(patientId);
         ModelAndView modelAndView = new ModelAndView("redirect: getAll");
@@ -80,6 +81,7 @@ public class PatientController {
         Long id = Long.valueOf(request.getParameter("id"));
         LOGGER.info("Get patients/assignments?id="+id);
         List<AssignmentDto> listAssignments = patientService.getAssignments(id);
+        eventService.sendUpdatedEvents();
         ModelAndView modelAndView = new ModelAndView("assignments");
         modelAndView.addObject("assignments", listAssignments);
         modelAndView.addObject("id", id);

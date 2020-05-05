@@ -5,6 +5,7 @@ import com.medapp.model.Event;
 import org.springframework.stereotype.Component;
 
 import javax.ejb.Stateful;
+import javax.jms.JMSException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -20,26 +21,25 @@ public class EventDAOImpl implements EventDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     public void addEvent(Event event) {
         entityManager.persist(event);
     }
 
     @Override
-    public void deleteByAssignmentId(Long assignmentId){
+    public void deleteByAssignmentId(Long assignmentId) throws JMSException {
         Query query = entityManager.createQuery("delete from Event e where e.assignment.id= :aId");
         query.setParameter("aId", assignmentId).executeUpdate();
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Event> getAll() {
+    public List<Event> getAll() throws JMSException {
         return entityManager.createQuery("FROM Event").getResultList();
     }
 
     @Override
-    public Event getById(Long id) {
+    public Event getById(Long id) throws JMSException {
         return  (Event) entityManager.find(Event.class,id);
     }
 
@@ -59,7 +59,7 @@ public class EventDAOImpl implements EventDAO {
      * @return
      */
     @Override
-    public List<Event> filterByHour() {
+    public List<Event> filterByHour() throws JMSException {
         LocalTime localTime = LocalTime.now();
         LocalTime plusHour = localTime.plusHours(1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -78,7 +78,7 @@ public class EventDAOImpl implements EventDAO {
      * @return
      */
     @Override
-    public List<Event> filterByPatient(String lastName) {
+    public List<Event> filterByPatient(String lastName) throws JMSException {
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.patientName= ?1");
         query.setParameter(1, lastName);
         return query.getResultList();
@@ -90,7 +90,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> getByAssignmentId(Long assId) {
+    public List<Event> getByAssignmentId(Long assId) throws JMSException {
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.assignment.id= ?1");
         query.setParameter(1, assId);
         return query.getResultList();

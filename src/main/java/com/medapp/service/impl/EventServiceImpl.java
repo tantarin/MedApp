@@ -9,6 +9,7 @@ import com.medapp.dto.FilterDto;
 import com.medapp.model.Assignment;
 import com.medapp.model.Event;
 import com.medapp.service.api.EventService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,9 @@ import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService {
+
+    private static final Logger LOGGER = Logger.getLogger(EventServiceImpl.class);
+
 
     EventDAO eventDAO;
     PatientDAO patientDAO;
@@ -49,9 +53,8 @@ public class EventServiceImpl implements EventService {
      * @throws JMSException
      */
     @Override
-    @Transactional
+   // @Transactional
     public List<EventDto> getAll() throws JMSException {
-        sendUpdatedEvents();
         List<Event> events = eventDAO.getAll();
         List<EventDto> eventDtoList = new ArrayList<>();
         for (Event e : events) {
@@ -68,7 +71,7 @@ public class EventServiceImpl implements EventService {
      * @return
      */
     @Override
-    public EventDto getById(Long id) {
+    public EventDto getById(Long id) throws JMSException {
         Event event = eventDAO.getById(id);
         return convertEventToEventDto(event);
     }
@@ -81,7 +84,7 @@ public class EventServiceImpl implements EventService {
      * @return List<EventDto>
      */
     @Override
-    public List<EventDto> filter(FilterDto filterDto) {
+    public List<EventDto> filter(FilterDto filterDto) throws JMSException {
         List<Event> events = eventDAO.getAll();
         if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
         if (!filterDto.getByDay().equals(ApplicationConstant.NO_FILTER)) events = eventDAO.filterByDate();
@@ -101,7 +104,7 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     @Transactional
-    public void update(EventDto eventDto) {
+    public void update(EventDto eventDto) throws JMSException {
         Event e = eventDAO.getById(eventDto.getId());
         e.setComments(eventDto.getComments());
         e.setStatus(eventDto.getStatus());
@@ -115,10 +118,10 @@ public class EventServiceImpl implements EventService {
      * @throws JMSException
      */
     @Override
-    @Transactional
     public void sendUpdatedEvents() throws JMSException {
         List<EventDto> eventDtoList = new ArrayList<>();
         List<Event> events = eventDAO.filterByDate();
+        LOGGER.info("send updated events");
         for (Event e : events) {
             EventDto eventDto = convertEventToEventDto(e);
             eventDtoList.add(eventDto);
@@ -135,7 +138,7 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     @Transactional
-    public void updateLastNameEvent(Long patientId) {
+    public void updateLastNameEvent(Long patientId) throws JMSException {
         String lastName = patientDAO.getById(patientId).getLastName();
         List<Assignment> assignmentList = patientDAO.getAssignments(patientId);
         for (Assignment a : assignmentList) {

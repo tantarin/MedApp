@@ -10,9 +10,9 @@ import java.util.List;
 public interface EventService {
     void addEvent(Event event);
     List<EventDto> getAll() throws JMSException;
-    EventDto getById(Long id);
-    List<EventDto> filter(FilterDto filterDto);
-    void update(EventDto eventDto);
+    EventDto getById(Long id) throws JMSException;
+    List<EventDto> filter(FilterDto filterDto) throws JMSException;
+    void update(EventDto eventDto) throws JMSException;
     void sendUpdatedEvents() throws JMSException;
-    void updateLastNameEvent(Long patientId);
+    void updateLastNameEvent(Long patientId) throws JMSException;
 }

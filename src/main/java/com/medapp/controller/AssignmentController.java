@@ -84,7 +84,7 @@ public class AssignmentController {
      * @return ModelAndView
      */
     @PostMapping(value = "/edit")
-    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) {
+    public ModelAndView edit(@ModelAttribute("assignment") AssignmentDto assignmentDto) throws JMSException {
         assignmentDto.setId(id);
         assignmentService.update(assignmentDto);
         Long patientId = assignmentService.getPatientId(id);
@@ -103,7 +103,7 @@ public class AssignmentController {
         id = Long.parseLong(request.getParameter("id"));
         Long patientId = assignmentService.getPatientId(id);
         assignmentService.deleteById(id);
-        eventService.sendUpdatedEvents();
+        LOGGER.info("send updated events from controller");
         return new ModelAndView("redirect:/patients/assignments?id=" + patientId);
     }
 }

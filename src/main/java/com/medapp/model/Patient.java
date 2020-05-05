@@ -2,7 +2,6 @@ package com.medapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
 @Entity
 @Data
 @Table
-@ToString
 @NoArgsConstructor
 public class Patient {
 
@@ -44,5 +42,19 @@ public class Patient {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", assignments=" + assignments +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", ensNumber='" + ensNumber + '\'' +
+                ", status='" + status + '\'' +
+                ", doctor='" + doctor + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
+                '}';
     }
 }

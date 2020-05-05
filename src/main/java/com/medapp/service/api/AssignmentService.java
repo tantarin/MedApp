@@ -2,6 +2,7 @@ package com.medapp.service.api;
 
 import com.medapp.dto.AssignmentDto;
 
+import javax.jms.JMSException;
 import java.util.List;
 
 public interface AssignmentService {
@@ -12,13 +13,13 @@ public interface AssignmentService {
 
     boolean add(AssignmentDto assignmentDto);
 
-    void update(AssignmentDto assignment);
+    void update(AssignmentDto assignment) throws JMSException;
 
-    void deleteById(Long assignmentId);
+    void deleteById(Long assignmentId) throws JMSException;
 
     Long getPatientId(Long assId);
 
-    void deleteEventsByAssId(Long assId);
+    void deleteEventsByAssId(Long assId) throws JMSException;
 
     void generateEventsByAssId(Long assId);
 }

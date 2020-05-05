@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jms.JMSException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class AssignmentServiceImpl implements AssignmentService {
      */
     @Override
     @Transactional
-    public void update(AssignmentDto assignmentDto) {
+    public void update(AssignmentDto assignmentDto) throws JMSException {
         Assignment assignment = assignmentDAO.getById(assignmentDto.getId());
         assignmentDAO.update(convertDtoToAssignment(assignment, assignmentDto));
         deleteEventsByAssId(assignment.getId());
@@ -85,7 +86,7 @@ public class AssignmentServiceImpl implements AssignmentService {
      */
     @Override
     @Transactional
-    public void deleteById(Long assignmentId) {
+    public void deleteById(Long assignmentId) throws JMSException {
         eventDAO.deleteByAssignmentId(assignmentId);
         assignmentDAO.delete(assignmentId);
     }
@@ -139,7 +140,7 @@ public class AssignmentServiceImpl implements AssignmentService {
      * @param assId
      */
     @Override
-    public void deleteEventsByAssId(Long assId) {
+    public void deleteEventsByAssId(Long assId) throws JMSException {
         eventDAO.deleteByAssignmentId(assId);
     }
 

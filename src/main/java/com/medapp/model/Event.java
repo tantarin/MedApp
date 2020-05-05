@@ -2,7 +2,6 @@ package com.medapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table
-@ToString
 @NoArgsConstructor
 public class Event {
     @Id
@@ -41,5 +39,18 @@ public class Event {
         this.id = id;
         this.patientName = patientName;
         this.assignment = assignment;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", assignment=" + assignment +
+                ", status='" + status + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", comments='" + comments + '\'' +
+                '}';
     }
 }

@@ -34,7 +34,6 @@ public class EventController {
     public ModelAndView getAll() throws JMSException {
         ModelAndView model = new ModelAndView("events");
         model.addObject("listEvents", eventService.filter(new FilterDto()));
-        eventService.sendUpdatedEvents();
         model.addObject("filterDto", new FilterDto());
         model.addObject("eventDto", new EventDto());
         return model;
