@@ -70,7 +70,7 @@ public class PatientServiceImpl implements PatientService {
     public PatientDto getById(Long theId) {
         Patient patient = patientDAO.getById(theId);
         PatientDto patientDto = convertPatientToDto(patient);
-        return new PatientDto();
+        return patientDto;
     }
 
     /**

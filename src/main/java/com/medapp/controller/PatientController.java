@@ -80,12 +80,15 @@ public class PatientController {
     @GetMapping("/assignments")
     public ModelAndView getAssignments(HttpServletRequest request) throws Exception {
         Long id = Long.valueOf(request.getParameter("id"));
+        String status = patientService.getById(id).getStatus();
         LOGGER.info("Get patients/assignments?id="+id);
+        LOGGER.info("Get status from patient controller: "+status);
         List<AssignmentDto> listAssignments = patientService.getAssignments(id);
         eventService.sendUpdatedEvents();
         ModelAndView modelAndView = new ModelAndView("assignments");
         modelAndView.addObject("assignments", listAssignments);
         modelAndView.addObject("id", id);
+        modelAndView.addObject("status", status);
         return modelAndView;
     }
 

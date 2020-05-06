@@ -43,7 +43,7 @@
         </div>
         <div class="col-xl-12 wrap">
             <div class="row">
-                <a class="btn btn-success btn-list"
+                <a id="b" class="btn btn-success btn-list"
                    href="${pageContext.request.contextPath}/assignments/add?id=<c:out value='${id}' />">Add</a> &nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="event-title">
                     <table id="table" class="table table-striped table-bordered">
@@ -108,5 +108,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
+<script>
+    let s = "${status}";
+    if(s === 'discharged'){
+        document.getElementById("b").setAttribute("disabled","disabled");
+     //   disabled="disabled"
+    }
+</script>
+<style type="text/css">
+    a[disabled="disabled"] {
+        pointer-events: none;
+    }
+</style>
 </html>
