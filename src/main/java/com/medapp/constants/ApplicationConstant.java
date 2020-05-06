@@ -10,7 +10,9 @@ public class ApplicationConstant {
     //for sservice layer
     public static final String STATUS_DISHARGED = "discharged";
     public static final String EVENT_STATUS_SHEDULED = "Scheduled";
+    public static final String EVENT_STATUS_CANCELLED = "Cancelled";
     public static final String DEFAULT_COMMENTS = "";
+    public static final String DISCHARGED_COMMENTS = "Patient discharged";
     public static final String NO_FILTER = "no filter";
 
 }

@@ -105,7 +105,7 @@
                                             <c:url value="/events/comments?id=${event.id}" var="all"/>
                                             <form:form action="${all}" method="post" modelAttribute="eventDto">
                                             <form:select id="${event.id}" class="btn btn-secondary dropdown-toggle"
-                                                         onchange="func(this.id, '${event.status}')" path="status">
+                                                         onchange="func(this.id, '${event.status}')" path="status" disabled="${event.comments == 'Patient discharged' ? 'true' : 'false'}" >
                                                 <option value="Cancelled" ${event.status == "Cancelled" ? 'selected="selected"' : ''}>Cancelled</option>
                                                 <option value="Done" ${event.status == "Done" ? 'selected="selected"' : ''}>Done</option>
                                                 <option value="Scheduled" ${event.status == "Scheduled" ? 'selected="selected"' : ''}>Scheduled</option>

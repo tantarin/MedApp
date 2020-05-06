@@ -2,10 +2,12 @@ package com.medapp.service.impl;
 
 import com.medapp.constants.ApplicationConstant;
 import com.medapp.dao.api.AssignmentDAO;
+import com.medapp.dao.api.EventDAO;
 import com.medapp.dao.api.PatientDAO;
 import com.medapp.dto.AssignmentDto;
 import com.medapp.dto.PatientDto;
 import com.medapp.model.Assignment;
+import com.medapp.model.Event;
 import com.medapp.model.Patient;
 import com.medapp.service.api.PatientService;
 import org.apache.log4j.LogManager;
@@ -22,6 +24,8 @@ public class PatientServiceImpl implements PatientService {
 
     private static Logger logger = LogManager.getLogger(PatientServiceImpl.class.getName());
 
+    @Autowired
+    private EventDAO eventDAO;
 
     private PatientDAO patientDAO;
     @Autowired
@@ -83,7 +87,15 @@ public class PatientServiceImpl implements PatientService {
         patientDAO.update(patient);
         List<Assignment> list = patientDAO.getAssignments(patientId);
         for (Assignment a : list) {
-            assignmentDAO.delete(a.getId());
+            Long assId = a.getId();
+            List<Event> events = eventDAO.getByAssignmentId(assId);
+            for(Event e:events){
+                if(e.getStatus().equals(ApplicationConstant.EVENT_STATUS_SHEDULED)){
+                    e.setStatus(ApplicationConstant.EVENT_STATUS_CANCELLED);
+                    e.setComments(ApplicationConstant.DISCHARGED_COMMENTS);
+                    eventDAO.update(e);
+                }
+            }
         }
     }
 

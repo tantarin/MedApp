@@ -90,7 +90,7 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> getByAssignmentId(Long assId) throws JMSException {
+    public List<Event> getByAssignmentId(Long assId) {
         Query query = entityManager.createQuery("select e FROM Event e WHERE e.assignment.id= ?1");
         query.setParameter(1, assId);
         return query.getResultList();

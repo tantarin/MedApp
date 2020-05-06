@@ -119,7 +119,7 @@
                                 <c:out value="${patient.status}"/>
                             </td>
                             <td width="23%">
-                                <a type="submit" class="btn btn-default" id="${patient.id}" onclick="Update(id)">
+                                <a type="submit" class="btn btn-default" id="${patient.id}" onclick="Update(id)" disabled="disabled">
                                     <i class="material-icons">edit</i>
                                 </a>
                                 <a type="submit" class="btn btn-default"
@@ -149,9 +149,14 @@
 </body>
 <script type="text/javascript">
     function Update(id) {
+        var rIndex = document.getElementById(id).parentNode.parentNode.rowIndex;
+        let s = table.rows[rIndex].cells[5].innerHTML.replace(/\s/g, '');
+        if(s === 'discharged') {
+            document.getElementById(id).onclick = x();
+        }
+        function x() {}
         var table = document.getElementById("table");
         document.getElementById('edit').action = "/patients/getAll?id=" + id;
-        var rIndex = document.getElementById(id).parentNode.parentNode.rowIndex;
         document.getElementById("fname").value = table.rows[rIndex].cells[0].innerHTML.replace(/\s/g, '');
         document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML.replace(/\s/g, '');
         document.getElementById("ens").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');

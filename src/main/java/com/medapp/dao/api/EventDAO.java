@@ -14,5 +14,5 @@ public interface EventDAO {
     List<Event> filterByHour() throws JMSException;
     List<Event> filterByPatient(String lastName) throws JMSException;
     void update(Event event);
-    List<Event>  getByAssignmentId(Long assId) throws JMSException;
+    List<Event>  getByAssignmentId(Long assId);
 }
