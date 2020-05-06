@@ -160,6 +160,7 @@ public class EventServiceImpl implements EventService {
         eventDto.setPatientName(event.getPatientName());
         eventDto.setStatus(event.getStatus());
         eventDto.setComments(event.getComments());
+        eventDto.setDoze(event.getDoze());
         return eventDto;
     }
 }

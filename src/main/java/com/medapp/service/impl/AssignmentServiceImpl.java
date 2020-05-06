@@ -170,6 +170,7 @@ public class AssignmentServiceImpl implements AssignmentService {
                     event.setComments(ApplicationConstant.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getMorningTime());
+                    event.setDoze(a.getDoze());
                     eventDAO.addEvent(event);
                 }
                 if (a.getAfternoonTime() != null) {
@@ -180,6 +181,7 @@ public class AssignmentServiceImpl implements AssignmentService {
                     event.setComments(ApplicationConstant.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getAfternoonTime());
+                    event.setDoze(a.getDoze());
                     eventDAO.addEvent(event);
                 }
                 if (a.getEveningTime() != null) {
@@ -190,6 +192,7 @@ public class AssignmentServiceImpl implements AssignmentService {
                     event.setComments(ApplicationConstant.DEFAULT_COMMENTS);
                     event.setDate(date.toString());
                     event.setTime(a.getEveningTime());
+                    event.setDoze(a.getDoze());
                     eventDAO.addEvent(event);
                 }
             }

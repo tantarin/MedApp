@@ -64,6 +64,7 @@ public class PatientController {
     public ModelAndView update(@ModelAttribute("patient") PatientDto patientDto, HttpServletRequest request) throws JMSException {
         Long patientId = Long.parseLong(request.getParameter("id"));
         patientDto.setId(patientId);
+        LOGGER.info("patient status: "+patientDto.getStatus());
         ModelAndView modelAndView = new ModelAndView("redirect: getAll");
         patientService.update(patientDto);
         eventService.updateLastNameEvent(patientId);

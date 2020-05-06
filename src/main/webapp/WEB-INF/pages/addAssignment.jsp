@@ -167,13 +167,25 @@
 <script type="text/javascript">
     function agreeForm(f) {
         if (f === "mor") {
-            document.getElementById("tm1").removeAttribute("disabled");
+            if (!document.getElementById("tm1").getAttribute("disabled")) {
+                document.getElementById("tm1").setAttribute("disabled","true")
+            } else {
+                document.getElementById("tm1").removeAttribute("disabled");
+            }
         }
         if (f === "aft") {
-            document.getElementById("tm2").removeAttribute("disabled");
+            if (!document.getElementById("tm2").getAttribute("disabled")) {
+                document.getElementById("tm2").setAttribute("disabled","true")
+            } else {
+                document.getElementById("tm2").removeAttribute("disabled");
+            }
         }
         if (f === "eve") {
-            document.getElementById("tm3").removeAttribute("disabled");
+            if (!document.getElementById("tm3").getAttribute("disabled")) {
+                document.getElementById("tm3").setAttribute("disabled","true")
+            } else {
+                document.getElementById("tm3").removeAttribute("disabled");
+            }
         }
     }
 

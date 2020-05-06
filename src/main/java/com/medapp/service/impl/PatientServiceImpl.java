@@ -112,6 +112,7 @@ public class PatientServiceImpl implements PatientService {
         p.setAssignments(patientDto.getAssignments());
         p.setDoctor(patientDto.getDoctor());
         p.setEnsNumber(patientDto.getEnsNumber());
+        p.setStatus(patientDto.getStatus());
         patientDAO.update(p);
     }
 

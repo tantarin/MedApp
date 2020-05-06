@@ -35,6 +35,9 @@ public class Event {
     @Column
     String comments;
 
+    @Column
+    String doze;
+
     public Event(Long id, String patientName, Assignment assignment) {
         this.id = id;
         this.patientName = patientName;

@@ -43,6 +43,7 @@
                     <table id="table" class="table table-striped table-bordered">
                         <tr>
                             <th></th>
+                            <th></th>
                             <th>
                                 <c:url value="/events/getAll" var="filter"/>
                                 <form:form action="${filter}" method="post" modelAttribute="filterDto">
@@ -73,6 +74,7 @@
                         </form:form>
                         <tr class="name-title">
                             <td class="left">Assignment</td>
+                            <td>Doze</td>
                             <td>Date</td>
                             <td>Time</td>
                             <td>Patient</td>
@@ -84,6 +86,9 @@
                             <tr>
                                 <td class="left">
                                     <c:out value="${event.assignmentName}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${event.doze}"/>
                                 </td>
                                 <td>
                                     <c:out value="${event.date}"/>
@@ -100,21 +105,17 @@
                                             <c:url value="/events/comments?id=${event.id}" var="all"/>
                                             <form:form action="${all}" method="post" modelAttribute="eventDto">
                                             <form:select id="${event.id}" class="btn btn-secondary dropdown-toggle"
-                                                         onchange="func(this.id)" path="status">
-                                                <option value="none" selected>
-                                                    <c:out value="${event.status}"/>
-                                                </option>
-                                                <option value="Cancelled">Cancelled</option>
-                                                <option value="Done">Done</option>
-                                                <option value="Sheduled">Scheduled</option>
+                                                         onchange="func(this.id, '${event.status}')" path="status">
+                                                <option value="Cancelled" ${event.status == "Cancelled" ? 'selected="selected"' : ''}>Cancelled</option>
+                                                <option value="Done" ${event.status == "Done" ? 'selected="selected"' : ''}>Done</option>
+                                                <option value="Scheduled" ${event.status == "Scheduled" ? 'selected="selected"' : ''}>Scheduled</option>
                                             </form:select>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <form:input path="comments" value="${event.comments}" type="text"
-                                                id="comm${event.id}" disabled="true" onchange="ff(this.id)"/>
-                                        <%--                                        <input type="submit" class="btn btn-light" value="submit" >--%>
+                                    <form:input value="${event.comments == '' ? '' : event.comments}" type="text"
+                                                id="comm${event.id}" disabled="true" onchange="ff(this.id)" path="comments"/>
                                     </form:form>
                                 </td>
                             </tr>
@@ -146,12 +147,19 @@
         document.getElementById(id).form.submit();
     }
 
-    function func(id) {
+    function func(id,status) {
+        let s= status;
         if (document.getElementById(id).value === "Cancelled") {
             var idd = "comm" + id;
             document.getElementById(idd).removeAttribute("disabled");
-            document.getElementById(idd).removeAttribute("hidden")
+            document.getElementById(idd).removeAttribute("hidden");
             document.getElementById(idd).focus();
+        }
+        if (document.getElementById(id).value === "Done"){
+            ff(id);
+        }
+        if(document.getElementById(id).value === "Scheduled") {
+            ff(id);
         }
     }
 </script>

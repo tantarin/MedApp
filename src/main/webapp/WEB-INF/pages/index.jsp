@@ -40,9 +40,6 @@
                         </div>
                         <input type="password" class="form-control" placeholder="password" name="password">
                     </div>
-                    <div class="row align-items-center remember">
-                        <input type="checkbox">Remember Me
-                    </div>
                     <div class="form-group">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="submit" value="Login" class="btn float-right login_btn">

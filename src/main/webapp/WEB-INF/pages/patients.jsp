@@ -87,7 +87,11 @@
                             <form:input type="text" id="doc" path="doctor"/>
                         </td>
                         <td>
-                            <form:input type="text" id="st" path="status"/>
+                            <form:select path="status" id="st">
+                                <option value="empty"></option>
+                                <option value="on medication">on medication</option>
+                                <option value="discharged">discharged</option>
+                            </form:select>
                         </td>
                         <td width="23%">
                             <input type="submit" class="btn btn-success btn-list" value="Submit">
@@ -150,10 +154,14 @@
         var rIndex = document.getElementById(id).parentNode.parentNode.rowIndex;
         document.getElementById("fname").value = table.rows[rIndex].cells[0].innerHTML.replace(/\s/g, '');
         document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML.replace(/\s/g, '');
-        document.getElementById("ens").value = table.rows[rIndex].cells[2].innerHTML.replace(/\s/g, '');
-        document.getElementById("doc").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');
-        document.getElementById("st").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
-        document.getElementById("diagnosis").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
+        document.getElementById("ens").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');
+        document.getElementById("doc").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
+        document.getElementById("diagnosis").value = table.rows[rIndex].cells[2].innerHTML.replace(/\s/g, '');
+        if(table.rows[rIndex].cells[5].innerHTML.replace(/\s/g, '') === 'onmedication') {
+            document.getElementById('st').getElementsByTagName('option')[1].selected = 'selected';
+        } else {
+            document.getElementById('st').getElementsByTagName('option')[2].selected = 'selected';
+        }
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

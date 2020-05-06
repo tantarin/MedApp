@@ -12,6 +12,7 @@ public class EventDto  implements Serializable {
     String time ;
     private String assignmentName;
     String status;
+    String doze;
     String patientName;
-    String comments =" ";
+    String comments ="";
 }

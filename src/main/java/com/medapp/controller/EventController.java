@@ -54,8 +54,9 @@ public class EventController {
         Long id = Long.parseLong(request.getParameter("id"));
         eventDto.setId(id);
         eventService.update(eventDto);
-        ModelAndView model = new ModelAndView("events");
+        ModelAndView model = new ModelAndView("redirect: getAll");
         model.addObject("listEvents", eventService.filter(filterDto));
+        LOGGER.info(eventService.filter(filterDto).toString());
         model.addObject("filterDto", filterDto);
         model.addObject("eventDto", eventDto);
         return model;

@@ -125,8 +125,8 @@
                     <div class="add-box">
                         <div class="from">
                             <label>From</label>
-                            <form:input type="date" id="fromDate" name="trip-start" value="2018-02-02"
-                                        onclick="mindate()" min="2018-01-01" max="2020-12-31" path="dateFrom"/>
+                            <form:input type="date" onclick="mindate()" id="fromDate" name="trip-start" min="${assignmentDto.dateFrom}"
+                                        max="2020-12-31" path="dateFrom"/>
                         </div>
                         <div class="from">
                             <label>To</label>
@@ -186,6 +186,25 @@
         }
     }
 
+    let time1 = "";
+    time1 = "${assignmentDto.time1}";
+    if(time1 !== ""){
+        document.getElementById("a").checked = true;
+        document.getElementById("tm1").removeAttribute("disabled");
+    }
+    let time2 = "";
+    time2 = "${assignmentDto.time2}";
+    if(time2 !== ""){
+        document.getElementById("q").checked = true;
+        document.getElementById("tm2").removeAttribute("disabled");
+    }
+    let time3 = "";
+    time3 = "${assignmentDto.time3}";
+    if(time3 !== ""){
+        document.getElementById("r").checked = true;
+        document.getElementById("tm3").removeAttribute("disabled");
+    }
+
     function mindate() {
         var d = new Date();
         var month = '' + (d.getMonth() + 1);
@@ -212,13 +231,25 @@
 
     function agreeForm(f) {
         if (f === "mor") {
-            document.getElementById("tm1").removeAttribute("disabled");
+            if (!document.getElementById("tm1").getAttribute("disabled")) {
+                document.getElementById("tm1").setAttribute("disabled","true")
+            } else {
+                document.getElementById("tm1").removeAttribute("disabled");
+            }
         }
         if (f === "aft") {
-            document.getElementById("tm2").removeAttribute("disabled");
+            if (!document.getElementById("tm2").getAttribute("disabled")) {
+                document.getElementById("tm2").setAttribute("disabled","true")
+            } else {
+                document.getElementById("tm2").removeAttribute("disabled");
+            }
         }
         if (f === "eve") {
-            document.getElementById("tm3").removeAttribute("disabled");
+            if (!document.getElementById("tm3").getAttribute("disabled")) {
+                document.getElementById("tm3").setAttribute("disabled","true")
+            } else {
+                document.getElementById("tm3").removeAttribute("disabled");
+            }
         }
     }
 </script>
