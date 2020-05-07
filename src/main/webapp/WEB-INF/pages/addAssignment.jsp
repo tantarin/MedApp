@@ -46,20 +46,22 @@
         <div class="col-xl-12 wrap">
             <div class="row">
                 <div class="add-assigment">
-                    <div class="add-box ad-box">
-                        <label>Name</label>
-                        <form:input path="name"/>
+                    <div class="add-box">Type
+                        <form:select id="type" class="form-control form-control-lg" path="type" onchange="func()">
+                            <option>Procedure</option>
+                            <option>Medicine</option>
+                        </form:select>
+                    </div>
+                    <div class="add-box">Name
+                        <form:select id="name" class="form-control form-control-lg" path="name">
+                            <option></option>
+                        </form:select>
                     </div>
                     <div class="add-box ad-box">
                         <label>Doze</label>
                         <form:input path="doze"/>
                     </div>
-                    <div class="add-box">Type
-                        <form:select class="form-control form-control-lg" path="type">
-                            <option>Procedure</option>
-                            <option>Medicine</option>
-                        </form:select>
-                    </div>
+
 
 
                     <div class="add-box">
@@ -165,6 +167,44 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script type="text/javascript">
+    func();
+   function func(){
+       let select = document.getElementById("name");
+       if (document.getElementById("type").value === "Procedure") {
+           $('#name')
+               .empty();
+           let opt = document.createElement('option');
+           opt.value = "Massage";
+           opt.innerHTML = "Massage";
+           select.appendChild(opt);
+           let opt1 = document.createElement('option');
+           opt1.value = "Tomography";
+           opt1.innerHTML = "Tomography";
+           select.appendChild(opt1);
+           let opt2 = document.createElement('option');
+           opt2.value = "Magnetic Therapy";
+           opt2.innerHTML = "Magnetic Therapy";
+           select.appendChild(opt2);
+       }
+       else if (document.getElementById("type").value === "Medicine") {
+           $('#name')
+               .empty();
+           let opt = document.createElement('option');
+           opt.value = "Wellbutrin ";
+           opt.innerHTML = "Wellbutrin ";
+           select.appendChild(opt);
+           let opt1 = document.createElement('option');
+           opt1.value = "Indocin";
+           opt1.innerHTML = "Indocin";
+           select.appendChild(opt1);
+           let opt2 = document.createElement('option');
+           opt2.value = "Proscar";
+           opt2.innerHTML = "Proscar";
+           select.appendChild(opt2);
+       }
+    }
+
+
     function agreeForm(f) {
         if (f === "mor") {
             if (!document.getElementById("tm1").getAttribute("disabled")) {

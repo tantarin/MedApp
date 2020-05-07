@@ -45,9 +45,10 @@ public class PatientController {
     }
 
     @GetMapping(value = "/disharge")
-    public ModelAndView disharge(HttpServletRequest request) {
+    public ModelAndView disharge(HttpServletRequest request) throws JMSException {
         Long id = Long.parseLong(request.getParameter("id"));
         patientService.disharge(id);
+        eventService.sendUpdatedEvents();
         return new ModelAndView("redirect:getAll");
     }
 
@@ -115,9 +116,10 @@ public class PatientController {
      * @return ModelAndView
      */
     @GetMapping(value = "/clear")
-    public ModelAndView clear(HttpServletRequest request) {
+    public ModelAndView clear(HttpServletRequest request) throws JMSException {
         Long id = Long.parseLong(request.getParameter("id"));
         patientService.clear(id);
+        eventService.sendUpdatedEvents();
         return new ModelAndView("redirect: getAll");
     }
 }
