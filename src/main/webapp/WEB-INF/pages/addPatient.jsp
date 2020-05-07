@@ -37,17 +37,23 @@
                 <div class="add-assigment">
                     <div class="add-box">
                         <label>Name</label>
-                        <form:input type="text" path="firstName" placeholder="Ivan" required="true"/>
+                        <form:input type="text" path="firstName" placeholder="Ivan" required="true"
+                                    oninvalid="this.setCustomValidity('invalid')"
+                                    oninput="this.setCustomValidity('')"
+                                    pattern="[A-Za-z]{3,}"/>
                         <label>Last name</label>
-                        <form:input type="text" path="lastName" placeholder="Ivanov" required="true"/>
+                        <form:input type="text" path="lastName" placeholder="Ivanov" required="true"
+                                    oninvalid="this.setCustomValidity('invalid')"
+                                    oninput="this.setCustomValidity('')"
+                                    pattern="[A-Za-z]{4,}"/>
                     </div>
                     <div class="add-box">
                         <label>Diagnosis</label>
-                        <form:input type="text" path="diagnosis" placeholder="Diagnosis" required="true"/>
+                        <form:input type="text" path="diagnosis" placeholder="Covid-19" required="true"/>
                     </div>
                     <div class="add-box">
                         Security number
-                        <form:input type="text" path="ensNumber" required="true"
+                        <form:input type="text" path="ensNumber" placeholder="0123456789123456" required="true"
                                     oninvalid="this.setCustomValidity('16 digits are required')"
                                     oninput="this.setCustomValidity('')" pattern="[0-9]{16}"/>
                     </div>

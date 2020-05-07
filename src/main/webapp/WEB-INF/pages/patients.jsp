@@ -72,13 +72,13 @@
                     <form:form action="${add}" method="post" modelAttribute="patient" id="edit">
                     <tr>
                         <td>
-                            <form:input type="text" maxlength="9" id="fname" path="firstName"/>
+                            <form:input type="text" maxlength="12" id="fname" path="firstName"/>
                         </td>
                         <td>
-                            <form:input type="text" id="lname" maxlength="9" path="lastName"/>
+                            <form:input type="text" id="lname" maxlength="12" path="lastName"/>
                         </td>
                         <td>
-                            <form:input type="text" id="diagnosis" maxlength="9" path="diagnosis"/>
+                            <form:input type="text" id="diagnosis" maxlength="14" path="diagnosis"/>
                         </td>
                         <td>
                             <form:input type="text" id="ens" alignn="left" path="ensNumber"/>

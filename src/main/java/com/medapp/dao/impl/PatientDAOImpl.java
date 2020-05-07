@@ -8,14 +8,12 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
 @Component
-@Stateful
 public class PatientDAOImpl implements PatientDAO {
 
     private static final Logger logger = LogManager.getLogger(PatientDAOImpl.class.getName());

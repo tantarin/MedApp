@@ -98,7 +98,7 @@
                             <label id="mor" class="custom-control-label" for="a"
                                    onclick="agreeForm(this.id)">Morning</label>
                         </div>
-                        <form:input type="time" id="tm1" name="appt" min="09:00" max="18:00" required="true"
+                        <form:input type="time" id="tm1" name="appt" min="09:00" max="11:00" required="true"
                                     path="time1" disabled="true"/>
                         &nbsp;
                         &nbsp;
@@ -109,7 +109,7 @@
                             <label id="aft" class="custom-control-label" for="q"
                                    onclick="agreeForm(this.id)">Afternoon</label>
                         </div>
-                        <form:input type="time" id="tm2" name="appt" min="09:00" max="18:00" required="true"
+                        <form:input type="time" id="tm2" name="appt" min="11:00" max="15:00" required="true"
                                     path="time2" disabled="true"/>
                         &nbsp;
                         &nbsp;
@@ -120,7 +120,7 @@
                             <label id="eve" class="custom-control-label" for="r"
                                    onclick="agreeForm(this.id)">Evening</label>
                         </div>
-                        <form:input type="time" id="tm3" name="appt" min="09:00" max="18:00" required="true"
+                        <form:input type="time" id="tm3" name="appt" min="17:00" max="20:00" required="true"
                                     path="time3" disabled="true"/>
                     </div>
                     <div class="add-box">

@@ -32,6 +32,5 @@
     <br>
     ${msg}
 </h1>
-
 </body>
 </html>

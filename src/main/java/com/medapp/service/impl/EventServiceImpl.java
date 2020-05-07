@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.JMSException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +59,42 @@ public class EventServiceImpl implements EventService {
    // @Transactional
     public List<EventDto> getAll() throws JMSException {
         List<Event> events = eventDAO.getAll();
+        for(Event e:events){
+            String eventDate = e.getDate();
+            LOGGER.info("eventDate "+eventDate);
+            LocalDate now = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String dateNow = formatter.format(now);
+            LocalDate localEvent = LocalDate.parse(eventDate, formatter);
+            LocalDate localNow = LocalDate.parse(dateNow,formatter);
+            int compare = localNow.compareTo(localEvent);
+            LOGGER.info("compare int "+compare);
+            if(compare > 0) {
+                e.setStatus(ApplicationConstant.EVENT_STATUS_CANCELLED);
+                e.setComments(ApplicationConstant.COMMENT_TIME_UP);
+                eventDAO.update(e);
+            } else if(compare == 0){
+                LocalTime localTime = LocalTime.now();
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+                String timeNow = formatterTime.format(localTime);
+                String eventTime = e.getTime();
+                LocalTime nowTime = LocalTime.parse(timeNow, formatterTime);
+                LocalTime timeEvent = LocalTime.parse(eventTime,formatterTime);
+                int compareTime = nowTime.compareTo(timeEvent);
+                if(compareTime > 0){
+                    e.setStatus(ApplicationConstant.EVENT_STATUS_CANCELLED);
+                    e.setComments(ApplicationConstant.COMMENT_TIME_UP);
+                    eventDAO.update(e);
+                }
+            }
+        }
+        List<Event> newEvents = eventDAO.getAll();
         List<EventDto> eventDtoList = new ArrayList<>();
-        for (Event e : events) {
+        for (Event e : newEvents) {
             EventDto eventDto = convertEventToEventDto(e);
             eventDtoList.add(eventDto);
         }
+        sendUpdatedEvents();
         return eventDtoList;
     }
 
@@ -84,16 +118,49 @@ public class EventServiceImpl implements EventService {
      * @return List<EventDto>
      */
     @Override
+    @Transactional
     public List<EventDto> filter(FilterDto filterDto) throws JMSException {
         List<Event> events = eventDAO.getAll();
-        if (!filterDto.getByPatient().equals("")) events = eventDAO.filterByPatient(filterDto.getByPatient());
-        if (!filterDto.getByDay().equals(ApplicationConstant.NO_FILTER)) events = eventDAO.filterByDate();
-        if (!filterDto.getByHour().equals(ApplicationConstant.NO_FILTER)) events = eventDAO.filterByHour();
+        for(Event e:events){
+            String eventDate = e.getDate();
+            LOGGER.info("eventDate "+eventDate);
+            LocalDate now = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String dateNow = formatter.format(now);
+            LocalDate localEvent = LocalDate.parse(eventDate, formatter);
+            LocalDate localNow = LocalDate.parse(dateNow,formatter);
+            int compare = localNow.compareTo(localEvent);
+            LOGGER.info("compare int "+compare);
+            if(compare > 0) {
+                e.setStatus(ApplicationConstant.EVENT_STATUS_CANCELLED);
+                e.setComments(ApplicationConstant.COMMENT_TIME_UP);
+                eventDAO.update(e);
+            } else if(compare == 0){
+                LocalTime localTime = LocalTime.now();
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+                String timeNow = formatterTime.format(localTime);
+                String eventTime = e.getTime();
+                LocalTime nowTime = LocalTime.parse(timeNow, formatterTime);
+                LocalTime timeEvent = LocalTime.parse(eventTime,formatterTime);
+                int compareTime = nowTime.compareTo(timeEvent);
+                LOGGER.info("compareTime "+compareTime);
+                if(compareTime > 0){
+                    e.setStatus(ApplicationConstant.EVENT_STATUS_CANCELLED);
+                    e.setComments(ApplicationConstant.COMMENT_TIME_UP);
+                    eventDAO.update(e);
+                }
+            }
+        }
+        List<Event> eventss = eventDAO.getAll();
+        if (!filterDto.getByPatient().equals("")) eventss = eventDAO.filterByPatient(filterDto.getByPatient());
+        if (!filterDto.getByDay().equals(ApplicationConstant.NO_FILTER)) eventss = eventDAO.filterByDate();
+        if (!filterDto.getByHour().equals(ApplicationConstant.NO_FILTER)) eventss = eventDAO.filterByHour();
         List<EventDto> eventDtos = new ArrayList<>();
-        for (Event e : events) {
+        for (Event e : eventss) {
             EventDto eventDto = convertEventToEventDto(e);
             eventDtos.add(eventDto);
         }
+        sendUpdatedEvents();
         return eventDtos;
     }
 

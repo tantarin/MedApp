@@ -126,6 +126,7 @@ public class PatientServiceImpl implements PatientService {
         p.setDoctor(patientDto.getDoctor());
         p.setEnsNumber(patientDto.getEnsNumber());
         p.setStatus(patientDto.getStatus());
+        p.setDiagnosis(patientDto.getDiagnosis());
         patientDAO.update(p);
     }
 

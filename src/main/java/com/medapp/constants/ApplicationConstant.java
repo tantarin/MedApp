@@ -18,4 +18,5 @@ public class ApplicationConstant {
     public static final String LOGIN_DOCTOR = "doctor";
     public static final String LOGIN_NURSE = "nurse";
     public static final String PASSWORD = "123";
+    public static final String COMMENT_TIME_UP = "time is up";
 }
