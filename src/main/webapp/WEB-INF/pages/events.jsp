@@ -13,6 +13,12 @@
             document.getElementById("pt").disabled = !(chbox.checked && f === "p");
         }
     </script>
+    <style>
+
+        .odd{background-color: #6fff93;}
+
+    </style>
+
 </head>
 <body>
 <header>
@@ -83,7 +89,7 @@
 
                         </tr>
                         <c:forEach var="event" items="${listEvents}">
-                            <tr>
+                            <tr style="${event.status == 'Done' ? 'background: #A9F5E1;' : ''}">
                                 <td class="left">
                                     <c:out value="${event.assignmentName}"/>
                                 </td>
@@ -141,9 +147,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script>
-    document.body.onclick = iii();
-
-    function ff(id) {
+        function ff(id) {
         document.getElementById(id).form.submit();
     }
 

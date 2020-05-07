@@ -40,10 +40,9 @@
             <div class="row">
                 <div class="add-assigment">
                     <div class="add-box">Type
-                        <form:select class="form-control form-control-lg" path="type" id="type">
-                            <option selected>${assignmentDto.type}</option>
-                            <option>Procedure</option>
-                            <option>Medicine</option>
+                        <form:select class="form-control form-control-lg" path="type" id="type" onchange="func()">
+                            <option value="Procedure" ${assignmentDto.type == "Procedure" ? 'selected="selected"' : ''}>Procedure</option>
+                            <option value="Medicine" ${assignmentDto.type == "Medicine" ? 'selected="selected"' : ''}>Medicine</option>
                         </form:select>
                     </div>
                     <div class="add-box">Name
@@ -225,6 +224,7 @@
             opt2.value = "Magnetic Therapy";
             opt2.innerHTML = "Magnetic Therapy";
             select.appendChild(opt2);
+            document.getElementById("doze").setAttribute("disabled","true");
         }
         else if (document.getElementById("type").value === "Medicine") {
             $('#name')
@@ -241,6 +241,7 @@
             opt2.value = "Proscar";
             opt2.innerHTML = "Proscar";
             select.appendChild(opt2);
+            document.getElementById("doze").removeAttribute("disabled");
         }
     }
 
