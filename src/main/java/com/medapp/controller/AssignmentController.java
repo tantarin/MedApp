@@ -88,6 +88,7 @@ public class AssignmentController {
         assignmentDto.setId(id);
         assignmentService.update(assignmentDto);
         Long patientId = assignmentService.getPatientId(id);
+        eventService.sendUpdatedEvents();
         return new ModelAndView("redirect:/patients/assignments?id=" + patientId);
     }
 
@@ -104,6 +105,7 @@ public class AssignmentController {
         Long patientId = assignmentService.getPatientId(id);
         assignmentService.deleteById(id);
         LOGGER.info("send updated events from controller");
+        eventService.sendUpdatedEvents();
         return new ModelAndView("redirect:/patients/assignments?id=" + patientId);
     }
 }
