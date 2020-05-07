@@ -1,8 +1,10 @@
 package com.medapp.dao.api;
 
-import org.springframework.security.core.userdetails.User;
+import com.medapp.model.login.Login;
+import com.medapp.model.login.User;
+
 
 public interface UserDAO {
-
-    User findByUsername(String username);
+    void register(User user);
+    User validateUser(Login login);
 }
