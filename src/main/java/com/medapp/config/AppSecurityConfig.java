@@ -1,5 +1,6 @@
 package com.medapp.config;
 
+import com.medapp.constants.ApplicationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,12 +23,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         authenticationMgr.inMemoryAuthentication()
-                .withUser("doctor")
-                .password(encoder.encode("123"))
+                .withUser(ApplicationConstant.LOGIN_DOCTOR)
+                .password(encoder.encode(ApplicationConstant.PASSWORD))
                 .roles("ADMIN", "USER")
                 .and()
-                .withUser("nurse")
-                .password(encoder.encode("123"))
+                .withUser(ApplicationConstant.LOGIN_NURSE)
+                .password(encoder.encode(ApplicationConstant.PASSWORD))
                 .roles("USER");
     }
 
@@ -65,7 +66,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied");
-        //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         http.authorizeRequests().antMatchers("/resources/css/**").permitAll();
     }
 }

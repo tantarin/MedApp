@@ -1,22 +1,37 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tanya
-  Date: 30.04.2020
-  Time: 20:12
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>Access Denied</title>
+    <meta charset="windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical App</title>
+    <link rel="stylesheet"
+          href="<c:url value="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+        <div>
+            <a href="https://www.javaguides.net" class="navbar-brand"> Medical App </a>
+        </div>
+
+        <ul class="navbar-nav">
+            <li><a href="${pageContext.request.contextPath}/events/getAll" class="nav-link">Events</a></li>
+            <li><a class="nav-link" href="<c:url value="/logout" />">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<h1 style="text-align: center">
+    <br>
+    <br>
     Access Denied!
+    <br>
+    <br>
+    ${msg}
 </h1>
-
-<h2>${msg}</h2>
-
 
 </body>
 </html>

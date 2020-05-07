@@ -15,5 +15,7 @@ public class ApplicationConstant {
     public static final String DEFAULT_COMMENTS = "";
     public static final String DISCHARGED_COMMENTS = "Patient discharged";
     public static final String NO_FILTER = "no filter";
-
+    public static final String LOGIN_DOCTOR = "doctor";
+    public static final String LOGIN_NURSE = "nurse";
+    public static final String PASSWORD = "123";
 }
