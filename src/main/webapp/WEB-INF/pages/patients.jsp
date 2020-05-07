@@ -119,7 +119,7 @@
                                 <c:out value="${patient.status}"/>
                             </td>
                             <td width="23%">
-                                <a type="submit" class="btn btn-default" id="${patient.id}" onclick="Update(id)" disabled="disabled">
+                                <a type="submit" class="btn btn-default" id="${patient.id}" onclick="Update(id)">
                                     <i class="material-icons">edit</i>
                                 </a>
                                 <a type="submit" class="btn btn-default"
@@ -148,24 +148,25 @@
     </form>
 </body>
 <script type="text/javascript">
+    function x() {}
     function Update(id) {
         var rIndex = document.getElementById(id).parentNode.parentNode.rowIndex;
+        let table = document.getElementById("table");
         let s = table.rows[rIndex].cells[5].innerHTML.replace(/\s/g, '');
         if(s === 'discharged') {
-            document.getElementById(id).onclick = x();
-        }
-        function x() {}
-        var table = document.getElementById("table");
-        document.getElementById('edit').action = "/patients/getAll?id=" + id;
-        document.getElementById("fname").value = table.rows[rIndex].cells[0].innerHTML.replace(/\s/g, '');
-        document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML.replace(/\s/g, '');
-        document.getElementById("ens").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');
-        document.getElementById("doc").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
-        document.getElementById("diagnosis").value = table.rows[rIndex].cells[2].innerHTML.replace(/\s/g, '');
-        if(table.rows[rIndex].cells[5].innerHTML.replace(/\s/g, '') === 'onmedication') {
-            document.getElementById('st').getElementsByTagName('option')[1].selected = 'selected';
-        } else {
-            document.getElementById('st').getElementsByTagName('option')[2].selected = 'selected';
+           document.getElementById(id).onclick = x();
+         } else {
+            document.getElementById('edit').action = "/patients/getAll?id=" + id;
+            document.getElementById("fname").value = table.rows[rIndex].cells[0].innerHTML.replace(/\s/g, '');
+            document.getElementById("lname").value = table.rows[rIndex].cells[1].innerHTML.replace(/\s/g, '');
+            document.getElementById("diagnosis").value = table.rows[rIndex].cells[2].innerHTML.replace(/\s/g, '');
+            document.getElementById("ens").value = table.rows[rIndex].cells[3].innerHTML.replace(/\s/g, '');
+            document.getElementById("doc").value = table.rows[rIndex].cells[4].innerHTML.replace(/\s/g, '');
+            if (table.rows[rIndex].cells[5].innerHTML.replace(/\s/g, '') === 'onmedication') {
+                document.getElementById('st').getElementsByTagName('option')[1].selected = 'selected';
+            } else {
+                document.getElementById('st').getElementsByTagName('option')[2].selected = 'selected';
+            }
         }
     }
 </script>

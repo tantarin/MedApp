@@ -55,25 +55,8 @@
                         <form:select class="form-control form-control-lg" path="doctor">
                             <option>Ivanov</option>
                             <option>Sidorov</option>
+                            <option>Petrov</option>
                         </form:select>
-                    </div>
-                    <div class="add-b">Status
-                        <div class="status">
-                            <div class="form-check">
-                                <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios1"
-                                                  value="on medication" checked="true" path="status"/>
-                                <label class="form-check-label" for="exampleRadios1">
-                                    On medication
-                                </label>
-                            </div>
-                            <div class="form-check break">
-                                <form:radiobutton class="form-check-input" name="exampleRadios" id="exampleRadios2"
-                                                  value="discharged" path="status"/>
-                                <label class="form-check-label" for="exampleRadios2">
-                                    Disсharged
-                                </label>
-                            </div>
-                        </div>
                     </div>
                     <div class="add-box">
                         <input type="submit" class="btn btn-success btn-list" value="Add">&nbsp;&nbsp;

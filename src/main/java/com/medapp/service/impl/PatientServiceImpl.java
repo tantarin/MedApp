@@ -38,6 +38,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void add(Patient patient) {
+        patient.setStatus(ApplicationConstant.STATUS_ON_MEDICATION);
         patientDAO.addPatient(patient);
     }
 

@@ -9,6 +9,7 @@ public class ApplicationConstant {
     public static final String HIBERNATE_HBM2DDL = "hibernate.hbm2ddl.auto";
     //for sservice layer
     public static final String STATUS_DISHARGED = "discharged";
+    public static final String STATUS_ON_MEDICATION = "on medication";
     public static final String EVENT_STATUS_SHEDULED = "Scheduled";
     public static final String EVENT_STATUS_CANCELLED = "Cancelled";
     public static final String DEFAULT_COMMENTS = "";
