@@ -1,6 +1,6 @@
 # Medical web app
 
-##Technologies were used:
+## Technologies were used:
 - Tomcat
 - DB: MySql
 - Maven
